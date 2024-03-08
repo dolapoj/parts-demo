@@ -13,7 +13,7 @@ const LoginCard = () => {
                   <input
                         type='text'
                         name='email'
-                        placeholder='example@gmail.com' 
+                        placeholder='example@kineticparts.com' 
                         autoComplete='off'
                         className=''
                   />
