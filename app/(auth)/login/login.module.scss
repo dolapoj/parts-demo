@@ -1,0 +1,22 @@
+@import '../../styles/variables';
+
+
+.login_container {
+      background: $primary-bg-login;
+}
+
+.logo {
+      width: 17vw
+}
+
+.no_acct_text {
+      color: $primary-ash;
+
+      span{
+            color: $primary-blue;
+      }
+}
+
+.bg_blue {
+      background: $secondary-bg-color;
+}

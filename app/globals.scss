@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import '../app/styles/variables';
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -16,6 +18,48 @@
   }
 }
 
-body {
-  
+//LoginCard
+input {
+  margin-top: 8px;
+  padding: 8px;
+  border: 2px solid $primary-black;
+  border-radius: 6px;
+}
+
+.button{
+  background: $primary-green;
+  border-radius: 6px;
+}
+
+//Horizontal rule
+.strike {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap; 
+}
+
+.strike > span {
+  position: relative;
+  display: inline-block;
+}
+
+.strike > span:before,
+.strike > span:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 99px;
+  height: 1.5px;
+  background: $primary-ash;
+}
+
+.strike > span:before {
+  right: 100%;
+  margin-right: 15px;
+}
+
+.strike > span:after {
+  left: 100%;
+  margin-left: 15px;
 }
