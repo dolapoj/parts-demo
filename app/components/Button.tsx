@@ -1,15 +1,16 @@
-'use client';
-import React from 'react'
+"use client";
+import React from "react";
 // import styles from '../../'
 
 const Button = (props: any) => {
   return (
-    <div className='flex mt-8'>
-      <button className={`button m-auto font-medium text-white w-full p-2`}>
-            {props.title}
-      </button>
-    </div>
-  )
-}
+    <button
+      type="button"
+      className={`button m-auto font-medium text-white w-full p-2`}
+    >
+      {props.title}
+    </button>
+  );
+};
 
-export default Button
+export default Button;

@@ -6,7 +6,7 @@ import SocialIcons from './SocialIcons'
 const LoginCard = () => {
   return (
     <main className='p-6'>
-      <p style={{fontWeight: '700'}} className='text-2xl'>Sign In</p>
+      <p style={{fontWeight: '700'}} className='text-2xl font-semibold'>Sign In</p>
       <form>
             <div className='flex flex-col'>
                   <label className='mt-8 text-left sm:ml-4'>Email</label>
@@ -32,7 +32,9 @@ const LoginCard = () => {
             <div className="strike mt-4">
                   <span>or with</span>
             </div>
-            <SocialIcons />
+            <div className='mb-8'>
+                  <SocialIcons />
+            </div>
             <Button title="Sign In" />
       </form>
     </main>
