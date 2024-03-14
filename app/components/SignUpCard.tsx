@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 // import { motion } from 'framer-motion'
 import Image from "next/image";
+import Link from "next/link";
 
 import { z } from "zod";
 import { FormDataSchema } from "@/lib/schema";
@@ -237,12 +238,17 @@ const SignUpCard = () => {
               <div className="flex flex-col mt-4">
                 <label className="text-left sm:ml-4">Mobile Number</label>
                 <input
-                  type="text"
+                  type="tel"
                   name="country"
                   placeholder="8100617304"
                   autoComplete="off"
-                  className=""
+                  className="inputField"
                 />
+              </div>
+              <div className="flex flex-row items-center mt-4">
+                <label className="text-xs">
+                    <input type="checkbox" name="remember" /> I agree to the User Agreement and the Privacy Policy
+                </label>
               </div>
             </div>
           )}
@@ -314,7 +320,7 @@ const SignUpCard = () => {
             onClick={handleNext}
             disabled={currentStep === steps.length - 1}
           >
-            Next
+            {currentStep === 3 ? <Link className="w-100" href='/login'>Sign In</Link>: 'Next'}
           </button>
         </div>
       </div>

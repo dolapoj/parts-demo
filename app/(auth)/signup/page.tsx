@@ -4,6 +4,7 @@ import Logo from "../../../images/kinetic-parts-logo.png";
 import styles from "../../../app/(auth)/login/login.module.scss";
 import RegisterSideBar from "@/app/components/RegisterSideBar";
 import SignUpCard from "@/app/components/SignUpCard";
+import Link from "next/link";
 
 const SignUp = () => {
   return (
@@ -21,7 +22,7 @@ const SignUp = () => {
           className={`${styles.no_acct_text} text-center text-base sm:text-x sm:text-right mt-8 sm:mt-4`}
         >
           Have an account?{" "}
-          <span className="cursor-pointer">Sign In Now!</span>
+          <Link href='/login'><span className="cursor-pointer">Sign In Now!</span></Link>
         </p>
         <div className="flex flex-row justify-center mt-4 h-auto text-white w-full">
           <div className="bg-white text-black sm:w-2/3 p-2 sm:p-6 h-full w-full">

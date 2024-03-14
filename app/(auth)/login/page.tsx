@@ -4,6 +4,7 @@ import LoginCard from "@/app/components/LoginCard";
 import Logo from "../../../images/logo.png";
 import styles from "./login.module.scss";
 import RegisterSideBar from "@/app/components/RegisterSideBar";
+import Link from "next/link";
 
 const LoginPage = () => {
   return (
@@ -18,7 +19,7 @@ const LoginPage = () => {
         <p
           className={`${styles.no_acct_text} text-center text-base sm:text-x sm:text-right mt-8 sm:mt-4`}
         >
-          Do not have an account? <span className="cursor-pointer">Sign Up Now!</span>
+          Do not have an account? <Link href='/signup'><span className="cursor-pointer">Sign Up Now!</span></Link>
         </p>
         <div className="flex flex-row justify-center mt-4 h-auto text-white w-full">
           <div className="bg-white text-black sm:w-2/3 p-2 sm:p-6 h-full w-full">
