@@ -3,6 +3,8 @@ import React from 'react'
 import Button from './Button';
 import SocialIcons from './SocialIcons'
 
+import Link from 'next/link';
+
 const LoginCard = () => {
   return (
     <main className='p-6'>
@@ -15,7 +17,7 @@ const LoginCard = () => {
                         name='email'
                         placeholder='example@kineticparts.com' 
                         autoComplete='off'
-                        className=''
+                        className='rounded-md'
                   />
             </div>
             <div className='flex flex-col'>
@@ -25,10 +27,10 @@ const LoginCard = () => {
                         name='password'
                         placeholder=''
                         autoComplete='off'
-                        className=''
+                        className='rounded-md'
                   />
             </div>
-            <p style={{textAlign: 'right'}} className='text-sm italic cursor-pointer'>Forgot password?</p>
+            <Link href='/reset-password'><p style={{textAlign: 'right'}} className='text-sm italic cursor-pointer'>Forgot password?</p></Link>
             <div className="strike mt-4">
                   <span>or with</span>
             </div>

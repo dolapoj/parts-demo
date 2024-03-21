@@ -73,6 +73,10 @@ input {
   border-color: $primary-green;
 }
 
+.bgGreen {
+  background: $primary-green;
+}
+
 .inputBg {
   background: $primary-bg-login;
 }
@@ -85,3 +89,5 @@ input {
   // background-repeat: no-repeat;
   // background-position: 3px center;
 }
+
+//Reset Password

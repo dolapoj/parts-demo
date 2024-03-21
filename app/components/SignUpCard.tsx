@@ -48,9 +48,8 @@ const steps = [
 const SignUpCard = () => {
   const [previousStep, setPreviousStep] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
+  const [currentOwner, setCurrentOwner] = useState(false);
   const delta = currentStep - previousStep;
-
-  console.log(currentStep);
 
   const {
     register,
@@ -78,7 +77,6 @@ const SignUpCard = () => {
     // if (!output) return null
 
     if (currentStep < steps.length - 1) {
-      console.log("I got here");
       // if (currentStep === steps.length - 2) {
       //   await handleSubmit(processForm)()
       // }
@@ -93,6 +91,13 @@ const SignUpCard = () => {
       setPreviousStep(currentStep);
       setCurrentStep((step) => step - 1);
     }
+  };
+
+  //Handle VIN change
+  const handleVin = async () => {
+    console.log(currentOwner, "1");
+    setCurrentOwner(!currentOwner);
+    console.log(currentOwner, "2");
   };
 
   return (
@@ -153,7 +158,7 @@ const SignUpCard = () => {
                   name="email"
                   placeholder="username001@xmail.com"
                   autoComplete="off"
-                  className=""
+                  className="rounded-md"
                 />
               </div>
               <div className="strike mt-8">
@@ -165,14 +170,18 @@ const SignUpCard = () => {
           {/* Step 2 Form */}
           {currentStep === 1 && (
             <div>
+              {/* <button onClick={handleVin} className="bg-black text-white p-6">Click Me</button> */}
               <div className="flex flex-col">
+                <button className="p-4 bg-black text-white" onClick={handleVin}>Hit me!</button>
                 <label className="text-left sm:ml-4">
                   What type of user are you?{" "}
                   <span className="text-sm italic">(optional)</span>
                 </label>
-                <select className="inputBg visible" name="owners">
+                <select className="visible rounded-md" name="owners">
                   <option value="Vehicle_owner">Vehicle Owner</option>
-                  <option value="fleet_manager">Fleet Manager</option>
+                  <option onClick={handleVin} value="fleet_manager">
+                    Fleet Manager
+                  </option>
                   <option value="auto_repairer">Auto Repairer</option>
                 </select>
               </div>
@@ -183,7 +192,7 @@ const SignUpCard = () => {
                   name="firstName"
                   placeholder="John"
                   autoComplete="off"
-                  className=""
+                  className="rounded-md"
                 />
               </div>
               <div className="flex flex-col mt-4">
@@ -193,7 +202,7 @@ const SignUpCard = () => {
                   name="lastName"
                   placeholder="Doe"
                   autoComplete="off"
-                  className=""
+                  className="rounded-md"
                 />
               </div>
               <div className="flex flex-col mt-4">
@@ -201,9 +210,9 @@ const SignUpCard = () => {
                 <input
                   type="text"
                   name="email"
-                  placeholder="username001@xmail.com"
+                  value="username001@xmail.com"
                   autoComplete="off"
-                  className={`${styles.inputBg}`}
+                  className={`${styles.inputBg} rounded-md focus:outline-none bg-violet-500`}
                   readOnly
                 />
               </div>
@@ -214,7 +223,7 @@ const SignUpCard = () => {
                   name="country"
                   placeholder="Nigeria"
                   autoComplete="off"
-                  className=""
+                  className="rounded-md"
                 />
               </div>
               <div className="flex flex-col mt-4">
@@ -223,7 +232,7 @@ const SignUpCard = () => {
                   type="password"
                   name="country"
                   autoComplete="off"
-                  className=""
+                  className="rounded-md"
                 />
               </div>
               <div className="flex flex-col mt-4">
@@ -232,7 +241,7 @@ const SignUpCard = () => {
                   type="password"
                   name="country"
                   autoComplete="off"
-                  className=""
+                  className="rounded-md"
                 />
               </div>
               <div className="flex flex-col mt-4">
@@ -242,14 +251,31 @@ const SignUpCard = () => {
                   name="country"
                   placeholder="8100617304"
                   autoComplete="off"
-                  className="inputField"
+                  className="inputField rounded-md"
                 />
               </div>
-              <div className="flex flex-row items-center mt-4">
-                <label className="text-xs">
-                    <input type="checkbox" name="remember" /> I agree to the User Agreement and the Privacy Policy
-                </label>
-              </div>
+              {/* VIN */}
+              {currentOwner && (
+                <div className="flex flex-col mt-4">
+                  <label className="text-left sm:ml-4">VIN</label>
+                  <input
+                    type="text"
+                    name="vin"
+                    placeholder="5479947GH"
+                    autoComplete="off"
+                    className="inputField rounded-md"
+                  />
+                </div>
+              )}
+              <label className="flex items-center mt-2">
+                <input
+                  type="checkbox"
+                  className="mr-2 w-4 h-4"
+                />
+                <span className="text-xs text-gray-600">
+                  I agree to the User Agreement and the Privacy Policy
+                </span>
+              </label>
             </div>
           )}
           {/* Step 3 Form */}
@@ -320,7 +346,13 @@ const SignUpCard = () => {
             onClick={handleNext}
             disabled={currentStep === steps.length - 1}
           >
-            {currentStep === 3 ? <Link className="w-100" href='/login'>Sign In</Link>: 'Next'}
+            {currentStep === 3 ? (
+              <Link className="w-100" href="/login">
+                Sign In
+              </Link>
+            ) : (
+              "Next"
+            )}
           </button>
         </div>
       </div>
