@@ -9,4 +9,5 @@ export const FormDataSchema = z.object({
       password: z.string().min(1, 'Password is required'),
       confirmPassword: z.string().min(1, 'Confirm password is required'),
       phoneNumber: z.string().min(1, 'Phone number is required'),
+      vin: z.string().min(1, 'VIN  is required'),
 })

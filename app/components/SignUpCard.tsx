@@ -13,6 +13,7 @@ import Button from "./Button";
 import SocialIcons from "./SocialIcons";
 import styles from "../(auth)/signup/signup.module.scss";
 import Square from "../../images/square.svg";
+import errorMap from "zod/locales/en.js";
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -29,10 +30,12 @@ const steps = [
       "vehicleOwner",
       "firstName",
       "lastName",
+      "email",
       "country",
       "password",
       "confirmPassword",
       "phoneNumber",
+      "vin",
     ],
   },
   {
@@ -50,6 +53,8 @@ const SignUpCard = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [currentOwner, setCurrentOwner] = useState(false);
   const delta = currentStep - previousStep;
+
+  // console.log(currentStep)
 
   const {
     register,
@@ -71,24 +76,26 @@ const SignUpCard = () => {
 
   //Handle Next logic
   const handleNext = async () => {
-    // const fields = steps[currentStep].fields
-    // const output = await trigger(fields as FieldName[], { shouldFocus: true })
+    const fields = steps[currentStep].fields;
+    const output = await trigger(fields as FieldName[], { shouldFocus: true });
 
-    // if (!output) return null
+    if (!output) return console.log("there is a problem");
 
     if (currentStep < steps.length - 1) {
-      // if (currentStep === steps.length - 2) {
-      //   await handleSubmit(processForm)()
-      // }
-      // setPreviousStep(currentStep)
+      if (currentStep === steps.length - 3) {
+        console.log("funmi ni data");
+        await handleSubmit(processForm)();
+      }
+      // setPreviousStep(currentStep);
       setCurrentStep((step) => step + 1);
+      console.log("condition: " + currentStep);
     }
   };
 
   //Handle Previous logic
-  const prev = () => {
+  const handlePrevious = () => {
     if (currentStep > 0) {
-      setPreviousStep(currentStep);
+      // setPreviousStep(currentStep);
       setCurrentStep((step) => step - 1);
     }
   };
@@ -155,11 +162,16 @@ const SignUpCard = () => {
                 </label>
                 <input
                   type="text"
-                  name="email"
                   placeholder="username001@xmail.com"
-                  autoComplete="off"
+                  {...register("email")}
+                  autoComplete="email"
                   className="rounded-md"
                 />
+                {errors.email?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.email.message}
+                  </p>
+                )}
               </div>
               <div className="strike mt-8">
                 <span>or with</span>
@@ -170,111 +182,157 @@ const SignUpCard = () => {
           {/* Step 2 Form */}
           {currentStep === 1 && (
             <div>
-              {/* <button onClick={handleVin} className="bg-black text-white p-6">Click Me</button> */}
               <div className="flex flex-col">
-                <button className="p-4 bg-black text-white" onClick={handleVin}>Hit me!</button>
+                {/* <button className="p-4 bg-black text-white" onClick={handleVin}>Hit me!</button> */}
                 <label className="text-left sm:ml-4">
                   What type of user are you?{" "}
                   <span className="text-sm italic">(optional)</span>
                 </label>
-                <select className="visible rounded-md" name="owners">
-                  <option value="Vehicle_owner">Vehicle Owner</option>
-                  <option onClick={handleVin} value="fleet_manager">
-                    Fleet Manager
-                  </option>
-                  <option value="auto_repairer">Auto Repairer</option>
+                <select
+                  className="block w-full rounded-md"
+                  {...register("vehicleOwner")}
+                  defaultValue={"DEFAULT"}
+                >
+                  <option value="DEFAULT">Vehicle Owner</option>
+                  <option value="1">Fleet Manager</option>
+                  <option value="2">Auto Repairer</option>
                 </select>
+                {errors.vehicleOwner?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.vehicleOwner.message}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col mt-4">
                 <label className="text-left sm:ml-4">Firstname</label>
                 <input
                   type="text"
-                  name="firstName"
-                  placeholder="John"
                   autoComplete="off"
+                  {...register("firstName")}
                   className="rounded-md"
                 />
+                {errors.firstName?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.firstName.message}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col mt-4">
                 <label className="text-left sm:ml-4">Lastname</label>
                 <input
                   type="text"
-                  name="lastName"
-                  placeholder="Doe"
+                  {...register("lastName")}
                   autoComplete="off"
                   className="rounded-md"
                 />
+                {errors.lastName?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.lastName.message}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col mt-4">
                 <label className="text-left sm:ml-4">Email Address</label>
                 <input
                   type="text"
-                  name="email"
                   value="username001@xmail.com"
+                  {...register('email')}
                   autoComplete="off"
-                  className={`${styles.inputBg} rounded-md focus:outline-none bg-violet-500`}
+                  className={`${styles.inputBg} rounded-md focus:outline-none`}
                   readOnly
                 />
+                {errors.email?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.email.message}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col mt-4">
                 <label className="text-left sm:ml-4">Country/Region</label>
                 <input
                   type="text"
-                  name="country"
-                  placeholder="Nigeria"
+                  {...register("country")}
                   autoComplete="off"
                   className="rounded-md"
                 />
+                {errors.country?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.country.message}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col mt-4">
                 <label className="text-left sm:ml-4">Password</label>
                 <input
                   type="password"
-                  name="country"
+                  {...register("password")}
                   autoComplete="off"
                   className="rounded-md"
                 />
+                {errors.password?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.password.message}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col mt-4">
                 <label className="text-left sm:ml-4">Confirm Password</label>
                 <input
                   type="password"
-                  name="country"
                   autoComplete="off"
+                  {...register("confirmPassword")}
                   className="rounded-md"
                 />
+                {errors.confirmPassword?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.confirmPassword.message}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col mt-4">
                 <label className="text-left sm:ml-4">Mobile Number</label>
                 <input
                   type="tel"
-                  name="country"
                   placeholder="8100617304"
+                  {...register("phoneNumber")}
                   autoComplete="off"
                   className="inputField rounded-md"
                 />
+                {errors.phoneNumber?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.phoneNumber.message}
+                  </p>
+                )}
               </div>
               {/* VIN */}
-              {currentOwner && (
-                <div className="flex flex-col mt-4">
-                  <label className="text-left sm:ml-4">VIN</label>
-                  <input
-                    type="text"
-                    name="vin"
-                    placeholder="5479947GH"
-                    autoComplete="off"
-                    className="inputField rounded-md"
-                  />
-                </div>
-              )}
-              <label className="flex items-center mt-2">
+              <div className="flex flex-col mt-4">
+                <label className="text-left sm:ml-4">VIN</label>
                 <input
-                  type="checkbox"
-                  className="mr-2 w-4 h-4"
+                  type="text"
+                  placeholder="5479947GH"
+                  value="5479947GH"
+                  {...register("vin")}
+                  autoComplete="off"
+                  className="inputField rounded-md"
                 />
-                <span className="text-xs text-gray-600">
-                  I agree to the User Agreement and the Privacy Policy
-                </span>
+                {errors.vin?.message && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {errors.vin.message}
+                  </p>
+                )}
+              </div>
+              <label className="flex items-center mt-2">
+                <input type="checkbox" className="mr-2 w-4 h-4" />
+                <p className="text-xs text-gray-600">
+                  I agree to the{" "}
+                  <span className="text-blue-900 font-bold cursor-pointer">
+                    User Agreement
+                  </span>{" "}
+                  and the{" "}
+                  <span className="text-blue-900 font-bold cursor-pointer">
+                    Privacy Policy
+                  </span>
+                </p>
               </label>
             </div>
           )}
