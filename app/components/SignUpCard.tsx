@@ -51,10 +51,14 @@ const steps = [
 const SignUpCard = () => {
   const [previousStep, setPreviousStep] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
-  const [currentOwner, setCurrentOwner] = useState(false);
-  const delta = currentStep - previousStep;
+  const [formEmail, setFormEmail] = useState("");
+  // const delta = currentStep - previousStep;
 
-  // console.log(currentStep)
+  //State to track the selected value in the select form
+  const [selectedValue, setSelectedValue] = useState("");
+
+  //State to show the visibility of the additional input field
+  const [showInputField, setShowInputField] = useState(false);
 
   const {
     register,
@@ -79,32 +83,32 @@ const SignUpCard = () => {
     const fields = steps[currentStep].fields;
     const output = await trigger(fields as FieldName[], { shouldFocus: true });
 
-    if (!output) return console.log("there is a problem");
+    // REFIX NEXT LINE //
+    if (!output && currentStep < 2) return console.log("there is a problem");
 
     if (currentStep < steps.length - 1) {
       if (currentStep === steps.length - 3) {
-        console.log("funmi ni data");
         await handleSubmit(processForm)();
       }
       // setPreviousStep(currentStep);
       setCurrentStep((step) => step + 1);
-      console.log("condition: " + currentStep);
     }
   };
 
   //Handle Previous logic
-  const handlePrevious = () => {
-    if (currentStep > 0) {
-      // setPreviousStep(currentStep);
-      setCurrentStep((step) => step - 1);
-    }
-  };
+  // const handlePrevious = () => {
+  //   if (currentStep > 0) {
+  //     // setPreviousStep(currentStep);
+  //     setCurrentStep((step) => step - 1);
+  //   }
+  // };
 
-  //Handle VIN change
-  const handleVin = async () => {
-    console.log(currentOwner, "1");
-    setCurrentOwner(!currentOwner);
-    console.log(currentOwner, "2");
+  // Handler function to update the selected value and show/hide th input field
+  const handleSelectChange = (e: any) => {
+    const value = e.target.value;
+    setSelectedValue(value);
+    setShowInputField(value === "fleet");
+    console.log("handle select worked");
   };
 
   return (
@@ -152,6 +156,7 @@ const SignUpCard = () => {
         </nav>
 
         {/* FORM */}
+
         <form className="py-12" onSubmit={handleSubmit(processForm)}>
           {/* Step One Form */}
           {currentStep === 0 && (
@@ -165,6 +170,7 @@ const SignUpCard = () => {
                   placeholder="username001@xmail.com"
                   {...register("email")}
                   autoComplete="email"
+                  onChange={(e) => setFormEmail(e.target.value)}
                   className="rounded-md"
                 />
                 {errors.email?.message && (
@@ -191,11 +197,13 @@ const SignUpCard = () => {
                 <select
                   className="block w-full rounded-md"
                   {...register("vehicleOwner")}
-                  defaultValue={"DEFAULT"}
+                  value={selectedValue}
+                  onChange={handleSelectChange}
+                  defaultValue={"vehicle_owner"}
                 >
-                  <option value="DEFAULT">Vehicle Owner</option>
-                  <option value="1">Fleet Manager</option>
-                  <option value="2">Auto Repairer</option>
+                  <option value="vehicle_owner">Vehicle Owner</option>
+                  <option value="fleet">Fleet Manager</option>
+                  <option value="repairer">Auto Repairer</option>
                 </select>
                 {errors.vehicleOwner?.message && (
                   <p className="mt-2 text-sm text-red-400">
@@ -203,6 +211,24 @@ const SignUpCard = () => {
                   </p>
                 )}
               </div>
+              {/* VIN */}
+              {showInputField && (
+                <div className="flex flex-col mt-4">
+                  <label className="text-left sm:ml-4">VIN</label>
+                  <input
+                    type="text"
+                    placeholder="5479947GH"
+                    {...register("vin")}
+                    autoComplete="off"
+                    className="inputField rounded-md"
+                  />
+                  {errors.vin?.message && (
+                    <p className="mt-2 text-sm text-red-400">
+                      {errors.vin.message}
+                    </p>
+                  )}
+                </div>
+              )}
               <div className="flex flex-col mt-4">
                 <label className="text-left sm:ml-4">Firstname</label>
                 <input
@@ -235,8 +261,7 @@ const SignUpCard = () => {
                 <label className="text-left sm:ml-4">Email Address</label>
                 <input
                   type="text"
-                  value="username001@xmail.com"
-                  {...register('email')}
+                  {...register("email")}
                   autoComplete="off"
                   className={`${styles.inputBg} rounded-md focus:outline-none`}
                   readOnly
@@ -304,23 +329,6 @@ const SignUpCard = () => {
                   </p>
                 )}
               </div>
-              {/* VIN */}
-              <div className="flex flex-col mt-4">
-                <label className="text-left sm:ml-4">VIN</label>
-                <input
-                  type="text"
-                  placeholder="5479947GH"
-                  value="5479947GH"
-                  {...register("vin")}
-                  autoComplete="off"
-                  className="inputField rounded-md"
-                />
-                {errors.vin?.message && (
-                  <p className="mt-2 text-sm text-red-400">
-                    {errors.vin.message}
-                  </p>
-                )}
-              </div>
               <label className="flex items-center mt-2">
                 <input type="checkbox" className="mr-2 w-4 h-4" />
                 <p className="text-xs text-gray-600">
@@ -342,7 +350,7 @@ const SignUpCard = () => {
               <p>
                 A confirmation mail was sent to your mailbox <br />
                 <span className="font-bold text-blue-600">
-                  username001@xmail.com
+                  {formEmail}
                 </span>{" "}
                 <br />
                 with a link to verify your account
@@ -376,25 +384,26 @@ const SignUpCard = () => {
                   <span className="text-blue-600 cursor-pointer">
                     change your email address
                   </span>{" "}
-                  instead of username001@xmail.com
+                  instead of {formEmail}
                 </span>
               </p>
             </div>
           )}
           {currentStep === 3 && (
             <div className="mb-8">
-              <h2
+              <h1
                 style={{ color: "#00E600" }}
-                className="text-center mt-6 text-2xl sm:text-3xl  font-bold leading-7"
+                className="text-base text-center mt-6 sm:text-3xl  font-bold leading-7"
               >
                 Welcome Back
-              </h2>
+              </h1>
               <p className="mt-1 text-center text-sm leading-6">
                 You have successfully created an account
               </p>
             </div>
           )}
         </form>
+
         {/* Navigation */}
 
         <div className="flex mt-8">

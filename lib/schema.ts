@@ -6,8 +6,8 @@ export const FormDataSchema = z.object({
       firstName: z.string().min(1, 'First name is required'),
       lastName: z.string().min(1, 'Last name is required'),
       country: z.string().min(1, 'Country is required'),
-      password: z.string().min(1, 'Password is required'),
-      confirmPassword: z.string().min(1, 'Confirm password is required'),
+      password: z.string().min(8, 'Password must be at least 8 characters').min(1, 'Password is required'),
+      confirmPassword: z.string().min(8, 'Password must be at least 8 characters').min(1, 'Password is required'),
       phoneNumber: z.string().min(1, 'Phone number is required'),
-      vin: z.string().min(1, 'VIN  is required'),
-})
+      vin: z.string().min(1, 'VIN  is required').optional()
+}).strip();

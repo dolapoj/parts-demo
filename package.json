@@ -28,6 +28,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "daisyui": "^4.8.0",
     "sass": "^1.71.1"
   }
 }
