@@ -8,6 +8,7 @@ import { z } from "zod";
 import { FormDataSchema } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
+import axios from "axios";
 
 import Button from "./Button";
 import SocialIcons from "./SocialIcons";
@@ -27,14 +28,14 @@ const steps = [
     id: "Step 2",
     name: "Information",
     fields: [
-      "vehicleOwner",
-      "firstName",
-      "lastName",
+      "role",
+      "first_name",
+      "last_name",
       "email",
-      "country",
+      // "country",
       "password",
-      "confirmPassword",
-      "phoneNumber",
+      "confirm_password",
+      "phone_number",
       "vin",
     ],
   },
@@ -71,7 +72,22 @@ const SignUpCard = () => {
     resolver: zodResolver(FormDataSchema),
   });
 
-  const processForm: SubmitHandler<Inputs> = (data) => {
+  const processForm: SubmitHandler<Inputs> = async (data) => {
+    //Make POST API call to the Register endpoint
+    const endpoint = "http://kineticparts.africa/auth/register/";
+    try {
+      const response = await axios.post(
+        endpoint, 
+        { data }, 
+      {
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+      console.log("Data successfully posted: ", response.data)
+    } catch (error) {
+      console.error('Error posting data:', error)
+    }
     console.log(data);
     reset();
   };
@@ -196,18 +212,18 @@ const SignUpCard = () => {
                 </label>
                 <select
                   className="block w-full rounded-md"
-                  {...register("vehicleOwner")}
+                  {...register("role")}
                   value={selectedValue}
                   onChange={handleSelectChange}
-                  defaultValue={"vehicle_owner"}
+                  defaultValue={"Merchant"}
                 >
-                  <option value="vehicle_owner">Vehicle Owner</option>
-                  <option value="fleet">Fleet Manager</option>
-                  <option value="repairer">Auto Repairer</option>
+                  <option value="Merchant">Merchant</option>
+                  <option value="fleet manager">Fleet Manager</option>
+                  <option value="mechanic">Mechanic</option>
                 </select>
-                {errors.vehicleOwner?.message && (
+                {errors.role?.message && (
                   <p className="mt-2 text-sm text-red-400">
-                    {errors.vehicleOwner.message}
+                    {errors.role.message}
                   </p>
                 )}
               </div>
@@ -234,12 +250,12 @@ const SignUpCard = () => {
                 <input
                   type="text"
                   autoComplete="off"
-                  {...register("firstName")}
+                  {...register("first_name")}
                   className="rounded-md"
                 />
-                {errors.firstName?.message && (
+                {errors.first_name?.message && (
                   <p className="mt-2 text-sm text-red-400">
-                    {errors.firstName.message}
+                    {errors.first_name.message}
                   </p>
                 )}
               </div>
@@ -247,13 +263,13 @@ const SignUpCard = () => {
                 <label className="text-left sm:ml-4">Lastname</label>
                 <input
                   type="text"
-                  {...register("lastName")}
+                  {...register("last_name")}
                   autoComplete="off"
                   className="rounded-md"
                 />
-                {errors.lastName?.message && (
+                {errors.last_name?.message && (
                   <p className="mt-2 text-sm text-red-400">
-                    {errors.lastName.message}
+                    {errors.last_name.message}
                   </p>
                 )}
               </div>
@@ -272,7 +288,7 @@ const SignUpCard = () => {
                   </p>
                 )}
               </div>
-              <div className="flex flex-col mt-4">
+              {/* <div className="flex flex-col mt-4">
                 <label className="text-left sm:ml-4">Country/Region</label>
                 <input
                   type="text"
@@ -285,7 +301,7 @@ const SignUpCard = () => {
                     {errors.country.message}
                   </p>
                 )}
-              </div>
+              </div> */}
               <div className="flex flex-col mt-4">
                 <label className="text-left sm:ml-4">Password</label>
                 <input
@@ -305,12 +321,12 @@ const SignUpCard = () => {
                 <input
                   type="password"
                   autoComplete="off"
-                  {...register("confirmPassword")}
+                  {...register("confirm_password")}
                   className="rounded-md"
                 />
-                {errors.confirmPassword?.message && (
+                {errors.confirm_password?.message && (
                   <p className="mt-2 text-sm text-red-400">
-                    {errors.confirmPassword.message}
+                    {errors.confirm_password.message}
                   </p>
                 )}
               </div>
@@ -319,13 +335,13 @@ const SignUpCard = () => {
                 <input
                   type="tel"
                   placeholder="8100617304"
-                  {...register("phoneNumber")}
+                  {...register("phone_number")}
                   autoComplete="off"
                   className="inputField rounded-md"
                 />
-                {errors.phoneNumber?.message && (
+                {errors.phone_number?.message && (
                   <p className="mt-2 text-sm text-red-400">
-                    {errors.phoneNumber.message}
+                    {errors.phone_number.message}
                   </p>
                 )}
               </div>
