@@ -5,16 +5,18 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { z } from "zod";
-import { FormDataSchema } from "@/lib/schema";
+import { FormDataSchema } from "@/lib/registerSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 
-import Button from "./Button";
+import { motion } from "framer-motion";
+
+// import Button from "./Button";
 import SocialIcons from "./SocialIcons";
 import styles from "../(auth)/signup/signup.module.scss";
 import Square from "../../images/square.svg";
-import errorMap from "zod/locales/en.js";
+// import errorMap from "zod/locales/en.js";
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -32,11 +34,11 @@ const steps = [
       "first_name",
       "last_name",
       "email",
-      // "country",
+      "country",
       "password",
       "confirm_password",
       "phone_number",
-      "vin",
+      "company_name",
     ],
   },
   {
@@ -76,19 +78,15 @@ const SignUpCard = () => {
     //Make POST API call to the Register endpoint
     const endpoint = "http://kineticparts.africa/auth/register/";
     try {
-      const response = await axios.post(
-        endpoint, 
-        { data }, 
-      {
+      const response = await axios.post(endpoint, data, {
         headers: {
           "Content-Type": "application/json",
-        }
+        },
       });
-      console.log("Data successfully posted: ", response.data)
+      console.log("Data successfully posted: ", response.data);
     } catch (error) {
-      console.error('Error posting data:', error)
+      console.error("Error posting data:", error);
     }
-    console.log(data);
     reset();
   };
 
@@ -124,7 +122,6 @@ const SignUpCard = () => {
     const value = e.target.value;
     setSelectedValue(value);
     setShowInputField(value === "fleet");
-    console.log("handle select worked");
   };
 
   return (
@@ -176,21 +173,25 @@ const SignUpCard = () => {
         <form className="py-12" onSubmit={handleSubmit(processForm)}>
           {/* Step One Form */}
           {currentStep === 0 && (
-            <div>
+            <motion.div
+              initial={{ x: currentStep >= 0 ? "50%" : "-50%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.7, ease: "easeInOut" }}
+            >
               <div className="flex flex-col">
                 <label className="text-left sm:ml-4 font-semibold">
                   Sign Up with Email
                 </label>
                 <input
                   type="text"
-                  placeholder="username001@xmail.com"
+                  placeholder=""
                   {...register("email")}
                   autoComplete="email"
                   onChange={(e) => setFormEmail(e.target.value)}
                   className="rounded-md"
                 />
                 {errors.email?.message && (
-                  <p className="mt-2 text-sm text-red-400">
+                  <p className="mt-2 text-xs text-red-400">
                     {errors.email.message}
                   </p>
                 )}
@@ -199,11 +200,15 @@ const SignUpCard = () => {
                 <span>or with</span>
               </div>
               <SocialIcons />
-            </div>
+            </motion.div>
           )}
           {/* Step 2 Form */}
           {currentStep === 1 && (
-            <div>
+            <motion.div
+              initial={{ x: currentStep >= 0 ? "50%" : "-50%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.7, ease: "easeInOut" }}
+            >
               <div className="flex flex-col">
                 {/* <button className="p-4 bg-black text-white" onClick={handleVin}>Hit me!</button> */}
                 <label className="text-left sm:ml-4">
@@ -215,14 +220,14 @@ const SignUpCard = () => {
                   {...register("role")}
                   value={selectedValue}
                   onChange={handleSelectChange}
-                  defaultValue={"Merchant"}
+                  defaultValue={"Vehicle Owner"}
                 >
-                  <option value="Merchant">Merchant</option>
+                  <option value="vehicle owner">Vehicle Owner</option>
                   <option value="fleet manager">Fleet Manager</option>
                   <option value="mechanic">Mechanic</option>
                 </select>
                 {errors.role?.message && (
-                  <p className="mt-2 text-sm text-red-400">
+                  <p className="mt-2 text-xs text-red-400">
                     {errors.role.message}
                   </p>
                 )}
@@ -234,13 +239,13 @@ const SignUpCard = () => {
                   <input
                     type="text"
                     placeholder="5479947GH"
-                    {...register("vin")}
+                    {...register("company_name")}
                     autoComplete="off"
                     className="inputField rounded-md"
                   />
-                  {errors.vin?.message && (
-                    <p className="mt-2 text-sm text-red-400">
-                      {errors.vin.message}
+                  {errors.company_name?.message && (
+                    <p className="mt-2 text-xs text-red-400">
+                      {errors.company_name.message}
                     </p>
                   )}
                 </div>
@@ -254,7 +259,7 @@ const SignUpCard = () => {
                   className="rounded-md"
                 />
                 {errors.first_name?.message && (
-                  <p className="mt-2 text-sm text-red-400">
+                  <p className="mt-2 text-xs text-red-400">
                     {errors.first_name.message}
                   </p>
                 )}
@@ -268,7 +273,7 @@ const SignUpCard = () => {
                   className="rounded-md"
                 />
                 {errors.last_name?.message && (
-                  <p className="mt-2 text-sm text-red-400">
+                  <p className="mt-2 text-xs text-red-400">
                     {errors.last_name.message}
                   </p>
                 )}
@@ -283,12 +288,12 @@ const SignUpCard = () => {
                   readOnly
                 />
                 {errors.email?.message && (
-                  <p className="mt-2 text-sm text-red-400">
+                  <p className="mt-2 text-xs text-red-400">
                     {errors.email.message}
                   </p>
                 )}
               </div>
-              {/* <div className="flex flex-col mt-4">
+              <div className="flex flex-col mt-4">
                 <label className="text-left sm:ml-4">Country/Region</label>
                 <input
                   type="text"
@@ -297,11 +302,11 @@ const SignUpCard = () => {
                   className="rounded-md"
                 />
                 {errors.country?.message && (
-                  <p className="mt-2 text-sm text-red-400">
+                  <p className="mt-2 text-xs text-red-400">
                     {errors.country.message}
                   </p>
                 )}
-              </div> */}
+              </div>
               <div className="flex flex-col mt-4">
                 <label className="text-left sm:ml-4">Password</label>
                 <input
@@ -311,7 +316,7 @@ const SignUpCard = () => {
                   className="rounded-md"
                 />
                 {errors.password?.message && (
-                  <p className="mt-2 text-sm text-red-400">
+                  <p className="mt-2 text-xs text-red-400">
                     {errors.password.message}
                   </p>
                 )}
@@ -325,7 +330,7 @@ const SignUpCard = () => {
                   className="rounded-md"
                 />
                 {errors.confirm_password?.message && (
-                  <p className="mt-2 text-sm text-red-400">
+                  <p className="mt-2 text-xs text-red-400">
                     {errors.confirm_password.message}
                   </p>
                 )}
@@ -340,7 +345,7 @@ const SignUpCard = () => {
                   className="inputField rounded-md"
                 />
                 {errors.phone_number?.message && (
-                  <p className="mt-2 text-sm text-red-400">
+                  <p className="mt-2 text-xs text-red-400">
                     {errors.phone_number.message}
                   </p>
                 )}
@@ -358,11 +363,15 @@ const SignUpCard = () => {
                   </span>
                 </p>
               </label>
-            </div>
+            </motion.div>
           )}
           {/* Step 3 Form */}
           {currentStep === 2 && (
-            <div>
+            <motion.div
+              initial={{ x: currentStep >= 0 ? "50%" : "-50%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.7, ease: "easeInOut" }}
+            >
               <p>
                 A confirmation mail was sent to your mailbox <br />
                 <span className="font-bold text-blue-600">
@@ -403,7 +412,7 @@ const SignUpCard = () => {
                   instead of {formEmail}
                 </span>
               </p>
-            </div>
+            </motion.div>
           )}
           {currentStep === 3 && (
             <div className="mb-8">
