@@ -20,6 +20,10 @@ import Square from "../../images/square.svg";
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
+interface ApiResponse {
+  activation_link: string;
+}
+
 const steps = [
   {
     id: "Step 1",
@@ -55,6 +59,7 @@ const SignUpCard = () => {
   const [previousStep, setPreviousStep] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
   const [formEmail, setFormEmail] = useState("");
+  const [activationLink, setActivationLink] = useState("")
   // const delta = currentStep - previousStep;
 
   //State to track the selected value in the select form
@@ -78,11 +83,13 @@ const SignUpCard = () => {
     //Make POST API call to the Register endpoint
     const endpoint = "http://kineticparts.africa/auth/register/";
     try {
-      const response = await axios.post(endpoint, data, {
+      const response = await axios.post<ApiResponse>(endpoint, data, {
         headers: {
           "Content-Type": "application/json",
         },
       });
+      console.log(response.data.activation_link)
+      setActivationLink(response.data.activation_link)
       console.log("Data successfully posted: ", response.data);
     } catch (error) {
       console.error("Error posting data:", error);
@@ -121,7 +128,7 @@ const SignUpCard = () => {
   const handleSelectChange = (e: any) => {
     const value = e.target.value;
     setSelectedValue(value);
-    setShowInputField(value === "fleet");
+    setShowInputField(value === "Fleet Manager");
   };
 
   return (
@@ -222,9 +229,9 @@ const SignUpCard = () => {
                   onChange={handleSelectChange}
                   defaultValue={"Vehicle Owner"}
                 >
-                  <option value="vehicle owner">Vehicle Owner</option>
-                  <option value="fleet manager">Fleet Manager</option>
-                  <option value="mechanic">Mechanic</option>
+                  <option value="Individual">Individual</option>
+                  <option value="Fleet Manager">Fleet Manager</option>
+                  <option value="Mechanic">Mechanic</option>
                 </select>
                 {errors.role?.message && (
                   <p className="mt-2 text-xs text-red-400">
@@ -232,20 +239,20 @@ const SignUpCard = () => {
                   </p>
                 )}
               </div>
-              {/* VIN */}
+              {/* Company Name */}
               {showInputField && (
                 <div className="flex flex-col mt-4">
-                  <label className="text-left sm:ml-4">VIN</label>
+                  <label className="text-left sm:ml-4">Company</label>
                   <input
                     type="text"
-                    placeholder="5479947GH"
-                    {...register("company_name")}
+                    placeholder="Ade & Sons"
+                    {...register("company")}
                     autoComplete="off"
                     className="inputField rounded-md"
                   />
-                  {errors.company_name?.message && (
+                  {errors.company?.message && (
                     <p className="mt-2 text-xs text-red-400">
-                      {errors.company_name.message}
+                      {errors.company.message}
                     </p>
                   )}
                 </div>
@@ -373,12 +380,14 @@ const SignUpCard = () => {
               transition={{ duration: 0.7, ease: "easeInOut" }}
             >
               <p>
-                A confirmation mail was sent to your mailbox <br />
+                {/* A confirmation mail was sent to your mailbox <br /> */}
+                Activate your account with this link <br/>
                 <span className="font-bold text-blue-600">
-                  {formEmail}
+                  {/* {formEmail} */}
+                  {activationLink}
                 </span>{" "}
                 <br />
-                with a link to verify your account
+                {/* with a link to verify your account */}
               </p>
               <p className="text-xs mt-2">
                 <span className="text-blue-600">Please check your email</span>{" "}
@@ -428,7 +437,8 @@ const SignUpCard = () => {
             </div>
           )}
         </form>
-
+        {/* esinxx@afripointgroup.com
+        Ayodeji123@ */}
         {/* Navigation */}
 
         <div className="flex mt-8">

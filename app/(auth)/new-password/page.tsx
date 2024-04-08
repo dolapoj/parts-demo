@@ -4,9 +4,6 @@ import styles from "../login/login.module.scss";
 import Logo from "../../../images/kinetic-parts-logo.png";
 import ResetAnime from "../../../images/resetpwvector.png";
 
-import showPwgImg from "../../../images/eye.png";
-import hidePwgImg from "../../../images/hidden.png";
-
 import Image from "next/image";
 import Link from "next/link";
 
@@ -50,6 +47,7 @@ const ResetPassword = () => {
                     placeholder=""
                     autoComplete="off"
                     className="rounded-md"
+                    required
                   />
                   <div
                     className="absolute inset-y-0 right-0 flex items-center px-4 text-gray-600"
@@ -103,6 +101,7 @@ const ResetPassword = () => {
                     placeholder=""
                     autoComplete="off"
                     className="rounded-md"
+                    required
                   />
                   <div
                     className="absolute inset-y-0 right-0 flex items-center px-4 text-gray-600"

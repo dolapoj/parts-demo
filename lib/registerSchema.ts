@@ -19,5 +19,5 @@ export const FormDataSchema = z.object({
             message: 'Password does not match',
       }),
       phone_number: z.string().min(1, 'Phone number is required'),
-      company_name: z.string().min(1, 'Company name  is required').optional()
+      company: z.string().min(1, 'Company name  is required').optional()
 }).strip();

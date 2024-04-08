@@ -1,11 +1,56 @@
-import React from "react";
+"use client";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../login/login.module.scss";
 import Logo from "../../../images/kinetic-parts-logo.png";
 import ResetAnime from "../../../images/resetpwvector.png";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const ResetPassword = () => {
+  const router = useRouter()
+  const [formData, setFormData] = useState({
+    email: ""
+  });
+
+  const [activationLink, setActivationLink] = useState("")
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    })
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const endpoint = "http://kineticparts.africa/auth/request-reset-email/"
+
+    try {
+      const response = await axios.post(
+        endpoint,
+        {
+          email: formData.email,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json"
+          },
+        }
+      );
+      setActivationLink(response.data.activation_link)
+      console.log("Data successfully posted: ", response.data)
+      setFormData({
+        email: ""
+      })
+      router.push("/new-password")
+    } catch (error) {
+      console.error("Error posting data: " ,error)
+    }
+  }
+
   return (
     <main className={`${styles.login_container} min-h-screen`}>
       <div
@@ -34,24 +79,24 @@ const ResetPassword = () => {
               Enter the email address associated with your account and we'll
               send you a link to reset your password
             </p>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="flex flex-col">
                 <label className="mt-6 text-left sm:ml-4">Email</label>
                 <input
                   type="text"
                   name="email"
                   placeholder=""
+                  onChange={handleInputChange}
                   autoComplete="off"
                   className="rounded-md"
+                  required
                 />
               </div>
-              <Link href="new-password">
-                <div className="flex justify-center mt-14">
-                  <button className="bgGreen text-white w-full p-2 rounded-md mb-4">
-                    Continue
-                  </button>
-                </div>
-              </Link>
+              <div className="flex justify-center mt-14">
+                <button className="bgGreen text-white w-full p-2 rounded-md mb-4">
+                  Continue
+                </button>
+              </div>
             </form>
           </div>
           <div
