@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import styles from "../login/login.module.scss";
 import Logo from "../../../images/kinetic-parts-logo.png";
 import ResetAnime from "../../../images/resetpwvector.png";
@@ -9,6 +9,25 @@ import Link from "next/link";
 
 const ResetPassword = () => {
   const [isRevealPwd, setIsRevealPwd] = useState(false);
+
+  const [formData, setFormData] = useState({
+    password: "",
+    confirmPassword: "",
+  });
+
+  //Handle Input Chnage in Form Fields
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // const endpoint = 
+  }
 
   function togglePwdVisibility(params: any) {
     setIsRevealPwd((prevState) => !prevState);
@@ -92,7 +111,7 @@ const ResetPassword = () => {
                   </div>
                 </div>
                 <label className="mt-6 text-left sm:ml-4">
-                    Confirm Password
+                  Confirm Password
                 </label>
                 <div className="relative flex flex-col">
                   <input

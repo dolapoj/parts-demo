@@ -45,6 +45,7 @@ const ResetPassword = () => {
       setFormData({
         email: ""
       })
+      alert(JSON.stringify(response.data.activation_link))
       router.push("/new-password")
     } catch (error) {
       console.error("Error posting data: " ,error)

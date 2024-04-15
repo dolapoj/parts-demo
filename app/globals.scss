@@ -81,13 +81,29 @@ input {
   background: $primary-bg-login;
 }
 
-.inputField {
-  // background: transparent;
-  // // border: 2px solid $input-field-border;
-  // background-image: url('../images/google.png');
-  // background-size: contain;
-  // background-repeat: no-repeat;
-  // background-position: 3px center;
+//NavBar
+.input-field {
+  padding: 6px 10px;
+  width: 400px;
+  background: transparent;
+  border-radius: 6px;
+  border: 2px solid $primary-green;
+  background-image: url('../images/loupe.png');
+  background-repeat: no-repeat;
+  background-position: 370px center;
 }
 
-//Reset Password
+.input-field::placeholder {
+  color: $primary-blue;
+  font-size: 16px;
+  font-style: normal;
+  line-height: 24px;
+  font-weight: 300;
+}
+
+input:focus {
+  outline: none;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 16px;
+}

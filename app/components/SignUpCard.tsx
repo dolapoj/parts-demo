@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-// import { motion } from 'framer-motion'
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,14 +8,13 @@ import { FormDataSchema } from "@/lib/registerSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 import { motion } from "framer-motion";
 
-// import Button from "./Button";
 import SocialIcons from "./SocialIcons";
 import styles from "../(auth)/signup/signup.module.scss";
 import Square from "../../images/square.svg";
-// import errorMap from "zod/locales/en.js";
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -56,11 +54,9 @@ const steps = [
 ];
 
 const SignUpCard = () => {
-  const [previousStep, setPreviousStep] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
   const [formEmail, setFormEmail] = useState("");
   const [activationLink, setActivationLink] = useState("")
-  // const delta = currentStep - previousStep;
 
   //State to track the selected value in the select form
   const [selectedValue, setSelectedValue] = useState("");
@@ -90,9 +86,11 @@ const SignUpCard = () => {
       });
       console.log(response.data.activation_link)
       setActivationLink(response.data.activation_link)
-      console.log("Data successfully posted: ", response.data);
+      // console.log("Data successfully posted: ", response.data);
+      toast.success("You can now check your email for account activation.")
     } catch (error) {
-      console.error("Error posting data:", error);
+      // console.error("Error posting data:", error);
+      toast.error("There might be an issue with your internet")
     }
     reset();
   };
