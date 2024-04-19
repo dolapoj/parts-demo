@@ -12,7 +12,7 @@ const SocialIcons = () => {
   const endpoint = "http://kineticparts.africa/social/google";
   const responseGoogle = (response: any) => {
     console.log(response);
-    // Send the received token to your server for authentication
+    // Send the received token to the server for authentication
     try {
       const apiResponse = axios.post(
             endpoint, response.accessToken,

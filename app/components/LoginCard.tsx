@@ -14,6 +14,7 @@ type ErrorsType = { [key: string]: string };
 
 const LoginCard = () => {
   const router = useRouter();
+
   //Set Form State
   const [formData, setFormData] = useState({
     email: "",
@@ -23,15 +24,15 @@ const LoginCard = () => {
   const [errors, setErrors] = useState<ErrorsType>({});
   const [responseData, setResponseData] = useState(null);
 
-  useEffect(() => {
-    function start() {
-      gapi.client.init({
-        clientId: "806292803476-urs300nfiqdfc0gekdnf3mrrpml5ehg9.apps.googleusercontent.com",
-        scope: ""
-      })
-    }
-    gapi.load('client:auth2', start)
-  })
+  // useEffect(() => {
+  //   function start() {
+  //     gapi.client.init({
+  //       clientId: "806292803476-urs300nfiqdfc0gekdnf3mrrpml5ehg9.apps.googleusercontent.com",
+  //       scope: ""
+  //     })
+  //   }
+  //   gapi.load('client:auth2', start)
+  // })
 
   //Handle Input Chnage in Form Fields
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -46,17 +47,17 @@ const LoginCard = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const validationErrors: { [key: string]: string } = {};
-    // if (!formData.email.trim()) {
-    //   validationErrors.email = "Email is required";
-    // } else if (
-    //   !/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/.test(formData.email.trim())
-    // ) {
-    //   validationErrors.email = "Email is not valid";
-    // }
-    // if (!formData.password.trim()) {
-    //   validationErrors.password = "Password is required";
-    // }
-    // setErrors(validationErrors);
+                          // if (!formData.email.trim()) {
+                          //   validationErrors.email = "Email is required";
+                          // } else if (
+                          //   !/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/.test(formData.email.trim())
+                          // ) {
+                          //   validationErrors.email = "Email is not valid";
+                          // }
+                          // if (!formData.password.trim()) {
+                          //   validationErrors.password = "Password is required";
+                          // }
+                          // setErrors(validationErrors);
 
     //Make API call to the Login Endpoint
     const endpoint = "http://kineticparts.africa/auth/login/";
@@ -76,12 +77,11 @@ const LoginCard = () => {
         );
         // console.log('Data successfully posted: ', response.data)
         if (response.status === 200) {
-          setResponseData(response.data);
-          router.push(
-            // pathname:
-            "/profile"
-            // query: { responseData: JSON.stringify(response.data) }
-          );
+          setResponseData(response.data.user);
+          
+          //Save responseData to sessionStorage
+          sessionStorage.setItem('userData', JSON.stringify(response.data.user))
+          router.push('/')
         } 
         else if (response.status === 400) {
           toast.error("Invalid email or password.");

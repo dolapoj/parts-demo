@@ -1,9 +1,14 @@
-import React from "react";
+'use client'
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 import logo from "../../images/kinetic-parts-logo.png";
 
-const NavBar = () => {
+type NavBarProps = {
+  userData: any; // Define the type of userData here
+};
+
+const NavBar: React.FC<NavBarProps> = ({ userData }) => {
   return (
     <div className="flex flex-row justify-between navbar bg-base-100 p-8">
       <div className="">
@@ -23,7 +28,7 @@ const NavBar = () => {
         </form>
       </div>
       <div className="">
-        <h4>username</h4>
+        <h4>Hi, {userData.first_name}</h4>
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             <div className="indicator">
