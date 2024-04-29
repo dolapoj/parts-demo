@@ -78,12 +78,15 @@ const LoginCard = () => {
         // console.log('Data successfully posted: ', response.data)
         if (response.status === 200) {
           setResponseData(response.data.user);
+          console.log('i got here')
+          console.log('Data successfully posted: ', response.data)
           
           //Save responseData to sessionStorage
           sessionStorage.setItem('userData', JSON.stringify(response.data.user))
           router.push('/')
         } 
-        else if (response.status === 400) {
+        if (response.status === 400) {
+          console.log('status 400')
           toast.error("Invalid email or password.");
           validationErrors.invalid =
             "You have provided an invalid email or password. Please check and try again";
@@ -91,6 +94,7 @@ const LoginCard = () => {
         }
       } catch (error) {
         console.error("There is an error:", error);
+        toast.error("Invalid email or password.")
       }
 
       setFormData({

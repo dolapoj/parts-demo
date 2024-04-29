@@ -2,8 +2,7 @@ import "./globals.scss";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
-
-import AuthProvider  from "react-auth-kit";
+import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,16 +11,22 @@ export const metadata: Metadata = {
   description: "Get your automobile parts",
 };
 
-export default function RootLayout({
-  children,
-}: {
+interface RootLayoutProps {
   children: React.ReactNode;
-}) {
+  session: any; // Define the type of session here
+}
+
+export default function RootLayout({ children, session }: RootLayoutProps) {
   return (
     <html lang="en">
       <body className={inter.className}>
         <Toaster position="top-center" />
         {children}
+        {/* {typeof window !== "undefined" && (
+          <SessionProvider session={session}>
+            {children}
+          </SessionProvider>
+        )} */}
       </body>
     </html>
   );

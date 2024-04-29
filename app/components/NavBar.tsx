@@ -16,14 +16,17 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
         <Image
           alt="logo"
           src={logo}
-          placeholder="blur"
           className={`w-24 sm:w-40`}
         />
       </div>
       <div className="">
         <form>
           <label className="input input-bordered flex items-center gap-2">
-            <input type="text" className="grow border-none focus:border-none placeholder:italic placeholder:text-slate-400" placeholder="Search by product name" />
+            <input
+              type="text"
+              className="grow border-none focus:border-none placeholder:italic placeholder:text-slate-400"
+              placeholder="Search by product name"
+            />
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -40,14 +43,16 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
         </form>
       </div>
       <div className="">
-        <div className="flex flex-row gap-4 justify-start mr-6">
-          <Link href="/login">
-            <span>Sign In</span>
-          </Link>
-          <Link href="/signup">
-            <span>Sign Up</span>
-          </Link>
-        </div>
+        {!userData.first_name && (
+          <div className="flex flex-row gap-4 justify-start mr-6">
+            <Link href="/login">
+              <span>Sign In</span>
+            </Link>
+            <Link href="/signup">
+              <span>Sign Up</span>
+            </Link>
+          </div>
+        )}
         {userData.first_name && <h4>Hi, {userData.first_name}</h4>}
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">

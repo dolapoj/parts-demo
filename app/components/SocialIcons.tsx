@@ -15,14 +15,14 @@ const SocialIcons = () => {
     console.log(response);
     // Send the received token to the server for authentication
     try {
-      const apiResponse = axios.post(
-            endpoint, response.accessToken,
-            {
-                  headers: {
-                    "Content-Type": "application/json",
-                  }
-            },
-      )
+      // const apiResponse = axios.post(
+      //       endpoint, response.accessToken,
+      //       {
+      //             headers: {
+      //               "Content-Type": "application/json",
+      //             }
+      //       },
+      // )
     } catch (error) {
       console.error(error)
     }
