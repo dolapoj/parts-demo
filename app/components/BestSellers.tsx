@@ -5,7 +5,7 @@ import Photo from "../../images/logo.png";
 
 const BestSellers = () => {
   return (
-    <section className="py-12 mx-12">
+    <section className="py-12 mx-12 sm:px-12">
       <div className="mx-8">
         <h4 className="font-semibold">BEST SELLERS</h4>
         <div className="grid grid-cols-4 gap-4 mt-12">

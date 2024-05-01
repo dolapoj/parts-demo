@@ -24,7 +24,7 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
           <label className="input input-bordered flex items-center gap-2">
             <input
               type="text"
-              className="grow border-none focus:border-none placeholder:italic placeholder:text-slate-400"
+              className="grow border-none sm:w-70 focus:border-none placeholder:italic placeholder:text-slate-400"
               placeholder="Search by product name"
             />
             <svg

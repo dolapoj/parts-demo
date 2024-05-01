@@ -1,6 +1,5 @@
 "use client";
 import React, { ReactNode } from "react";
-import AuthProvider from "react-auth-kit";
 
 // interface AuthProviderProps {
 //   children: ReactNode;

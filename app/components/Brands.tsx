@@ -7,7 +7,7 @@ import Bmw from '../../images/bmw.png'
 
 const Brands = () => {
   return (
-    <section className='mx-16 py-12'>
+    <section className='mx-24 py-12 pb-36'>
       <h5 className="font-semibold pb-8">POPULAR BRANDS</h5>
       <div className="flex justify-between ">
         <Image src={Toyota} alt="toyota" className='w-24 h-24' />
@@ -15,7 +15,6 @@ const Brands = () => {
         <Image src={Hyundai} alt="toyota" className='w-24 h-24'/>
         <Image src={Bmw} alt="toyota" className='w-24 h-24'/>
         <Image src={Honda} alt="toyota" className='w-24 h-24'/>
-        <Image src={Hyundai} alt="toyota" className='w-24 h-24'/>
         <Image src={Hyundai} alt="toyota" className='w-24 h-24'/>
       </div>
     </section>
