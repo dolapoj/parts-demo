@@ -48,7 +48,7 @@ const ResetPassword = () => {
       alert(JSON.stringify(response.data.activation_link))
       router.push("/new-password")
     } catch (error) {
-      console.error("Error posting data: " ,error)
+      console.error("Error posting data: ", error)
     }
   }
 
@@ -77,12 +77,12 @@ const ResetPassword = () => {
               Password Reset
             </p>
             <p className="mt-8 text-sm">
-              Enter the email address associated with your account and we'll
+              Enter the email address associated with your account and well
               send you a link to reset your password
             </p>
             <form onSubmit={handleSubmit}>
-              <div className="flex flex-col">
-                <label className="mt-6 text-left sm:ml-4">Email</label>
+              <div className="flex flex-col mt-6 sm:ml-4">
+                <label>Email</label>
                 <input
                   type="text"
                   name="email"
@@ -94,15 +94,13 @@ const ResetPassword = () => {
                 />
               </div>
               <div className="flex justify-center mt-14">
-                <button className="bgGreen text-white w-full p-2 rounded-md mb-4">
+                <button className="bg-green text-white w-full p-2 rounded-md mb-4">
                   Continue
                 </button>
               </div>
             </form>
           </div>
-          <div
-            className={`${styles.bg_blue} hidden sm:block sm:flex sm:px-10 flex-col justify-center items-center sm:w-1/3 p-6`}
-          >
+          <div className={`${styles.bg_blue} hidden sm:block sm:flex sm:px-10 flex-col justify-center items-center sm:w-1/3 p-6`}>
             <Image
               src={ResetAnime}
               alt="Reset Password"
@@ -111,6 +109,7 @@ const ResetPassword = () => {
             />
           </div>
         </div>
+
       </div>
     </main>
   );
