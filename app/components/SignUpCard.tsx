@@ -56,7 +56,7 @@ const steps = [
 const SignUpCard = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formEmail, setFormEmail] = useState("");
-  const [activationLink, setActivationLink] = useState("")
+  const [activationLink, setActivationLink] = useState("");
 
   //State to track the selected value in the select form
   const [selectedValue, setSelectedValue] = useState("");
@@ -84,13 +84,13 @@ const SignUpCard = () => {
           "Content-Type": "application/json",
         },
       });
-      console.log(response.data.activation_link)
-      setActivationLink(response.data.activation_link)
+      console.log(response.data.activation_link);
+      setActivationLink(response.data.activation_link);
       // console.log("Data successfully posted: ", response.data);
-      toast.success("You can now check your email for account activation.")
+      toast.success("You can now check your email for account activation.");
     } catch (error) {
       // console.error("Error posting data:", error);
-      toast.error("There might be an issue with your internet")
+      toast.error("There might be an issue with your internet");
     }
     reset();
   };
@@ -212,7 +212,7 @@ const SignUpCard = () => {
             <motion.div
               initial={{ x: currentStep >= 0 ? "50%" : "-50%", opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.7, ease: "easeInOut" }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
             >
               <div className="flex flex-col">
                 {/* <button className="p-4 bg-black text-white" onClick={handleVin}>Hit me!</button> */}
@@ -290,7 +290,8 @@ const SignUpCard = () => {
                   {...register("email")}
                   autoComplete="off"
                   className={`${styles.inputBg} rounded-md focus:outline-none`}
-                  readOnly
+                  // readOnly
+                  disabled
                 />
                 {errors.email?.message && (
                   <p className="mt-2 text-xs text-red-400">
@@ -348,6 +349,7 @@ const SignUpCard = () => {
                   {...register("phone_number")}
                   autoComplete="off"
                   className="inputField rounded-md"
+                  required
                 />
                 {errors.phone_number?.message && (
                   <p className="mt-2 text-xs text-red-400">
@@ -355,19 +357,25 @@ const SignUpCard = () => {
                   </p>
                 )}
               </div>
-              <label className="flex items-center mt-2">
-                <input type="checkbox" className="mr-2 w-4 h-4" />
-                <p className="text-xs text-gray-600">
-                  I agree to the{" "}
-                  <span className="text-blue-900 font-bold cursor-pointer">
-                    User Agreement
-                  </span>{" "}
-                  and the{" "}
-                  <span className="text-blue-900 font-bold cursor-pointer">
-                    Privacy Policy
+              <div>
+                <label className="flex flex-row justify-start label cursor-pointer">
+                  <input
+                    type="checkbox"
+                    defaultChecked
+                    className="checkbox checkbox-primary mr-2 w-4 h-4 mb-2"
+                  />
+                  <span className="label-text text-xs text-gray-600">
+                    I agree to the{" "}
+                    <span className="text-blue-900 font-bold cursor-pointer">
+                      User Agreement
+                    </span>{" "}
+                    and the{" "}
+                    <span className="text-blue-900 font-bold cursor-pointer">
+                      Privacy Policy
+                    </span>
                   </span>
-                </p>
-              </label>
+                </label>
+              </div>
             </motion.div>
           )}
           {/* Step 3 Form */}
@@ -379,7 +387,7 @@ const SignUpCard = () => {
             >
               <p>
                 {/* A confirmation mail was sent to your mailbox <br /> */}
-                Activate your account with this link <br/>
+                Activate your account with this link <br />
                 <span className="font-bold text-blue-600">
                   {/* {formEmail} */}
                   {activationLink}

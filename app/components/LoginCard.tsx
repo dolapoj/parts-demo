@@ -24,15 +24,15 @@ const LoginCard = () => {
   const [errors, setErrors] = useState<ErrorsType>({});
   const [responseData, setResponseData] = useState(null);
 
-  // useEffect(() => {
-  //   function start() {
-  //     gapi.client.init({
-  //       clientId: "806292803476-urs300nfiqdfc0gekdnf3mrrpml5ehg9.apps.googleusercontent.com",
-  //       scope: ""
-  //     })
-  //   }
-  //   gapi.load('client:auth2', start)
-  // })
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: "806292803476-urs300nfiqdfc0gekdnf3mrrpml5ehg9.apps.googleusercontent.com",
+        scope: ""
+      })
+    }
+    gapi.load('client:auth2', start)
+  })
 
   //Handle Input Chnage in Form Fields
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {

@@ -77,7 +77,11 @@ const ResetPassword = () => {
               Password Reset
             </p>
             <p className="mt-8 text-sm">
+<<<<<<< HEAD
               Enter the email address associated with your account and well
+=======
+              Enter the email address associated with your account and we will
+>>>>>>> f9cfff98a6d70b7d0418acd1f3eb71eb7d391f10
               send you a link to reset your password
             </p>
             <form onSubmit={handleSubmit}>

@@ -33,19 +33,16 @@ const ResetPassword = () => {
     event.preventDefault();
     const validationErrors: { [key: string]: string } = {};
     if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(formData.password.trim())) {
-      console.log('1')
       validationErrors.password = "Must contain at least 8 characters, one digit, one special character and one alphabet"
     }
-    if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(formData.confirmPassword.trim())) {
-      console.log('2')
+    if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(formData.confirmPassword.trim())) { console.log('2')
       validationErrors.confirmPassword = "Must contain at least 8 characters, one digit, one special character and one alphabet"
     }
     if (formData.password.trim() !== formData.confirmPassword.trim()) {
-      console.log('3')
       validationErrors.notEqual = "Passwords does not match"
     }
     setErrors(validationErrors)
-    await console.log(errors)
+    // await console.log(errors)
 
     //Make API calls
     if (Object.keys(validationErrors).length === 0) {
