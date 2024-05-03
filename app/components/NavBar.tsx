@@ -106,9 +106,6 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
                   <span className="badge">New</span>
                 </a>
               </li>
-              {/* <li>
-              <a>Settings</a>
-            </li> */}
               <li>
                 <a>Logout</a>
               </li>
