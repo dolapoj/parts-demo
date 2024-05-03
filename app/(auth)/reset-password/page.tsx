@@ -1,4 +1,3 @@
-"use client";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,24 +8,24 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 const ResetPassword = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: ""
   });
 
-  const [activationLink, setActivationLink] = useState("")
+  const [activationLink, setActivationLink] = useState("");
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({
       ...formData,
       [name]: value
-    })
+    });
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const endpoint = "http://kineticparts.africa/auth/request-reset-email/"
+    const endpoint = "http://kineticparts.africa/auth/request-reset-email/";
 
     try {
       const response = await axios.post(
@@ -40,23 +39,21 @@ const ResetPassword = () => {
           },
         }
       );
-      setActivationLink(response.data.activation_link)
-      console.log("Data successfully posted: ", response.data)
+      setActivationLink(response.data.activation_link);
+      console.log("Data successfully posted: ", response.data);
       setFormData({
         email: ""
-      })
-      alert(JSON.stringify(response.data.activation_link))
-      router.push("/new-password")
+      });
+      alert(JSON.stringify(response.data.activation_link));
+      router.push("/new-password");
     } catch (error) {
-      console.error("Error posting data: ", error)
+      console.error("Error posting data: ", error);
     }
-  }
+  };
 
   return (
-    <main className={`${styles.login_container} min-h-screen`}>
-      <div
-        className={`flex flex-col justify-start p-8 sm:p-16 sm:px-52 2xl:px-96`}
-      >
+    <div className={`${styles.login_container} min-h-screen`}>
+      <div className={`flex flex-col justify-start p-8 sm:p-16 sm:px-52 2xl:px-96`}>
         <Image
           src={Logo}
           alt="Kinetic Parts"
@@ -77,11 +74,7 @@ const ResetPassword = () => {
               Password Reset
             </p>
             <p className="mt-8 text-sm">
-<<<<<<< HEAD
-              Enter the email address associated with your account and well
-=======
-              Enter the email address associated with your account and we will
->>>>>>> f9cfff98a6d70b7d0418acd1f3eb71eb7d391f10
+              Enter the email address associated with your account and we'll
               send you a link to reset your password
             </p>
             <form onSubmit={handleSubmit}>
@@ -113,9 +106,8 @@ const ResetPassword = () => {
             />
           </div>
         </div>
-
       </div>
-    </main>
+    </div>
   );
 };
 
