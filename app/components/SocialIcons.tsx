@@ -4,8 +4,6 @@ import Image from "next/image";
 import FacebookIcon from "../../images/facebook.png";
 import GoogleIcon from "../../images/google.png";
 import LinkedIn from "../../images/linkedin.png";
-
-import { GoogleLogin } from "react-google-login";
 import axios from "axios";
 
 const SocialIcons = () => {
@@ -45,27 +43,27 @@ const SocialIcons = () => {
       </div>
       {/* End of icon */}
       <div>
-        <GoogleLogin
+        {/* <GoogleLogin
           clientId="806292803476-urs300nfiqdfc0gekdnf3mrrpml5ehg9.apps.googleusercontent.com"
           onSuccess={responseGoogle}
           buttonText="Continue with Google"
           onFailure={onFailure}
           cookiePolicy={"single_host_origin"}
-          // render={(renderProps) => (
-          //   // <button
-          //   //   onClick={renderProps.onClick}
-          //   //   disabled={renderProps.disabled}
-          //   //   className="google-login-button"
-          //   // >
-          //   //   {/* <Image
-          //   //     src={GoogleIcon}
-          //   //     alt="Google"
-          //   //     quality={100}
-          //   //     className="w-8"
-          //   //   /> */}
-          //   // </button>
-          // )}
-        />
+          render={(renderProps) => (
+            <button
+              onClick={renderProps.onClick}
+              disabled={renderProps.disabled}
+              className="google-login-button"
+            >
+              <Image
+                src={GoogleIcon}
+                alt="Google"
+                quality={100}
+                className="w-8"
+              />
+            </button>
+          )}
+        /> */}
         {/* <Image src={GoogleIcon} alt="Google" quality={100} className="w-8" /> */}
       </div>
 
