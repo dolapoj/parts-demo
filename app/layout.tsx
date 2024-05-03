@@ -2,6 +2,7 @@ import "./globals.scss";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
+import { GoogleOAuthProvider } from '@react-oauth/google'
 import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -21,12 +22,9 @@ export default function RootLayout({ children, session }: RootLayoutProps) {
     <html lang="en">
       <body className={inter.className}>
         <Toaster position="top-center" />
-        {children}
-        {/* {typeof window !== "undefined" && (
-          <SessionProvider session={session}>
-            {children}
-          </SessionProvider>
-        )} */}
+        <GoogleOAuthProvider clientId="806292803476-urs300nfiqdfc0gekdnf3mrrpml5ehg9.apps.googleusercontent.com">
+          {children}
+        </GoogleOAuthProvider>
       </body>
     </html>
   );

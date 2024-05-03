@@ -7,6 +7,7 @@ import BestSellers from "./components/BestSellers";
 import MoreParts from "./components/MoreParts";
 import Brands from "./components/Brands";
 import Footer from "./components/Footer";
+import Carousel from "./components/Carousel";
 
 type UserData = {
   first_name: string;
@@ -42,11 +43,11 @@ export default function Home({ session }: RootLayoutProps) {
   };
 
   return (
-    <main className="">
+    <main className="bg-landing">
       <Suspense fallback={Loading()}>
         <SessionProvider session={session}>
           <NavBar userData={userData} />
-          <section className="bg-cyan-900 text-white font-semibold py-2 px-12">
+          <section style={{backgroundColor: "#02026B"}} className="text-white font-semibold py-2 px-12">
             <ul className="flex justify-start items-center gap-8">
               <li className="cursor-pointer">Products</li>
               <li className="cursor-pointer">Categories</li>
@@ -55,10 +56,11 @@ export default function Home({ session }: RootLayoutProps) {
               <li className="cursor-pointer">Customer Service</li>
             </ul>
           </section>
+          <Carousel />
           <InnerSearch />
           <BestSellers />
-          <MoreParts props="SHOP MORE PARTS" />
-          <MoreParts props="SHOP BY MAKE" color="white" text="black"/>
+          <MoreParts color="#02026B" backgroundImage='/images/hyundai.png' props="SHOP MORE PARTS" />
+          <MoreParts props="SHOP BY MAKE" color="white" text="black" />
           <Brands />
           <Footer />
         </SessionProvider>

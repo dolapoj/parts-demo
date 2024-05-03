@@ -2,16 +2,18 @@
 import React from "react";
 import Image from "next/image";
 import FacebookIcon from "../../images/facebook.png";
-import GoogleIcon from "../../images/google.png";
+// import GoogleIcon from "../../images/google.png";
 import LinkedIn from "../../images/linkedin.png";
 
-import { GoogleLogin } from "react-google-login";
+import { GoogleLogin } from '@react-oauth/google';
 import axios from "axios";
+
+const clientId = "806292803476-urs300nfiqdfc0gekdnf3mrrpml5ehg9.apps.googleusercontent.com"
 
 const SocialIcons = () => {
   const endpoint = "http://kineticparts.africa/social/google";
 
-  const responseGoogle = (response: any) => {
+  const onSuccess = (response: any) => {
     console.log(response);
     // Send the received token to the server for authentication
     try {
@@ -28,7 +30,7 @@ const SocialIcons = () => {
     }
   };
 
-  const onFailure = (error: any) => {
+  const onError = (error: any) => {
     console.error("Google login failed:", error);
   };
 
@@ -46,11 +48,12 @@ const SocialIcons = () => {
       {/* End of icon */}
       <div>
         <GoogleLogin
-          clientId="806292803476-urs300nfiqdfc0gekdnf3mrrpml5ehg9.apps.googleusercontent.com"
-          onSuccess={responseGoogle}
-          buttonText="Continue with Google"
-          onFailure={onFailure}
-          cookiePolicy={"single_host_origin"}
+          onSuccess={(credentialResponse) => {
+            console.log(credentialResponse);
+          }}
+          onError={() => {
+            console.log("Login Failed")
+          }}
           // render={(renderProps) => (
           //   // <button
           //   //   onClick={renderProps.onClick}

@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
-import logo from "../../images/kinetic-parts-logo.png";
 import Link from "next/link";
 
 type NavBarProps = {
@@ -13,9 +12,9 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
   return (
     <div className="flex flex-row justify-between navbar bg-base-100 p-8">
       <div className="">
-        <Image
+        <img
           alt="logo"
-          src={logo}
+          src='/images/logo.png'
           className={`w-24 sm:w-40`}
         />
       </div>

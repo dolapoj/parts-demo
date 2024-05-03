@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Square from "../../images/square.svg";
-import SignUpImage from "../../images/sign-up-vector.png";
+// import SignUpImage from "../../images/sign-up-vector.png";
 import styles from '../(auth)/login/login.module.scss'
 
 const RegisterSideBar = () => {
@@ -22,10 +22,9 @@ const RegisterSideBar = () => {
         ))}
       </div>
       <div>
-        <Image
-          src={SignUpImage}
+        <img
+          src='images/sign-up-vector.png'
           alt="image-vector"
-          quality={100}
           className={`w-40 md:w-60`}
         />
       </div>

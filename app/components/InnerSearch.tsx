@@ -2,7 +2,7 @@ import React from "react";
 
 const InnerSearch = () => {
   return (
-    <section className="bg-cyan-700 mx-12 py-6">
+    <section style={{backgroundColor: "#03013E"}} className="mx-12 py-6">
       <div className="flex flex-col">
         <h5 className="font-semibold text-white pt-6 px-6 sm:text-2xl sm:px-24">
           Search from over 10 Million Auto Parts

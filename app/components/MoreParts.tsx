@@ -4,14 +4,15 @@ type StyleProperties = {
   [key: string]: string | number;
 };
 
-const MoreParts = ({ props, color, text }: any) => {
+const MoreParts = ({ props, color, text, backgroundImage }: any) => {
   const style: StyleProperties = {
     backgroundColor: color,
-    color: text
+    color: text,
+    backgroundImage: `url(${backgroundImage})`
   };
 
   return (
-    <section style={style} className="py-12 text-white bg-blue-950">
+    <section style={style} className="py-20 text-white">
       <div className="mx-20">
         <h5 className="text-center font-semibold">{props}</h5>
         <div className="grid grid-cols-4 gap-4 mt-12 justify-around text-center">

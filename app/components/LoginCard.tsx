@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
-import Button from "./Button";
 import SocialIcons from "./SocialIcons";
 import axios from "axios";
 import toast from "react-hot-toast";
