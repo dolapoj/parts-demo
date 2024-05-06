@@ -1,11 +1,10 @@
 "use client";
-import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
-import Button from "./Button";
+import React, { useState, ChangeEvent, FormEvent} from "react";
 import SocialIcons from "./SocialIcons";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-import { gapi } from 'gapi-script'
+// import { gapi } from 'gapi-script'
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -24,15 +23,15 @@ const LoginCard = () => {
   const [errors, setErrors] = useState<ErrorsType>({});
   const [responseData, setResponseData] = useState(null);
 
-  useEffect(() => {
-    function start() {
-      gapi.client.init({
-        clientId: "806292803476-urs300nfiqdfc0gekdnf3mrrpml5ehg9.apps.googleusercontent.com",
-        scope: ""
-      })
-    }
-    gapi.load('client:auth2', start)
-  })
+  // useEffect(() => {
+  //   function start() {
+  //     gapi.client.init({
+  //       clientId: "806292803476-urs300nfiqdfc0gekdnf3mrrpml5ehg9.apps.googleusercontent.com",
+  //       scope: ""
+  //     })
+  //   }
+  //   gapi.load('client:auth2', start)
+  // })
 
   //Handle Input Chnage in Form Fields
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
