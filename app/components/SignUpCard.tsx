@@ -130,7 +130,7 @@ const SignUpCard = () => {
   };
 
   return (
-    <main className="p-6">
+    <main className="p-6 mx-8 2xl:mx-32">
       <p style={{ fontWeight: "700" }} className="text-2xl">
         Create Account
       </p>
@@ -443,14 +443,11 @@ const SignUpCard = () => {
             </div>
           )}
         </form>
-        {/* esinxx@afripointgroup.com
-        Ayodeji123@ */}
-        {/* Navigation */}
 
         <div className="flex mt-8">
           <button
             type="button"
-            className={`button m-auto font-medium text-white w-full p-2`}
+            className={`button m-auto font-medium text-white w-full p-2 hover:scale-105 hover:shadow-lg hover:shadow-green-300 transition-all`}
             onClick={handleNext}
             disabled={currentStep === steps.length - 1}
           >

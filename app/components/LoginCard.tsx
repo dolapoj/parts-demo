@@ -4,8 +4,6 @@ import SocialIcons from "./SocialIcons";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-import { gapi } from 'gapi-script'
-
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -23,16 +21,6 @@ const LoginCard = () => {
   const [errors, setErrors] = useState<ErrorsType>({});
   const [responseData, setResponseData] = useState(null);
 
-  useEffect(() => {
-    function start() {
-      gapi.client.init({
-        clientId: "806292803476-urs300nfiqdfc0gekdnf3mrrpml5ehg9.apps.googleusercontent.com",
-        scope: ""
-      })
-    }
-    gapi.load('client:auth2', start)
-  })
-
   //Handle Input Chnage in Form Fields
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -46,20 +34,9 @@ const LoginCard = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const validationErrors: { [key: string]: string } = {};
-                          // if (!formData.email.trim()) {
-                          //   validationErrors.email = "Email is required";
-                          // } else if (
-                          //   !/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/.test(formData.email.trim())
-                          // ) {
-                          //   validationErrors.email = "Email is not valid";
-                          // }
-                          // if (!formData.password.trim()) {
-                          //   validationErrors.password = "Password is required";
-                          // }
-                          // setErrors(validationErrors);
 
     //Make API call to the Login Endpoint
-    const endpoint = "http://kineticparts.africa/auth/login/";
+    const endpoint = "http://api.kineticparts.africa/auth/login/";
     if (Object.keys(validationErrors).length === 0) {
       try {
         const response = await axios.post(
@@ -87,6 +64,7 @@ const LoginCard = () => {
         if (response.status === 400) {
           console.log('status 400')
           toast.error("Invalid email or password.");
+          // toast.error({response.message});
           validationErrors.invalid =
             "You have provided an invalid email or password. Please check and try again";
             console.log(response.data.message)
@@ -94,6 +72,7 @@ const LoginCard = () => {
       } catch (error) {
         console.error("There is an error:", error);
         toast.error("Invalid email or password.")
+        // toast.error(`Error: ${error.message}`)
       }
 
       setFormData({
@@ -104,7 +83,7 @@ const LoginCard = () => {
   };
 
   return (
-    <main className="p-6">
+    <main className="p-6 mx-8 2xl:mx-32">
       <p style={{ fontWeight: "700" }} className="text-2xl font-semibold">
         Sign In
       </p>
@@ -151,7 +130,7 @@ const LoginCard = () => {
         </div>
         <button
           type="submit"
-          className="button m-auto font-medium text-white w-full p-2"
+          className="button m-auto font-medium text-white w-full p-2 hover:scale-105 hover:shadow-lg hover:shadow-green-300 transition-all"
         >
           Sign In
         </button>

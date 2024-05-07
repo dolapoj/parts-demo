@@ -18,7 +18,7 @@ const Carousel = () => {
       <div className="mt-20">
         <Slider {...settings}>
           <div className="   text-white rounded-xl">
-            <div className="card bg-white flex flex-col justify-between gap-14 w-56 xl:w-72 border-8 border-white">
+            <div className="card bg-white flex flex-col justify-between gap-14 w-52 md:w-60 2xl:w-72 border-8 border-white">
               <figure className="mt-10">
                 <Image src={Filter} alt="Shoes" className="w-40" />
               </figure>
@@ -32,7 +32,7 @@ const Carousel = () => {
             </div>
           </div>
           <div className="   text-white rounded-xl">
-            <div className="card bg-white flex flex-col justify-between gap-14 w-56 xl:w-72 border-8 border-white">
+            <div className="card bg-white flex flex-col justify-between gap-14 w-56 md:w-60 2xl:w-72 border-8 border-white">
               <figure className="mt-10">
                 <Image src={Filter} alt="Shoes" className="w-40" />
               </figure>

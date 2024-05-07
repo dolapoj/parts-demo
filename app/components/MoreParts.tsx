@@ -39,7 +39,7 @@ const MoreParts = ({ props, color, text, backgroundImage }: any) => {
           <p className="cursor-pointer">Product Name</p>
           <p className="cursor-pointer">Product Name</p>
           <p className="cursor-pointer">Product Name</p>
-          <p className="cursor-pointer text-green-500 underline">Show More</p>
+          <p className="cursor-pointer text-green-500">Show More v</p>
         </div>
       </div>
     </section>

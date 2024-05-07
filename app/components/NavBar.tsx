@@ -1,14 +1,18 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
+// import Image from "next/image";
 
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 type NavBarProps = {
   userData: any; // Define the type of userData here
 };
 
 const NavBar: React.FC<NavBarProps> = ({ userData }) => {
+  const { data: session } = useSession();
+  let greeting = ''
+
   return (
     <div className="flex flex-row justify-between navbar bg-base-100 p-8">
       <div className="">
@@ -42,17 +46,17 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
         </form>
       </div>
       <div className="">
-        {!userData.first_name && (
-          <div className="flex flex-row gap-4 justify-start mr-6">
+        {!userData.first_name && !session && (
+          <div className="flex flex-row text-sm gap-4 justify-start mr-6">
             <Link href="/login">
-              <span>Sign In</span>
+              <span className="hover:text-green-500 hover:font-bold">Sign In</span>
             </Link>
             <Link href="/signup">
-              <span>Sign Up</span>
+              <span className="hover:text-green-500 hover:font-bold">Sign Up</span>
             </Link>
           </div>
         )}
-        {userData.first_name && <h4>Hi, {userData.first_name}</h4>}
+        {userData.first_name || session && (<h4>Hi, {JSON.stringify(session.user.name) || userData.first_name} </h4>)}
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             <div className="indicator">
@@ -86,7 +90,7 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
             </div>
           </div>
         </div>
-        {userData.first_name && (
+        {session && (
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
@@ -95,7 +99,7 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
             >
               <div className="w-10 rounded-full">
                 <img
-                  alt="Tailwind CSS Navbar component"
+                  alt="Profile Image"
                   src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
                 />
               </div>

@@ -2,16 +2,18 @@
 import React from "react";
 import Image from "next/image";
 import FacebookIcon from "../../images/facebook.png";
-// import GoogleIcon from "../../images/google.png";
+import GoogleIcon from "../../images/google.png";
 import LinkedIn from "../../images/linkedin.png";
 
-import { GoogleLogin } from '@react-oauth/google';
-import axios from "axios";
+import { signIn, useSession } from "next-auth/react"
 
-const clientId = "806292803476-urs300nfiqdfc0gekdnf3mrrpml5ehg9.apps.googleusercontent.com"
+// import { GoogleLogin } from '@react-oauth/google';
+// import axios from "axios";
 
 const SocialIcons = () => {
+  const { data: session } = useSession();
   const endpoint = "http://kineticparts.africa/social/google";
+
 
   const onSuccess = (response: any) => {
     console.log(response);
@@ -46,33 +48,12 @@ const SocialIcons = () => {
         />
       </div>
       {/* End of icon */}
-      <div>
-        <GoogleLogin
-          onSuccess={(credentialResponse) => {
-            console.log(credentialResponse);
-          }}
-          onError={() => {
-            console.log("Login Failed")
-          }}
-          // render={(renderProps) => (
-          //   // <button
-          //   //   onClick={renderProps.onClick}
-          //   //   disabled={renderProps.disabled}
-          //   //   className="google-login-button"
-          //   // >
-          //   //   {/* <Image
-          //   //     src={GoogleIcon}
-          //   //     alt="Google"
-          //   //     quality={100}
-          //   //     className="w-8"
-          //   //   /> */}
-          //   // </button>
-          // )}
-        />
-        {/* <Image src={GoogleIcon} alt="Google" quality={100} className="w-8" /> */}
+      <div onClick={() => signIn('google')} className="flex items-center text-xs gap-1 cursor-pointer">
+        <Image src={GoogleIcon} alt="Google" quality={100} className="w-6" />
+        Continue with Google
       </div>
 
-      {/* This LinkedIn icon is hidden with tailwaind css */}
+      {/* This LinkedIn icon is hidden with tailwind css */}
       <div className="hidden">
         <Image src={LinkedIn} alt="LinkedIn" quality={100} className="w-8" />
       </div>
