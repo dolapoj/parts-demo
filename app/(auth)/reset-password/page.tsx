@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,24 +9,24 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 const ResetPassword = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: ""
   });
 
-  const [activationLink, setActivationLink] = useState("")
+  const [activationLink, setActivationLink] = useState("");
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({
       ...formData,
       [name]: value
-    })
+    });
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const endpoint = "http://kineticparts.africa/auth/request-reset-email/"
+    const endpoint = "http://kineticparts.africa/auth/request-reset-email/";
 
     try {
       const response = await axios.post(
@@ -40,23 +40,21 @@ const ResetPassword = () => {
           },
         }
       );
-      setActivationLink(response.data.activation_link)
-      console.log("Data successfully posted: ", response.data)
+      setActivationLink(response.data.activation_link);
+      console.log("Data successfully posted: ", response.data);
       setFormData({
         email: ""
-      })
-      alert(JSON.stringify(response.data.activation_link))
-      router.push("/new-password")
+      });
+      alert(JSON.stringify(response.data.activation_link));
+      router.push("/new-password");
     } catch (error) {
-      console.error("Error posting data: " ,error)
+      console.error("Error posting data: ", error);
     }
-  }
+  };
 
   return (
-    <main className={`${styles.login_container} min-h-screen`}>
-      <div
-        className={`flex flex-col justify-start p-8 sm:p-16 sm:px-52 2xl:px-96`}
-      >
+    <div className={`${styles.login_container} min-h-screen`}>
+      <div className={`flex flex-col justify-start p-8 sm:p-16 sm:px-52 2xl:px-96`}>
         <Image
           src={Logo}
           alt="Kinetic Parts"
@@ -81,8 +79,8 @@ const ResetPassword = () => {
               send you a link to reset your password
             </p>
             <form onSubmit={handleSubmit}>
-              <div className="flex flex-col">
-                <label className="mt-6 text-left sm:ml-4">Email</label>
+              <div className="flex flex-col mt-6 sm:ml-4">
+                <label>Email</label>
                 <input
                   type="text"
                   name="email"
@@ -94,15 +92,13 @@ const ResetPassword = () => {
                 />
               </div>
               <div className="flex justify-center mt-14">
-                <button className="bgGreen text-white w-full p-2 rounded-md mb-4">
+                <button className="bg-green text-white w-full p-2 rounded-md mb-4">
                   Continue
                 </button>
               </div>
             </form>
           </div>
-          <div
-            className={`${styles.bg_blue} hidden sm:block sm:flex sm:px-10 flex-col justify-center items-center sm:w-1/3 p-6`}
-          >
+          <div className={`${styles.bg_blue} hidden sm:block sm:flex sm:px-10 flex-col justify-center items-center sm:w-1/3 p-6`}>
             <Image
               src={ResetAnime}
               alt="Reset Password"
@@ -112,7 +108,7 @@ const ResetPassword = () => {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 

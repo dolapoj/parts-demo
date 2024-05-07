@@ -27,6 +27,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-form-stepper": "^2.0.3",
+    "react-google-login": "^5.2.2",
     "react-hook-form": "^7.51.0",
     "react-hot-toast": "^2.4.1",
     "react-slick": "^0.30.2",
