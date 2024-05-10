@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+input {
+  margin-top: 8px;
+  padding: 18px;
+  border: 1.5px solid #010101;
+  border-radius: 6px;
+}
+
+.button {
+  background: #00E600;
+  border-radius: 6px;
+}
+
+.strike {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.strike > span {
+  position: relative;
+  display: inline-block;
+}
+
+.strike > span:before,
+.strike > span:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 99px;
+  height: 1.5px;
+  background: #4D4D4D;
+}
+
+.strike > span:before {
+  right: 100%;
+  margin-right: 15px;
+}
+
+.strike > span:after {
+  left: 100%;
+  margin-left: 15px;
+}
+
+.stepColor {
+  color: #00E600;
+}
+
+.stepColorBorder {
+  border-color: #00E600;
+}
+
+.bgGreen {
+  background: #00E600;
+}
+
+.inputBg {
+  background: #F0EBEB;
+}
+
+.input-field {
+  padding: 6px 10px;
+  width: 400px;
+  background: transparent;
+  border-radius: 6px;
+  border: 2px solid #00E600;
+  background-image: url("../images/loupe.png");
+  background-repeat: no-repeat;
+  background-position: 370px center;
+}
+
+.input-field::-moz-placeholder {
+  color: #0000FF;
+  font-size: 16px;
+  font-style: normal;
+  line-height: 24px;
+  font-weight: 300;
+}
+
+.input-field::placeholder {
+  color: #0000FF;
+  font-size: 16px;
+  font-style: normal;
+  line-height: 24px;
+  font-weight: 300;
+}
+
+input:focus {
+  outline: none;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.bg-landing {
+  background: #F0EBEB;
+}/*# sourceMappingURL=globals.css.map */

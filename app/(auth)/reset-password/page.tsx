@@ -3,7 +3,6 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../login/login.module.scss";
-import Logo from "../../../images/kinetic-parts-logo.png";
 import ResetAnime from "../../../images/resetpwvector.png";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -56,7 +55,7 @@ const ResetPassword = () => {
     <div className={`${styles.login_container} min-h-screen`}>
       <div className={`flex flex-col justify-start p-8 sm:p-16 sm:px-52 2xl:px-96`}>
         <Image
-          src={Logo}
+          src='/images/logo.png'
           alt="Kinetic Parts"
           quality={100}
           className={`w-28 sm:w-60`}

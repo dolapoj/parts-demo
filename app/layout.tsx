@@ -13,22 +13,17 @@ export const metadata: Metadata = {
   description: "Get your automobile parts",
 };
 
-interface RootLayoutProps {
+export default function RootLayout({
+  children, 
+}: Readonly<{
   children: React.ReactNode;
-  session: any; // Define the type of session here
-}
-
-export default function RootLayout({ children, session }: RootLayoutProps) {
+  }>) {
   return (
-    <SessionWrapper>
       <html lang="en">
         <body className={inter.className}>
+          <SessionWrapper>{children}</SessionWrapper>
           <Toaster position="top-center" />
-          {/* <GoogleOAuthProvider clientId="806292803476-urs300nfiqdfc0gekdnf3mrrpml5ehg9.apps.googleusercontent.com"> */}
-          {children}
-          {/* </GoogleOAuthProvider> */}
         </body>
       </html>
-    </SessionWrapper>
   );
 }

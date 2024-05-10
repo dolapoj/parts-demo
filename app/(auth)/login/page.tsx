@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-// import Image from "next/image";
+import Image from "next/image";
 import LoginCard from "@/app/components/LoginCard";
 import styles from "./login.module.scss";
 import RegisterSideBar from "@/app/components/RegisterSideBar";
@@ -13,10 +13,12 @@ const LoginPage = () => {
         className={`flex flex-col justify-start p-8 sm:p-16 sm:px-52 2xl:px-96`}
       >
         <Link href="/">
-          <img
+          <Image
             src="images/logo.png"
             alt="Kinetic Parts"
             className={`w-28 sm:w-60`}
+            width={28}
+            height={28}
           />
         </Link>
         <p

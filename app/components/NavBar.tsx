@@ -1,9 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
-// import Image from "next/image";
+import Image from "next/image";
 
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 type NavBarProps = {
   userData: any; // Define the type of userData here
@@ -11,15 +11,19 @@ type NavBarProps = {
 
 const NavBar: React.FC<NavBarProps> = ({ userData }) => {
   const { data: session } = useSession();
-  let greeting = ''
+  const user = session ? session.user : null;
+  // console.log(session)
 
   return (
     <div className="flex flex-row justify-between navbar bg-base-100 p-8">
       <div className="">
-        <img
+        <Image
           alt="logo"
           src='/images/logo.png'
           className={`w-24 sm:w-40`}
+          // quality={}
+          width={24}
+          height={24}
         />
       </div>
       <div className="">
@@ -56,7 +60,7 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
             </Link>
           </div>
         )}
-        {userData.first_name || session && (<h4>Hi, {JSON.stringify(session.user.name) || userData.first_name} </h4>)}
+        {userData.first_name || session && (<h4 className="text-green-700">Yo, {JSON.stringify(user?.name).replace(/"/g, '').split(' ')[0] || userData.first_name} </h4>)}
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             <div className="indicator">
@@ -98,9 +102,12 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img
+                <Image
                   alt="Profile Image"
-                  src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                  // src={ user?.image as string}
+                  src='/images/pad.png'
+                  width={20}
+                  height={20}
                 />
               </div>
             </div>
@@ -115,7 +122,7 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
                 </a>
               </li>
               <li>
-                <a>Logout</a>
+                <a>Logout</a> 
               </li>
             </ul>
           </div>

@@ -12,7 +12,7 @@ const SignUp = () => {
       <div
         className={`flex flex-col justify-start p-8 sm:p-16 sm:px-52 2xl:px-96`}
       >
-        <img
+        <Image
           src='images/logo.png'
           alt="Kinetic Parts"
           className={`w-28 sm:w-60`}

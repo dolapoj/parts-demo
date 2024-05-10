@@ -1,7 +1,6 @@
 import React from "react";
 import Ratings from "./Ratings";
-// import Image from "next/image";
-// import Photo from "../../images/logo.png";
+import Image from "next/image";
 
 const BestSellers = () => {
   return (
@@ -11,7 +10,7 @@ const BestSellers = () => {
         <div className="grid grid-cols-4 gap-4 mt-12">
           <div className="card">
             <figure>
-              <img src='images/pad.png' alt="Shoes" className="w-28" />
+              <Image src='/images/pad.png' alt="Shoes" quality={100} className="w-28" width={28} height={28} />
             </figure>
             <div className="card-body text-center">
               <div className="">
@@ -24,7 +23,7 @@ const BestSellers = () => {
           </div>
           <div className="card">
             <figure>
-              <img src='images/pad.png' alt="Shoes" className="w-28" />
+              <Image src='/images/pad.png' alt="Shoes" quality={100} className="w-28" width={28} height={28} />
             </figure>
             <div className="card-body text-center">
               <div className="">
@@ -37,7 +36,7 @@ const BestSellers = () => {
           </div>
           <div className="card">
             <figure>
-              <img src='images/pad.png' alt="Shoes" className="w-28" />
+              <Image src='/images/pad.png' alt="Shoes" quality={100} className="w-28" width={28} height={28} />
             </figure>
             <div className="card-body text-center">
               <div className="">
@@ -50,7 +49,7 @@ const BestSellers = () => {
           </div>
           <div className="card">
             <figure>
-              <img src='images/pad.png' alt="Shoes" className="w-28" />
+              <Image src='/images/pad.png' alt="Shoes" quality={100} className="w-28" width={28} height={28} />
             </figure>
             <div className="card-body text-center">
               <div className="">
@@ -63,7 +62,7 @@ const BestSellers = () => {
           </div>
           <div className="card">
             <figure>
-              <img src='images/pad.png' alt="Shoes" className="w-28" />
+              <Image src='/images/pad.png' alt="Shoes" quality={100} className="w-28" width={28} height={28} />
             </figure>
             <div className="card-body text-center">
               <div className="">
@@ -76,7 +75,7 @@ const BestSellers = () => {
           </div>
           <div className="card">
             <figure>
-              <img src='images/pad.png' alt="Shoes" className="w-28" />
+              <Image src='/images/pad.png' alt="Shoes" quality={100} className="w-28" width={28} height={28} />
             </figure>
             <div className="card-body text-center">
               <div className="">
@@ -89,7 +88,7 @@ const BestSellers = () => {
           </div>
           <div className="card">
             <figure>
-              <img src='images/pad.png' alt="Shoes" className="w-28" />
+              <Image src='/images/pad.png' alt="Shoes" quality={100} className="w-28" width={28} height={28} />
             </figure>
             <div className="card-body text-center">
               <div className="">
@@ -102,7 +101,7 @@ const BestSellers = () => {
           </div>
           <div className="card">
             <figure>
-              <img src='images/pad.png' alt="Shoes" className="w-28" />
+              <Image src='/images/pad.png' alt="Shoes" quality={100} className="w-28" width={28} height={28} />
             </figure>
             <div className="card-body text-center">
               <div className="">
@@ -115,7 +114,7 @@ const BestSellers = () => {
           </div>
           <div className="card">
             <figure>
-              <img src='images/pad.png' alt="Shoes" className="w-28" />
+              <Image src='/images/pad.png' alt="Shoes" quality={100} className="w-28" width={28} height={28} />
             </figure>
             <div className="card-body text-center">
               <div className="">
@@ -126,46 +125,6 @@ const BestSellers = () => {
               </div>
             </div>
           </div>
-          <div className="card">
-            <figure>
-              <img src='images/pad.png' alt="Shoes" className="w-28" />
-            </figure>
-            <div className="card-body text-center">
-              <div className="">
-                <span className="font-semibold">Toyota Corolla </span><br />
-                <span className="text-sm">Brake Pad and Discs</span>
-                <Ratings />
-                <p className="text-sm">$23.56</p>
-              </div>
-            </div>
-          </div>
-          <div className="card">
-            <figure>
-              <img src='images/pad.png' alt="Shoes" className="w-28" />
-            </figure>
-            <div className="card-body text-center">
-              <div className="">
-                <span className="font-semibold">Toyota Corolla </span><br />
-                <span className="text-sm">Brake Pad and Discs</span>
-                <Ratings />
-                <p className="text-sm">$23.56</p>
-              </div>
-            </div>
-          </div>
-          <div className="card">
-            <figure>
-              <img src='images/pad.png' alt="Shoes" className="w-28" />
-            </figure>
-            <div className="card-body text-center">
-              <div className="">
-                <span className="font-semibold">Toyota Corolla </span><br />
-                <span className="text-sm">Brake Pad and Discs</span>
-                <Ratings />
-                <p className="text-sm">$23.56</p>
-              </div>
-            </div>
-          </div>
-          
         </div>
       </div>
     </section>

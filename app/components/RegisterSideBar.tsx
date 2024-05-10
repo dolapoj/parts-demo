@@ -16,16 +16,18 @@ const RegisterSideBar = () => {
         <p style={{ fontWeight: "800" }}>Why register with us?</p>
         {whyList.map((item, index) => (
           <p key={index} className="flex flex-row items-start mb-2 mt-2 space text-xs">
-            <Image className="w-3" src={Square} alt="rectangle" />
+            {/* <Image className="w-3" src={Square} alt="rectangle" /> */}
             <span className="text-black pl-2">{item}</span>
           </p>
         ))}
       </div>
       <div>
-        <img
-          src='images/sign-up-vector.png'
+        <Image
+          src='/images/sign-up-vector.png'
           alt="image-vector"
           className={`w-40 md:w-60`}
+          width={40}
+          height={40}
         />
       </div>
     </div>

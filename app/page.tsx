@@ -23,6 +23,8 @@ interface RootLayoutProps {
 export default function Home() {
   const [userData, setUserData] = useState<UserData | any>({});
   const { data: session } = useSession();
+  const user = session ? session.user : null;
+  console.log(session)
 
   useEffect(() => {
     //Retrieve userData from sessionStorage when component mounts

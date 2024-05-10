@@ -1,0 +1,18 @@
+.login_container {
+  background: #F0EBEB;
+}
+
+.logo {
+  width: 17vw;
+}
+
+.no_acct_text {
+  color: #4D4D4D;
+}
+.no_acct_text span {
+  color: #0000FF;
+}
+
+.bg_blue {
+  background: #F4F7FA;
+}/*# sourceMappingURL=login.module.css.map */
