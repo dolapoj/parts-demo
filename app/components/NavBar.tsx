@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 import Link from "next/link";
-import { signIn, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 type NavBarProps = {
   userData: any; // Define the type of userData here
@@ -21,7 +21,6 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
           alt="logo"
           src='/images/logo.png'
           className={`w-24 sm:w-40`}
-          // quality={}
           width={24}
           height={24}
         />
@@ -94,7 +93,7 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
             </div>
           </div>
         </div>
-        {session && (
+        {session || userData.first_name ?  (
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
@@ -104,8 +103,8 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
               <div className="w-10 rounded-full">
                 <Image
                   alt="Profile Image"
-                  // src={ user?.image as string}
-                  src='/images/pad.png'
+                  src={ user?.image as string}
+                  // src='/images/pad.png'
                   width={20}
                   height={20}
                 />
@@ -122,11 +121,11 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
                 </a>
               </li>
               <li>
-                <a>Logout</a> 
+                <a onClick={() => signOut({ callbackUrl: `/login` })}>Logout</a> 
               </li>
             </ul>
           </div>
-        )}
+        ): <></>}
       </div>
     </div>
   );

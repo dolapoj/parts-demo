@@ -15,7 +15,7 @@ const InnerSearch = () => {
               //     value={selectedValue}
               //     onChange={handleSelectChange}
             >
-              <option value="" disabled selected>
+              <option value="default" disabled defaultValue={'default'}>
                 Select Make
               </option>
               <option value="Individual">Toyota</option>
@@ -27,7 +27,7 @@ const InnerSearch = () => {
               //     value={selectedValue}
               //     onChange={handleSelectChange}
             >
-              <option value="" disabled selected>
+              <option value="default" disabled defaultValue={"default"}>
                 Select Model
               </option>
               <option value="Individual">Avensis</option>
@@ -39,7 +39,7 @@ const InnerSearch = () => {
               //     value={selectedValue}
               //     onChange={handleSelectChange}
             >
-              <option value="" disabled selected>
+              <option value="default" disabled defaultValue={'default'}>
                 Select Year
               </option>
               <option value="Individual">2019</option>

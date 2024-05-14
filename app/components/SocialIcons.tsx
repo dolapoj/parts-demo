@@ -48,7 +48,7 @@ const SocialIcons = () => {
         />
       </div>
       {/* End of icon */}
-      <div onClick={() => signIn('google')} className="flex items-center text-xs gap-1 cursor-pointer">
+      <div onClick={() => signIn('google', { callbackUrl: '/'})} className="flex items-center text-xs gap-1 cursor-pointer">
         <Image src={GoogleIcon} alt="Google" quality={100} className="w-6" />
         Continue with Google
       </div>
