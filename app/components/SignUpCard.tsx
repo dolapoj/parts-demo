@@ -77,7 +77,7 @@ const SignUpCard = () => {
 
   const processForm: SubmitHandler<Inputs> = async (data) => {
     //Make POST API call to the Register endpoint
-    const endpoint = "http://kineticparts.africa/auth/register/";
+    const endpoint = "http://api.kineticparts.africa/auth/register/";
     try {
       const response = await axios.post<ApiResponse>(endpoint, data, {
         headers: {
@@ -89,7 +89,7 @@ const SignUpCard = () => {
       // console.log("Data successfully posted: ", response.data);
       toast.success("You can now check your email for account activation.");
     } catch (error) {
-      // console.error("Error posting data:", error);
+      console.error("Error posting data:", error);
       toast.error("There might be an issue with your internet");
     }
     reset();
@@ -103,7 +103,7 @@ const SignUpCard = () => {
     const output = await trigger(fields as FieldName[], { shouldFocus: true });
 
     // REFIX NEXT LINE //
-    if (!output && currentStep < 2) return console.log("there is a problem");
+    if (!output && currentStep < 2) return null;
 
     if (currentStep < steps.length - 1) {
       if (currentStep === steps.length - 3) {
@@ -130,7 +130,7 @@ const SignUpCard = () => {
   };
 
   return (
-    <main className="p-6 mx-8 2xl:mx-32">
+    <main className="sm:p-6 sm:x-8 2xl:mx-32">
       <p style={{ fontWeight: "700" }} className="text-2xl">
         Create Account
       </p>
