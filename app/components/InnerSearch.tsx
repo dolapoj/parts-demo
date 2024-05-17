@@ -2,15 +2,15 @@ import React from "react";
 
 const InnerSearch = () => {
   return (
-    <section style={{backgroundColor: "#03013E"}} className="mx-12 py-6">
+    <section style={{backgroundColor: "#03013E"}} className="sm:mx-12 py-6">
       <div className="flex flex-col">
         <h5 className="font-semibold text-white pt-6 px-6 sm:text-2xl sm:px-24">
           Search from over 10 Million Auto Parts
         </h5>
         <form>
-          <div className="mt-4 flex justify-start gap-4 px-6 sm:px-24">
+          <div className="mt-4 flex justify-start flex-wrap gap-4 px-6 sm:px-24">
             <select
-              className="block rounded-md"
+              className="block rounded-md sm:w-52"
               //     {...register("role")}
               //     value={selectedValue}
               //     onChange={handleSelectChange}
@@ -22,7 +22,7 @@ const InnerSearch = () => {
               <option value="Fleet Manager">Lexus</option>
             </select>
             <select
-              className="block rounded-md"
+              className="block rounded-md sm:w-52"
               //     {...register("role")}
               //     value={selectedValue}
               //     onChange={handleSelectChange}
@@ -34,7 +34,7 @@ const InnerSearch = () => {
               <option value="Fleet Manager">Corolla</option>
             </select>
             <select
-              className="block rounded-md"
+              className="block rounded-md sm:w-52"
               //     {...register("role")}
               //     value={selectedValue}
               //     onChange={handleSelectChange}
@@ -45,7 +45,7 @@ const InnerSearch = () => {
               <option value="Individual">2019</option>
               <option value="Fleet Manager">2020</option>
             </select>
-            <button className="btn bg-green-500 text-white px-3 py-0 border-none font-semibold text-sm">
+            <button className="btn bg-green-500 text-white px-3 py-0 border-none font-semibold text-sm sm:w-64">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"

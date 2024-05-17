@@ -44,8 +44,8 @@ const BestSellers = () => {
   return (
     <section className="py-12 sm:px-12">
       <div className="mx-8">
-        <h4 className="font-semibold mx-16">BEST SELLERS {}</h4>
-        <div className="grid grid-cols-4 gap-4 mt-12">
+        <h4 className="font-semibold mx-12 sm:mx-16">BEST SELLERS</h4>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-12">
           {allCars.map((car) => (
             <div className="card">
               <figure>

@@ -77,16 +77,14 @@ const SignUpCard = () => {
 
   const processForm: SubmitHandler<Inputs> = async (data) => {
     //Make POST API call to the Register endpoint
-    const endpoint = "http://api.kineticparts.africa/auth/register/";
+    const endpoint = "http://partdirectafrica.com/auth/register/";
     try {
       const response = await axios.post<ApiResponse>(endpoint, data, {
         headers: {
           "Content-Type": "application/json",
         },
       });
-      console.log(response.data.activation_link);
       setActivationLink(response.data.activation_link);
-      // console.log("Data successfully posted: ", response.data);
       toast.success("You can now check your email for account activation.");
     } catch (error) {
       console.error("Error posting data:", error);

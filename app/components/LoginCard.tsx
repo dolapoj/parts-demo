@@ -36,7 +36,7 @@ const LoginCard = () => {
     const validationErrors: { [key: string]: string } = {};
 
     //Make API call to the Login Endpoint
-    const endpoint = "http://api.kineticparts.africa/auth/login/";
+    const endpoint = "http://partdirectafrica.com/auth/login/";
     if (Object.keys(validationErrors).length === 0) {
       try {
         const response = await axios.post(

@@ -46,9 +46,9 @@ const MoreParts = ({ props, color, text, backgroundImage }: any) => {
 
   return (
     <section style={style} className="py-20 text-white">
-      <div className="mx-20">
+      <div className="sm:mx-20">
         <h5 className="text-center font-semibold">{props}</h5>
-        <div className="grid grid-cols-4 gap-4 mt-12 justify-around text-center">
+        <div className="grid grid-cols-3 gap-6 sm:grid-cols-5 sm:gap-4 mt-12 justify-around text-center">
           {allMakes?.map(car => (
             <p className="cursor-pointer">{car.make}</p>
           ))}

@@ -3,8 +3,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import { SessionWrapper } from "./components/SessionWrapper";
-// import { GoogleOAuthProvider } from '@react-oauth/google'
-// import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
