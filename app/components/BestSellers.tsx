@@ -1,60 +1,34 @@
 import React, { Suspense, useEffect, useState } from "react";
 import Ratings from "./Ratings";
 import Image from "next/image";
+
 interface Car {
-  id: number;
+  client_id: number;
   make: string;
-  model: string;
   year: number;
-  color: string;
-  mileage: number;
-  price: number;
-  fuelType: string;
-  transmission: string;
-  engine: string;
-  horsepower: number;
-  features: string[];
-  owners: number;
+  model: string;
   image: string;
 }
 
-const BestSellers = () => {
-  const [allCars, setAllCars] = useState<Car[]>([]);
+interface PartsDisplayProps {
+  parts: Car[];
+}
 
-  useEffect(() => {
-    const fetchCars = async (count = 10): Promise<void> => {
-      const endpoint = "https://freetestapi.com/api/v1/cars";
-      try {
-        let selectedCars: Car[] = [];
-        //Fetch Data From Endpoint and Cache
-        const res = await fetch(endpoint, { next: { revalidate: 10 } });
-        const response: Car[] = await res.json();
-        selectedCars = response;
-        count = Math.min(count, selectedCars.length);
-        const shuffledCars = selectedCars.sort(() => Math.random() - 0.5);
-        const randomSubset = shuffledCars.slice(0, count);
-        setAllCars(randomSubset);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchCars();
-  }, []);
-
+const BestSellers: React.FC<PartsDisplayProps> = ({ parts }) => {
   return (
     <section className="py-12 sm:px-12">
       <div className="mx-8">
         <h4 className="font-semibold mx-12 sm:mx-16">BEST SELLERS</h4>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-12">
-          {allCars.map((car) => (
-            <div className="card">
+          {parts.map((car) => (
+            <div key={car.client_id} className="card">
               <figure>
                 <Image
                   // src="/images/pad.png"
                   src={car?.image as string}
                   alt="Shoes"
                   quality={100}
-                  className="w-28"
+                  className="w-28 max-h-16"
                   width={28}
                   height={28}
                 />
@@ -65,9 +39,9 @@ const BestSellers = () => {
                     {car?.make + ` ${car?.year}`}
                   </span>
                   <br />
-                  <span className="text-sm">{car?.engine}</span>
+                  <span className="text-sm">{car?.model}</span>
                   <Ratings />
-                  <p className="text-sm">{`$${car?.price}`}</p>
+                  <p className="text-sm">{`${car?.model}`}</p>
                 </div>
               </div>
             </div>

@@ -1,21 +1,44 @@
 "use client";
 import React, { useState, useEffect, Suspense } from "react";
-import NavBar from "./NavBar";
 import InnerSearch from "./InnerSearch";
 import BestSellers from "./BestSellers";
 import MoreParts from "./MoreParts";
 import Brands from "./Brands";
 import Footer from "./Footer";
 import Carousel from "./Carousel";
-import { useSession } from "next-auth/react";
+
+interface Car {
+  client_id: number;
+  make: string;
+  year: number;
+  model: string;
+  image: string;
+}
+interface CarResponse {
+  data: Car[];
+}
+
 
 const Landing = () => {
+  const [parts, setParts] = useState<Car[]>([]);
+
+  useEffect(() => {
+    const getParts = async () => {
+      const response = await fetch('/api/parts');
+      const parts: CarResponse = await response.json();
+      setParts(parts.data)
+      console.log(parts.data)
+    }
+
+    getParts();
+  }, [])
+
   return (
     <main className="bg-landing">
-      <Carousel />
+      <Carousel parts={parts} />
       <InnerSearch />
       <Suspense fallback={<p className="text-red-600">Loading...</p>}>
-        <BestSellers />
+        <BestSellers parts={parts} />
       </Suspense>
       <MoreParts
         color="#02026B"

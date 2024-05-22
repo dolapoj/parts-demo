@@ -4,15 +4,15 @@ const Ratings = () => {
   return (
     <>
       <div className="rating flex justify-center">
-        <input type="radio" name="rating-1" className="mask mask-star w-4" />
+        <input type="radio" name="rating-1" className="mask mask-star bg-orange-400 w-4" />
         <input
           type="radio"
           name="rating-1"
-          className="mask mask-star w-4"
+          className="mask mask-star bg-orange-400 w-4"
         />
-        <input type="radio" name="rating-1" className="mask mask-star w-4" />
-        <input type="radio" name="rating-1" className="mask mask-star w-4" />
-        <input type="radio" name="rating-1" className="mask mask-star w-4" />
+        <input type="radio" name="rating-1" className="mask mask-star bg-orange-400 w-4" />
+        <input type="radio" name="rating-1" className="mask mask-star bg-orange-400 w-4" />
+        <input type="radio" name="rating-1" className="mask mask-star bg-orange-400 w-4" />
       </div>
     </>
   );

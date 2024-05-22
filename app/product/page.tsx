@@ -1,11 +1,32 @@
+'use client'
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Ratings from "../components/Ratings";
+import NavBar from "../components/NavBar";
+import { useSession } from "next-auth/react";
+
+interface UserData {
+  first_name: string;
+  last_name: string
+}
 
 const ProductDetailPage = () => {
+  const [userData, setUserData] = useState<UserData | any>({});
+  const { data: session } = useSession();
+  // const user = session ? session.user : null;
+
+  useEffect(() => {
+    //Retrieve userData from sessionStorage when component mounts
+    const storedUserData = sessionStorage.getItem("userData");
+    if (storedUserData) {
+      setUserData(JSON.parse(storedUserData));
+    }
+    // console.log(storedUserData);
+  }, []);
   return (
     <>
-      <div className="px-12 my-20 bg-emerald-100 leading-relaxed">
+    <NavBar userData={userData} />
+      <div className="px-12 my-10 leading-relaxed">
         <div className="flex justify-between gap-2 items-center mb-8">
           <div>
             <p className="pl-4">Results For: {}</p>
@@ -113,14 +134,46 @@ const ProductDetailPage = () => {
                 <div className="flex-1">
                   <div className="flex justify-evenly leading-relaxed">
                     <div className="max-w-80">
-                      <h5 className="text-green-900 font-bold">2001-2006 Toyota Camry</h5>
-                      <h6 className="text-blue-800 font-bold">Product Detailed Name Brand Name & Number</h6>
-                      <h6 className="text-sm mt-1"><strong>Part Number:</strong> 923-247 </h6>
-                      <h6 className="text-sm mt-1"><strong>Brand:</strong> Dorman </h6>
-                      <h6 className="text-sm mt-1"><strong>Notes:</strong> Detailed Note </h6>
-                      <p className="text-xs pt-1">Ideal replacement - this third brake light assembly was specifically designed to look and function like the original light on specific vehicles</p>
+                      <h5 className="text-green-900 font-bold">
+                        2001-2006 Toyota Camry
+                      </h5>
+                      <h6 className="text-blue-800 font-bold">
+                        Product Detailed Name Brand Name & Number
+                      </h6>
+                      <h6 className="text-sm mt-1">
+                        <strong>Part Number:</strong> 923-247{" "}
+                      </h6>
+                      <h6 className="text-sm mt-1">
+                        <strong>Brand:</strong> Dorman{" "}
+                      </h6>
+                      <h6 className="text-sm mt-1">
+                        <strong>Notes:</strong> Detailed Note{" "}
+                      </h6>
+                      <p className="text-xs pt-1">
+                        Ideal replacement - this third brake light assembly was
+                        specifically designed to look and function like the
+                        original light on specific vehicles
+                      </p>
                     </div>
-                    <div>Wagwan</div>
+                    <div className="bg-green-700 p-4 text-white rounded-xl">
+                      <h6>$100.00</h6>
+                      <div className="divider mt-0 divider-warning"></div>
+                      <div className="flex justify-between gap-2 items-center mb-2">
+                        <h6>Quantity</h6>
+                        <input className="w-12 h-4" />
+                      </div>
+                      <select
+                          className="block rounded-md"
+                        >
+                          <option
+                          >
+                            Select Year
+                          </option>
+                          <option value="Individual">2019</option>
+                          <option value="Fleet Manager">2020</option>
+                        </select>
+                        <button className="bg-yellow-500 text-black px-4 font-semibold w-full rounded-md mt-2"> Add to Cart</button>
+                    </div>
                   </div>
                 </div>
               </div>
