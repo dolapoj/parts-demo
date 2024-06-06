@@ -11,7 +11,7 @@ const RegisterSideBar = () => {
     "Sourcing assistant to help your source easier",
   ];
   return (
-    <div className={`${styles.bg_blue} hidden sm:block sm:flex flex-col justify-between items-center gap-20 text-black sm:w-1/3 p-6`}>
+    <div className={`${styles.bg_blue} hidden sm:block sm:flex flex-col justify-between items-center gap-20 text-black sm:w-1/3 p-6 2xl:p-16`}>
       <div>
         <p style={{ fontWeight: "800" }}>Why register with us?</p>
         {whyList.map((item, index) => (

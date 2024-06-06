@@ -39,7 +39,7 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-              {!userData.first_name && !session && (
+              {!userData?.first_name && !session && (
                 <div className="flex flex-row text-sm gap-4 justify-start mr-6">
                   <Link href="/login">
                     <span className="hover:text-green-500 hover:font-bold">
@@ -53,7 +53,7 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
                   </Link>
                 </div>
               )}
-              {userData.first_name ||
+              {userData?.first_name ||
                 (session && (
                   <h4 className="text-green-700">
                     Yo,{" "}
@@ -101,7 +101,7 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
                   </div>
                 </div>
               </div>
-              {session || userData.first_name ? (
+              {session || userData?.first_name ? (
                 <div className="dropdown dropdown-end">
                   <div
                     tabIndex={0}
@@ -173,7 +173,7 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
           </form>
         </div>
         <div className="navbar-end">
-          {!userData.first_name && !session && (
+          {!userData?.first_name && !session && (
             <div className="flex flex-row text-sm gap-4 justify-start mr-6">
               <Link href="/login">
                 <span className="hover:text-green-500 hover:font-bold">
@@ -187,7 +187,7 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
               </Link>
             </div>
           )}
-          {userData.first_name ||
+          {userData?.first_name ||
             (session && (
               <h4 className="text-green-700">
                 Yo,{" "}
@@ -234,7 +234,7 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
               </div>
             </div>
           </div>
-          {session || userData.first_name ? (
+          {session || userData?.first_name ? (
             <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}

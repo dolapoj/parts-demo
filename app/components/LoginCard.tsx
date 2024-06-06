@@ -54,7 +54,6 @@ const LoginCard = () => {
         // console.log('Data successfully posted: ', response.data)
         if (response.status === 200) {
           setResponseData(response.data.user);
-          console.log('i got here')
           console.log('Data successfully posted: ', response.data)
           
           //Save responseData to sessionStorage
@@ -83,7 +82,7 @@ const LoginCard = () => {
   };
 
   return (
-    <main className="py-4 sm:px-6 sm:mx-6 2xl:mx-32">
+    <main className="py-4 2xl:py-16 sm:px-6 sm:mx-6 2xl:mx-32">
       <p style={{ fontWeight: "700" }} className="text-2xl font-semibold">
         Sign In
       </p>

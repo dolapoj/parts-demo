@@ -46,17 +46,13 @@ const steps = [
   {
     id: "Step 3",
     name: "Verification",
-  },
-  {
-    id: "Step 4",
-    name: "Complete",
-  },
+  }
 ];
 
 const SignUpCard = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formEmail, setFormEmail] = useState("");
-  const [activationLink, setActivationLink] = useState("");
+  // const [activationLink, setActivationLink] = useState("");
 
   //State to track the selected value in the select form
   const [selectedValue, setSelectedValue] = useState("");
@@ -84,11 +80,10 @@ const SignUpCard = () => {
           "Content-Type": "application/json",
         },
       });
-      setActivationLink(response.data.activation_link);
       toast.success("You can now check your email for account activation.");
     } catch (error) {
       console.error("Error posting data:", error);
-      toast.error("There might be an issue with your internet");
+      toast.error('');
     }
     reset();
   };
@@ -104,7 +99,7 @@ const SignUpCard = () => {
     if (!output && currentStep < 2) return null;
 
     if (currentStep < steps.length - 1) {
-      if (currentStep === steps.length - 3) {
+      if (currentStep === steps.length - 2) {
         await handleSubmit(processForm)();
       }
       // setPreviousStep(currentStep);
@@ -383,19 +378,9 @@ const SignUpCard = () => {
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.7, ease: "easeInOut" }}
             >
-              <p>
-                {/* A confirmation mail was sent to your mailbox <br /> */}
-                Activate your account with this link <br />
-                <span className="font-bold text-blue-600">
-                  {/* {formEmail} */}
-                  {activationLink}
-                </span>{" "}
-                <br />
-                {/* with a link to verify your account */}
-              </p>
               <p className="text-xs mt-2">
                 <span className="text-blue-600">Please check your email</span>{" "}
-                and continue your registration with 1 hour
+                and continue your registration within 1 hour
               </p>
               <p className="mt-4 text-sm font-medium">
                 Having problems receiving email?
