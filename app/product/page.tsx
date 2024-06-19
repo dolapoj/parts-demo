@@ -26,7 +26,6 @@ const ProductDetailPage = () => {
 
   return (
     <>
-      <NavBar userData={userData} />
       <ProductDetail />
     </>
   );

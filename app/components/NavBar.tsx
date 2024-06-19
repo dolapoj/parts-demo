@@ -9,10 +9,27 @@ type NavBarProps = {
   userData: any; // Define the type of userData here
 };
 
-const NavBar: React.FC<NavBarProps> = ({ userData }) => {
+type UserData = {
+  first_name: string;
+  last_name: string;
+  // Add other properties as needed
+};
+
+const NavBar: React.FC<NavBarProps> = () => {
   const { data: session } = useSession();
+  const [userData, setUserData] = useState<UserData | any>({});
   const user = session ? session.user : null;
   // console.log(session)
+  // const user = session ? session.user : null;
+
+  useEffect(() => {
+    //Retrieve userData from sessionStorage when component mounts
+    const storedUserData = sessionStorage.getItem("userData");
+    if (storedUserData) {
+      setUserData(JSON.parse(storedUserData));
+    }
+    // console.log(storedUserData);
+  }, []);
 
   return (
     <>
@@ -227,9 +244,11 @@ const NavBar: React.FC<NavBarProps> = ({ userData }) => {
                 <span className="font-bold text-lg">2 Items</span>
                 <span className="text-info">Subtotal: $999</span>
                 <div className="card-actions">
-                  <button className="btn btn-primary btn-block">
-                    View cart
-                  </button>
+                  <Link href="/cart">
+                    <button className="btn btn-primary btn-block">
+                      View cart
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

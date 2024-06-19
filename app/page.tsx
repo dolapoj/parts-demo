@@ -1,9 +1,11 @@
 'use client';
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Component, Suspense, useEffect, useState } from "react";
+import { AppProps } from "next/app";
 import Landing from "./components/Landing";
-import Skeleton from "./components/Skeleton";
 import { useSession } from "next-auth/react";
-import NavBar from "./components/NavBar";
+// import NavBar from "./components/NavBar";
+// import Footer from "./components/Footer";
+import Layout from "./components/Layout";
 
 type UserData = {
   first_name: string;
@@ -11,7 +13,7 @@ type UserData = {
   // Add other properties as needed
 };
 
-export default function Home() {
+const Home: React.FC<AppProps> = ({ Component, pageProps }) => {
   const [userData, setUserData] = useState<UserData | any>({});
   const { data: session } = useSession();
   // const user = session ? session.user : null;
@@ -25,11 +27,10 @@ export default function Home() {
     // console.log(storedUserData);
   }, []);
   return (
-    <main className="bg-landing">
-      <Suspense fallback={Skeleton()}>
-        <NavBar userData={userData} />
+    <div className="bg-landing">
         <Landing />
-      </Suspense>
-    </main>
+    </div>
   );
 }
+
+export default Home

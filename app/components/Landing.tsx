@@ -4,7 +4,6 @@ import InnerSearch from "./InnerSearch";
 import BestSellers from "./BestSellers";
 import MoreParts from "./MoreParts";
 import Brands from "./Brands";
-import Footer from "./Footer";
 import Carousel from "./Carousel";
 
 interface Car {
@@ -50,7 +49,6 @@ const Landing = () => {
       />
       <MoreParts props="SHOP BY MAKE" color="white" text="black" />
       <Brands />
-      <Footer />
     </main>
   );
 };

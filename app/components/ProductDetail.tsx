@@ -3,9 +3,23 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Ratings from "./Ratings";
 import { usePathname, useSearchParams } from "next/navigation";
+import useLocalStorageState from "use-local-storage-state";
 
 interface SearchResults {
   [key: string]: any;
+}
+
+export type Product = {
+  product_sku: number;
+  part_desc: string;
+  part_number: string;
+  price: number;
+  image_url: string;
+  quantity: number;
+};
+
+export interface CartProps {
+  [productId: string]: Product;
 }
 
 const useProductData = (productId: string | undefined) => {
@@ -26,6 +40,8 @@ const useProductData = (productId: string | undefined) => {
 };
 
 const ProductDetail = () => {
+  const [error, setError] = useState(false);
+  const [cart, setCart] = useLocalStorageState<SearchResults>("cart", {});
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -39,6 +55,20 @@ const ProductDetail = () => {
       console.log(`URL: ${pathname}?productId=${productId}`);
     }
   }, [pathname, productId]);
+
+  const addToCart = (product: Product): void => {
+    // Ensure the quantity is set to 1 when adding a new product
+    const newProduct = { ...product, quantity: 1 };
+
+    setCart((prevCart) => ({
+      ...prevCart,
+      [product.product_sku]: newProduct,
+    }));
+  };
+
+  //Function to check if a product is in the cart 
+  const isInCart = (productId: number): boolean =>
+    Object.keys(cart || {}).includes(productId.toString());
 
   return (
     <div className="px-12 my-10 leading-relaxed">
@@ -139,15 +169,17 @@ const ProductDetail = () => {
         {/* Main Content */}
         <div className="flex-1 p-4">
           {/* Content for the main section */}
-          {
-            searchResults?.results.parts.map((part: any) => {
-              return(
-                <div className="bg-white flex flex-col justify-center mx-12 mb-8">
+          {searchResults?.results.parts.map((part: any) => {
+            return (
+              <div
+                key={part.product_sku}
+                className="bg-white flex flex-col justify-center mx-12 mb-8"
+              >
                 <div className="flex flex-wrap justify-between px-12 py-8">
                   <div className="">
                     <Image
-                      src={part.image_url as string}
-                      alt="type"
+                      src={part.image_url[0] as string}
+                      alt="part type"
                       width={140}
                       height={140}
                     />
@@ -170,16 +202,20 @@ const ProductDetail = () => {
                           <strong>Brand:</strong> {part?.mfg_code}{" "}
                         </h6>
                         <h6 className="text-sm mt-1">
-                          <span className="font-semibold">Notes:</span> Detailed Note{" "}
+                          <span className="font-semibold">Notes:</span> Detailed
+                          Note{" "}
                         </h6>
                         <p className="text-xs pt-1">
-                          Ideal replacement - this third brake light assembly was
-                          specifically designed to look and function like the
-                          original light on specific vehicles
+                          Ideal replacement - this third brake light assembly
+                          was specifically designed to look and function like
+                          the original light on specific vehicles
                         </p>
                       </div>
                       <div className="bg-green-700 p-4 text-white rounded-xl">
-                        <h6 className="text-sm">{part?.pricing.sellprice} {part?.pricing.currency}</h6>
+                        <h6 className="text-sm">
+                          {part?.pricing.sellprice}{" "}
+                          <span>{part?.pricing.currency}₦</span>
+                        </h6>
                         <div className="divider mt-0 divider-warning"></div>
                         <div className="flex justify-between gap-2 items-center mb-2">
                           <h6>Quantity</h6>
@@ -190,7 +226,11 @@ const ProductDetail = () => {
                           <option value="Individual">2019</option>
                           <option value="Fleet Manager">2020</option>
                         </select>
-                        <button className="bg-yellow-500 text-black px-4 font-semibold w-full rounded-md mt-2">
+                        <button
+                          disabled={isInCart(part?.product_sku)}
+                          onClick={() => addToCart(part)}
+                          className="bg-yellow-500 text-black px-4 font-semibold w-full rounded-md mt-2"
+                        >
                           {" "}
                           Add to Cart
                         </button>
@@ -204,18 +244,17 @@ const ProductDetail = () => {
                       This Part Fits:
                     </div>
                     <div className="border-solid border-2 border-indigo-4200 text-xs p-2 font-bold">
-                      Vehicle
+                      {part?.fitment[0].notes}
                     </div>
                     <div className="rounded-b-lg border-solid border-2 border-indigo-4200 text-xs p-2">
-                      {searchResults?.facets.engines[0].name}
+                      {part?.vehicle.engine.name}
                     </div>
                   </div>
                 </div>
                 <hr className="text-green-900" />
               </div>
-              )
-            })
-          }
+            );
+          })}
         </div>
       </section>
     </div>

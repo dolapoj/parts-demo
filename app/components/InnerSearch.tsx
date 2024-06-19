@@ -68,30 +68,36 @@ const InnerSearch: React.FC = () => {
                 name="make"
                 value={formData.make}
                 onChange={handleChange}
+                required
               >
                 <option value="">Select Make</option>
-                <option value="acura">Acura</option>
-                <option value="toyota">Toyota</option>
+                <option value="acura">acura</option>
+                <option value="kia">kia</option>
+                <option value="toyota">toyota</option>
               </select>
               <select
                 className="block rounded-md sm:w-52"
                 name="model"
                 value={formData.model}
                 onChange={handleChange}
+                required
               >
                 <option value="">Select Model</option>
                 <option value="mdx">mdx</option>
-                <option value="avensis">avensis</option>
+                <option value="sorento">sorento</option>
+                <option value="camry">camry</option>
               </select>
               <select
                 className="block rounded-md sm:w-52"
                 name="year"
                 value={formData.year}
                 onChange={handleChange}
+                required
               >
                 <option value="">Select Year</option>
                 <option value="2012">2012</option>
                 <option value="2013">2013</option>
+                <option value="2014">2014</option>
               </select>
               <button
                 className="btn bg-green-500 text-white px-3 py-0 border-none font-semibold text-sm sm:w-64"

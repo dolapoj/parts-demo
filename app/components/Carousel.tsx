@@ -57,12 +57,12 @@ const Carousel: React.FC<PartsDisplayProps> = ({ parts }) => {
     <div className="w-3/4 m-auto pb-20">
       <div className="mt-20">
         <Slider {...settings}>
-          {parts?.map((product) => (
-            <div className="text-white rounded-xl">
+          {parts?.map((product, index) => (
+            <div key={index} className="text-white rounded-xl">
               <div className="card bg-white flex flex-col justify-between gap-14 sm:w-52 md:w-56 2xl:w-72 border-8 h-80 border-white">
                 <figure className="relative mt-10">
                   <Image
-                    src={product.image as string}
+                    src={product?.image as any}
                     alt="Parts"
                     className="relative min-h-20 min-w-24"
                     width={40}
