@@ -21,10 +21,9 @@ const BestSellers: React.FC<PartsDisplayProps> = ({ parts }) => {
         <h4 className="font-semibold mx-12 sm:mx-16">BEST SELLERS</h4>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-12">
           {parts.map((car) => (
-            <div key={car.client_id} className="card">
+            <div key={car.client_id} className="card mb-4">
               <figure>
                 <Image
-                  // src="/images/pad.png"
                   src={car?.image as string}
                   alt="Shoes"
                   quality={100}
@@ -33,7 +32,7 @@ const BestSellers: React.FC<PartsDisplayProps> = ({ parts }) => {
                   height={28}
                 />
               </figure>
-              <div className="card-body text-center">
+              <div className="card-body text-center p-0">
                 <div className="">
                   <span className="font-semibold">
                     {car?.make + ` ${car?.year}`}
@@ -41,7 +40,7 @@ const BestSellers: React.FC<PartsDisplayProps> = ({ parts }) => {
                   <br />
                   <span className="text-sm">{car?.model}</span>
                   <Ratings />
-                  <p className="text-sm">{`${car?.model}`}</p>
+                  {/* <p className="text-sm">{`${car?.model}`}</p> */}
                 </div>
               </div>
             </div>

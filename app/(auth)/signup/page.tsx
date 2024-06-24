@@ -24,7 +24,7 @@ const SignUp = () => {
         >
           Have an account?
           {/* {" "} */}
-          <Link href='/login'><span className="cursor-pointer">Sign In Now!</span></Link>
+          <Link href='/login'><span className="cursor-pointer"> Sign In Now!</span></Link>
         </p>
         <div className="flex flex-row justify-center mt-4 h-auto text-white w-full">
           <div className="bg-white text-black sm:w-2/3 p-2 sm:p-6 h-full w-full">

@@ -3,6 +3,8 @@ import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import SocialIcons from "./SocialIcons";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { CiUser } from 'react-icons/ci';
+import { TbPassword } from "react-icons/tb";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -82,33 +84,44 @@ const LoginCard = () => {
   };
 
   return (
-    <main className="py-4 2xl:py-16 sm:px-6 sm:mx-6 2xl:mx-32">
-      <p style={{ fontWeight: "700" }} className="text-2xl font-semibold">
+    <main className="py-4 2xl:py-16 sm:px-6 2xl:mx-32">
+      <p style={{ fontWeight: "700" }} className="text-2xl mb-8 font-semibold">
         Sign In
       </p>
       <form onSubmit={handleSubmit}>
-        <div className="flex flex-col">
-          <label className="mt-8 text-left sm:ml-4">Email</label>
+        <label className="mt-8 text-left sm:ml-4">Email</label>
+        <div className="mb-6 relative shadow-sm">
+          <div className="pointer-event-none mt-1 absolute left-0 inset-y-0 flex items-center pl-3">
+            <span className="text-gray-500 text-sm">
+              <CiUser />
+            </span>
+          </div>
           <input
             type="text"
             name="email"
             value={formData.email}
-            placeholder=""
+            placeholder="Your email"
             autoComplete="email"
             onChange={handleInputChange}
-            className="rounded-md"
+            className="rounded-md w-full pr-7 pl-8 border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
             required
           />
         </div>
-        <div className="flex flex-col">
-          <label className="mt-4 text-left sm:ml-4">Password</label>
+        <label className="mt-4 text-left sm:ml-4">Password</label>
+        <div className="mb-6 relative shadow-sm">
+          <div className="pointer-event-none mt-1 absolute left-0 inset-y-0 flex items-center pl-3">
+            <span className="text-gray-500 text-sm">
+              <TbPassword/>
+            </span>
+          </div>
           <input
             type="password"
             name="password"
+            placeholder="Your password"
             value={formData.password}
             onChange={handleInputChange}
             autoComplete="off"
-            className="rounded-md"
+            className="rounded-md w-full pr-7 pl-8 border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
             required
           />
           {errors.password && (

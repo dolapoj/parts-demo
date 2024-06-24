@@ -182,11 +182,11 @@ const SignUpCard = () => {
                 </label>
                 <input
                   type="text"
-                  placeholder=""
+                  placeholder="Enter your email here"
                   {...register("email")}
                   autoComplete="email"
                   onChange={(e) => setFormEmail(e.target.value)}
-                  className="rounded-md"
+                  className="rounded-md order border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-indigo-500 focus:ring-2 text-sm"
                 />
                 {errors.email?.message && (
                   <p className="mt-2 text-xs text-red-400">
@@ -214,7 +214,7 @@ const SignUpCard = () => {
                   <span className="text-sm italic">(optional)</span>
                 </label>
                 <select
-                  className="block w-full rounded-md"
+                  className="block w-full rounded-md border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-2 text-sm"
                   {...register("role")}
                   value={selectedValue}
                   onChange={handleSelectChange}
@@ -239,7 +239,7 @@ const SignUpCard = () => {
                     placeholder="Ade & Sons"
                     {...register("company")}
                     autoComplete="off"
-                    className="inputField rounded-md"
+                    className="inputField rounded-md border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-2 text-sm"
                   />
                   {errors.company?.message && (
                     <p className="mt-2 text-xs text-red-400">
@@ -254,7 +254,7 @@ const SignUpCard = () => {
                   type="text"
                   autoComplete="off"
                   {...register("first_name")}
-                  className="rounded-md"
+                  className="rounded-md border-gray-300 outline-offset-2 outline-transparent focus:border-green-800 focus:ring-2 text-sm"
                 />
                 {errors.first_name?.message && (
                   <p className="mt-2 text-xs text-red-400">
@@ -268,7 +268,7 @@ const SignUpCard = () => {
                   type="text"
                   {...register("last_name")}
                   autoComplete="off"
-                  className="rounded-md"
+                  className="rounded-md border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-2 text-sm"
                 />
                 {errors.last_name?.message && (
                   <p className="mt-2 text-xs text-red-400">
@@ -282,7 +282,7 @@ const SignUpCard = () => {
                   type="text"
                   {...register("email")}
                   autoComplete="off"
-                  className={`${styles.inputBg} rounded-md focus:outline-none`}
+                  className={`${styles.inputBg} rounded-md focus:outline-none border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-2 text-sm`}
                   // readOnly
                   disabled
                 />
@@ -298,7 +298,7 @@ const SignUpCard = () => {
                   type="text"
                   {...register("country")}
                   autoComplete="off"
-                  className="rounded-md"
+                  className="rounded-md border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-2 text-sm"
                 />
                 {errors.country?.message && (
                   <p className="mt-2 text-xs text-red-400">
@@ -312,7 +312,7 @@ const SignUpCard = () => {
                   type="password"
                   {...register("password")}
                   autoComplete="off"
-                  className="rounded-md"
+                  className="rounded-md border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-2 text-sm"
                 />
                 {errors.password?.message && (
                   <p className="mt-2 text-xs text-red-400">
@@ -326,7 +326,7 @@ const SignUpCard = () => {
                   type="password"
                   autoComplete="off"
                   {...register("confirm_password")}
-                  className="rounded-md"
+                  className="rounded-md border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-2 text-sm"
                 />
                 {errors.confirm_password?.message && (
                   <p className="mt-2 text-xs text-red-400">
@@ -341,7 +341,7 @@ const SignUpCard = () => {
                   placeholder="8100617304"
                   {...register("phone_number")}
                   autoComplete="off"
-                  className="inputField rounded-md"
+                  className="inputField rounded-md border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-2 text-sm"
                   required
                 />
                 {errors.phone_number?.message && (

@@ -75,14 +75,14 @@ const CartPage = () => {
                   {/* Render product details from the prop */}
                   <div className="flex flex-col gap-4 pl-8">
                     <div className="ml-3 flex flex-col justify-center">
-                      <p className="text-xl font-semibold text-blue-700">
+                      <p className="text-md font-semibold text-blue-700">
                         {product.part_desc}
                       </p>
-                      <p className="text-sm text-gray-400 font-semibold">
+                      <p className="text-xs text-gray-400 font-semibold">
                         2004-2008 Ford F150
                       </p>
                     </div>
-                    <div className="flex flex-row gap-2">
+                    <div className="flex flex-row gap-2 items-center">
                       <Image
                         className="w-[100px]"
                         src="/images/pad.png"
@@ -90,30 +90,30 @@ const CartPage = () => {
                         height={80}
                         alt="image"
                       />
-                      <div className="text-lg">
+                      <div className="text-md">
                         <h5>923-662</h5>
                         <h5>Detailed Note</h5>
                       </div>
                     </div>
                   </div>
                 </td>
-                <td className="mx-auto text-center">${product.pricing.sellprice}</td>
+                <td className="mx-auto text-sm text-center">{product.pricing.sellprice}</td>
                 {/* Additional code for quantity and total remains unchanged */}
-                <td className="align-middle justify-center">
+                <td className="align-middle text-sm justify-center">
                   <div className="flex items-center justify-center">
                     <button
-                      className="flex h-8 w-8 cursor-pointer items-center justify-center border duration-100 hover:bg-neutral-100 focus:ring-2 focus:ring-gray-500 active:ring-2 active:ring-gray-500"
+                      className="flex h-8 w-8 cursor-pointer items-center justify-center duration-100 hover:bg-neutral-100 focus:ring-2 focus:ring-gray-500 active:ring-2 active:ring-gray-500"
                       // onClick={() =>
                       //   updateQuantity(index, quantities[index] - 1)
                       // }
                     >
                       −
                     </button>
-                    <div className="flex h-8 w-8 cursor-text items-center justify-center border-t border-b active:ring-gray-500">
+                    <div className="flex h-8 w-8 cursor-text items-center justify-center border active:ring-gray-500">
                       {/* {quantities[index]} */}1
                     </div>
                     <button
-                      className="flex h-8 w-8 cursor-pointer items-center justify-center border duration-100 hover:bg-neutral-100 focus:ring-2 focus:ring-gray-500 active:ring-2 active:ring-gray-500"
+                      className="flex h-8 w-8 cursor-pointer items-center justify-center duration-100 hover:bg-neutral-100 focus:ring-2 focus:ring-gray-500 active:ring-2 active:ring-gray-500"
                       // onClick={() =>
                       //   updateQuantity(
                       //     index,
@@ -125,10 +125,10 @@ const CartPage = () => {
                     </button>
                   </div>
                   <div className="flex justify-center mt-6">
-                    <button className="btn btn-sm btn-outline">Delete</button>
+                    <button className="btn btn-sm btn-outline">Remove</button>
                   </div>
                 </td>
-                <td className="mx-auto text-center">$50</td>
+                <td className="mx-auto text-sm text-center">{product.pricing.sellprice}</td>
                 <td className="align-middle">
                   {/* <FaTrashAlt
                       onClick={() => removeItem(index)}

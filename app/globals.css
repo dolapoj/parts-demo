@@ -14,12 +14,7 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
-input {
-  margin-top: 8px;
-  padding: 18px;
-  border: 1.5px solid #010101;
-  border-radius: 6px;
-}
+
 
 .button {
   background: #00E600;
@@ -72,39 +67,6 @@ input {
 
 .inputBg {
   background: #F0EBEB;
-}
-
-.input-field {
-  padding: 6px 10px;
-  width: 400px;
-  background: transparent;
-  border-radius: 6px;
-  border: 2px solid #00E600;
-  background-image: url("../images/loupe.png");
-  background-repeat: no-repeat;
-  background-position: 370px center;
-}
-
-.input-field::-moz-placeholder {
-  color: #0000FF;
-  font-size: 16px;
-  font-style: normal;
-  line-height: 24px;
-  font-weight: 300;
-}
-
-.input-field::placeholder {
-  color: #0000FF;
-  font-size: 16px;
-  font-style: normal;
-  line-height: 24px;
-  font-weight: 300;
-}
-
-input:focus {
-  outline: none;
-  font-weight: 400;
-  font-size: 16px;
 }
 
 .bg-landing {
