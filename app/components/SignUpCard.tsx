@@ -8,6 +8,10 @@ import { FormDataSchema } from "@/lib/registerSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
+import { CiUser } from "react-icons/ci";
+import { CiLocationArrow1 } from "react-icons/ci";
+import { TbPassword } from "react-icons/tb";
+import { MdPhoneIphone } from "react-icons/md";
 import toast from "react-hot-toast";
 
 import { motion } from "framer-motion";
@@ -95,7 +99,7 @@ const SignUpCard = () => {
     const fields = steps[currentStep].fields;
     const output = await trigger(fields as FieldName[], { shouldFocus: true });
 
-    // REFIX NEXT LINE //
+    // REFIX NEXT LINE 
     if (!output && currentStep < 2) return null;
 
     if (currentStep < steps.length - 1) {
@@ -176,22 +180,27 @@ const SignUpCard = () => {
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.7, ease: "easeInOut" }}
             >
-              <div className="flex flex-col">
-                <label className="text-left sm:ml-4 font-semibold">
-                  Sign Up with Email
-                </label>
+              <label className="text-left sm:ml-4 font-semibold">
+                Sign Up with Email
+              </label>
+              <div className="mb-6 relative shadow-sm">
+                <div className="pointer-event-none mt-2 absolute left-0 inset-y-0 flex items-center pl-3">
+                  <span className="text-gray-500 text-sm">
+                    <CiUser />
+                  </span>
+                </div>
                 <input
                   type="text"
                   placeholder="Enter your email here"
                   {...register("email")}
                   autoComplete="email"
                   onChange={(e) => setFormEmail(e.target.value)}
-                  className="rounded-md order border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-indigo-500 focus:ring-2 text-sm"
+                  className="rounded-md order w-full pr-7 pl-8 border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
                 />
                 {errors.email?.message && (
-                  <p className="mt-2 text-xs text-red-400">
+                  <span className="mt-2 text-xs text-red-400">
                     {errors.email.message}
-                  </p>
+                  </span>
                 )}
               </div>
               <div className="strike mt-8">
@@ -200,21 +209,23 @@ const SignUpCard = () => {
               <SocialIcons />
             </motion.div>
           )}
-          {/* Step 2 Form */}
+
+                                                              {/* Step 2 Form */}
+
           {currentStep === 1 && (
             <motion.div
               initial={{ x: currentStep >= 0 ? "50%" : "-50%", opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
             >
-              <div className="flex flex-col">
+              <div className="flex flex-col mb-4">
                 {/* <button className="p-4 bg-black text-white" onClick={handleVin}>Hit me!</button> */}
                 <label className="text-left sm:ml-4">
                   What type of user are you?{" "}
                   <span className="text-sm italic">(optional)</span>
                 </label>
                 <select
-                  className="block w-full rounded-md border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-2 text-sm"
+                  className="block w-full rounded-md border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
                   {...register("role")}
                   value={selectedValue}
                   onChange={handleSelectChange}
@@ -232,14 +243,14 @@ const SignUpCard = () => {
               </div>
               {/* Company Name */}
               {showInputField && (
-                <div className="flex flex-col mt-4">
+                <div className="flex flex-col mt-4 mb-4">
                   <label className="text-left sm:ml-4">Company</label>
                   <input
                     type="text"
                     placeholder="Ade & Sons"
                     {...register("company")}
                     autoComplete="off"
-                    className="inputField rounded-md border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-2 text-sm"
+                    className="inputField rounded-md border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
                   />
                   {errors.company?.message && (
                     <p className="mt-2 text-xs text-red-400">
@@ -248,13 +259,16 @@ const SignUpCard = () => {
                   )}
                 </div>
               )}
-              <div className="flex flex-col mt-4">
-                <label className="text-left sm:ml-4">Firstname</label>
+              <label className="text-left sm:ml-4">Firstname</label>
+              <div className="mb-6 relative shadow-sm">
+                <div className="pointer-event-none mt-2 absolute left-0 inset-y-0 flex items-center pl-3">
+                  <span className="text-gray-500 text-sm"></span>
+                </div>
                 <input
                   type="text"
                   autoComplete="off"
                   {...register("first_name")}
-                  className="rounded-md border-gray-300 outline-offset-2 outline-transparent focus:border-green-800 focus:ring-2 text-sm"
+                  className="rounded-md w-full border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
                 />
                 {errors.first_name?.message && (
                   <p className="mt-2 text-xs text-red-400">
@@ -268,7 +282,7 @@ const SignUpCard = () => {
                   type="text"
                   {...register("last_name")}
                   autoComplete="off"
-                  className="rounded-md border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-2 text-sm"
+                  className="rounded-md border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
                 />
                 {errors.last_name?.message && (
                   <p className="mt-2 text-xs text-red-400">
@@ -276,13 +290,13 @@ const SignUpCard = () => {
                   </p>
                 )}
               </div>
-              <div className="flex flex-col mt-4">
+              <div className="flex flex-col mt-4 mb-4">
                 <label className="text-left sm:ml-4">Email Address</label>
                 <input
                   type="text"
                   {...register("email")}
                   autoComplete="off"
-                  className={`${styles.inputBg} rounded-md focus:outline-none border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-2 text-sm`}
+                  className={`${styles.inputBg} rounded-md focus:outline-none border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm`}
                   // readOnly
                   disabled
                 />
@@ -292,13 +306,18 @@ const SignUpCard = () => {
                   </p>
                 )}
               </div>
-              <div className="flex flex-col mt-4">
-                <label className="text-left sm:ml-4">Country/Region</label>
+              <label className="text-left sm:ml-4">Country/Region</label>
+              <div className="mb-6 relative shadow-sm">
+                <div className="pointer-event-none mt-2 absolute left-0 inset-y-0 flex items-center pl-3">
+                  <span className="text-gray-500 text-sm">
+                    <CiLocationArrow1 />
+                  </span>
+                </div>
                 <input
                   type="text"
                   {...register("country")}
                   autoComplete="off"
-                  className="rounded-md border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-2 text-sm"
+                  className="rounded-md pr-7 pl-8 w-full border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
                 />
                 {errors.country?.message && (
                   <p className="mt-2 text-xs text-red-400">
@@ -306,13 +325,18 @@ const SignUpCard = () => {
                   </p>
                 )}
               </div>
-              <div className="flex flex-col mt-4">
-                <label className="text-left sm:ml-4">Password</label>
+              <label className="text-left sm:ml-4">Password</label>
+              <div className="mb-6 relative shadow-sm">
+                <div className="pointer-event-none mt-2 absolute left-0 inset-y-0 flex items-center pl-3">
+                  <span className="text-gray-500 text-sm">
+                    <TbPassword />
+                  </span>
+                </div>
                 <input
                   type="password"
                   {...register("password")}
                   autoComplete="off"
-                  className="rounded-md border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-2 text-sm"
+                  className="rounded-md w-full pr-7 pl-8 border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
                 />
                 {errors.password?.message && (
                   <p className="mt-2 text-xs text-red-400">
@@ -320,13 +344,18 @@ const SignUpCard = () => {
                   </p>
                 )}
               </div>
-              <div className="flex flex-col mt-4">
-                <label className="text-left sm:ml-4">Confirm Password</label>
+              <label className="text-left sm:ml-4">Confirm Password</label>
+              <div className="mb-6 relative shadow-sm">
+                <div className="pointer-event-none mt-2 absolute left-0 inset-y-0 flex items-center pl-3">
+                  <span className="text-gray-500 text-sm">
+                    <TbPassword />
+                  </span>
+                </div>
                 <input
                   type="password"
                   autoComplete="off"
                   {...register("confirm_password")}
-                  className="rounded-md border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-2 text-sm"
+                  className="rounded-md w-full pr-7 pl-8 border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
                 />
                 {errors.confirm_password?.message && (
                   <p className="mt-2 text-xs text-red-400">
@@ -334,14 +363,19 @@ const SignUpCard = () => {
                   </p>
                 )}
               </div>
-              <div className="flex flex-col mt-4">
-                <label className="text-left sm:ml-4">Mobile Number</label>
+              <label className="text-left sm:ml-4">Mobile Number</label>
+              <div className="mb-6 relative shadow-sm">
+                <div className="pointer-event-none mt-2 absolute left-0 inset-y-0 flex items-center pl-3">
+                  <span className="text-gray-500 text-sm">
+                    <MdPhoneIphone />
+                  </span>
+                </div>
                 <input
                   type="tel"
-                  placeholder="8100617304"
+                  placeholder="012-3456-789"
                   {...register("phone_number")}
                   autoComplete="off"
-                  className="inputField rounded-md border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-2 text-sm"
+                  className="inputField rounded-md w-full pr-7 pl-8 border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
                   required
                 />
                 {errors.phone_number?.message && (
@@ -371,7 +405,9 @@ const SignUpCard = () => {
               </div>
             </motion.div>
           )}
-          {/* Step 3 Form */}
+
+                                                          {/* Step 3 Form */}
+
           {currentStep === 2 && (
             <motion.div
               initial={{ x: currentStep >= 0 ? "50%" : "-50%", opacity: 0 }}

@@ -91,7 +91,7 @@ const LoginCard = () => {
       <form onSubmit={handleSubmit}>
         <label className="mt-8 text-left sm:ml-4">Email</label>
         <div className="mb-6 relative shadow-sm">
-          <div className="pointer-event-none mt-1 absolute left-0 inset-y-0 flex items-center pl-3">
+          <div className="pointer-event-none mt-2 absolute left-0 inset-y-0 flex items-center pl-3">
             <span className="text-gray-500 text-sm">
               <CiUser />
             </span>
@@ -100,7 +100,7 @@ const LoginCard = () => {
             type="text"
             name="email"
             value={formData.email}
-            placeholder="Your email"
+            placeholder=""
             autoComplete="email"
             onChange={handleInputChange}
             className="rounded-md w-full pr-7 pl-8 border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
@@ -109,7 +109,7 @@ const LoginCard = () => {
         </div>
         <label className="mt-4 text-left sm:ml-4">Password</label>
         <div className="mb-6 relative shadow-sm">
-          <div className="pointer-event-none mt-1 absolute left-0 inset-y-0 flex items-center pl-3">
+          <div className="pointer-event-none mt-2 absolute left-0 inset-y-0 flex items-center pl-3">
             <span className="text-gray-500 text-sm">
               <TbPassword/>
             </span>
@@ -117,7 +117,7 @@ const LoginCard = () => {
           <input
             type="password"
             name="password"
-            placeholder="Your password"
+            placeholder=""
             value={formData.password}
             onChange={handleInputChange}
             autoComplete="off"
