@@ -183,22 +183,24 @@ const SignUpCard = () => {
               <label className="text-left sm:ml-4 font-semibold">
                 Sign Up with Email
               </label>
-              <div className="mb-6 relative shadow-sm">
-                <div className="pointer-event-none mt-2 absolute left-0 inset-y-0 flex items-center pl-3">
-                  <span className="text-gray-500 text-sm">
-                    <CiUser />
-                  </span>
+              <div className="mb-6">
+                <div className="mb-0 relative shadow-sm">
+                  <div className="pointer-event-none mt-2 absolute left-0 inset-y-0 flex items-center pl-3">
+                    <span className="text-gray-500 text-sm">
+                      <CiUser className="text-green-700" />
+                    </span>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Enter your email here"
+                    {...register("email")}
+                    autoComplete="email"
+                    onChange={(e) => setFormEmail(e.target.value)}
+                    className="rounded-md order w-full pr-7 pl-8 border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
+                  />
                 </div>
-                <input
-                  type="text"
-                  placeholder="Enter your email here"
-                  {...register("email")}
-                  autoComplete="email"
-                  onChange={(e) => setFormEmail(e.target.value)}
-                  className="rounded-md order w-full pr-7 pl-8 border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
-                />
                 {errors.email?.message && (
-                  <span className="mt-2 text-xs text-red-400">
+                  <span className="text-xs text-red-400">
                     {errors.email.message}
                   </span>
                 )}
@@ -210,7 +212,7 @@ const SignUpCard = () => {
             </motion.div>
           )}
 
-                                                              {/* Step 2 Form */}
+          {/* Step 2 Form */}
 
           {currentStep === 1 && (
             <motion.div
@@ -307,18 +309,20 @@ const SignUpCard = () => {
                 )}
               </div>
               <label className="text-left sm:ml-4">Country/Region</label>
-              <div className="mb-6 relative shadow-sm">
-                <div className="pointer-event-none mt-2 absolute left-0 inset-y-0 flex items-center pl-3">
-                  <span className="text-gray-500 text-sm">
-                    <CiLocationArrow1 />
-                  </span>
+              <div className="mb-6">
+                <div className="relative shadow-sm">
+                  <div className="pointer-event-none mt-2 absolute left-0 inset-y-0 flex items-center pl-3">
+                    <span className="text-gray-500 text-sm">
+                      <CiLocationArrow1 className="text-green-500" />
+                    </span>
+                  </div>
+                  <input
+                    type="text"
+                    {...register("country")}
+                    autoComplete="off"
+                    className="rounded-md pr-7 pl-8 w-full border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
+                  />
                 </div>
-                <input
-                  type="text"
-                  {...register("country")}
-                  autoComplete="off"
-                  className="rounded-md pr-7 pl-8 w-full border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
-                />
                 {errors.country?.message && (
                   <p className="mt-2 text-xs text-red-400">
                     {errors.country.message}
@@ -326,18 +330,20 @@ const SignUpCard = () => {
                 )}
               </div>
               <label className="text-left sm:ml-4">Password</label>
-              <div className="mb-6 relative shadow-sm">
-                <div className="pointer-event-none mt-2 absolute left-0 inset-y-0 flex items-center pl-3">
-                  <span className="text-gray-500 text-sm">
-                    <TbPassword />
-                  </span>
+              <div className="mb-6">
+                <div className="relative shadow-sm">
+                  <div className="pointer-event-none mt-2 absolute left-0 inset-y-0 flex items-center pl-3">
+                    <span className="text-gray-500 text-sm">
+                      <TbPassword className="text-green-500" />
+                    </span>
+                  </div>
+                  <input
+                    type="password"
+                    {...register("password")}
+                    autoComplete="off"
+                    className="rounded-md w-full pr-7 pl-8 border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
+                  />
                 </div>
-                <input
-                  type="password"
-                  {...register("password")}
-                  autoComplete="off"
-                  className="rounded-md w-full pr-7 pl-8 border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
-                />
                 {errors.password?.message && (
                   <p className="mt-2 text-xs text-red-400">
                     {errors.password.message}
@@ -345,18 +351,20 @@ const SignUpCard = () => {
                 )}
               </div>
               <label className="text-left sm:ml-4">Confirm Password</label>
-              <div className="mb-6 relative shadow-sm">
-                <div className="pointer-event-none mt-2 absolute left-0 inset-y-0 flex items-center pl-3">
-                  <span className="text-gray-500 text-sm">
-                    <TbPassword />
-                  </span>
+              <div className="mb-6">
+                <div className="relative shadow-sm">
+                  <div className="pointer-event-none mt-2 absolute left-0 inset-y-0 flex items-center pl-3">
+                    <span className="text-gray-500 text-sm">
+                      <TbPassword className="text-green-500" />
+                    </span>
+                  </div>
+                  <input
+                    type="password"
+                    autoComplete="off"
+                    {...register("confirm_password")}
+                    className="rounded-md w-full pr-7 pl-8 border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
+                  />
                 </div>
-                <input
-                  type="password"
-                  autoComplete="off"
-                  {...register("confirm_password")}
-                  className="rounded-md w-full pr-7 pl-8 border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
-                />
                 {errors.confirm_password?.message && (
                   <p className="mt-2 text-xs text-red-400">
                     {errors.confirm_password.message}
@@ -364,20 +372,22 @@ const SignUpCard = () => {
                 )}
               </div>
               <label className="text-left sm:ml-4">Mobile Number</label>
-              <div className="mb-6 relative shadow-sm">
-                <div className="pointer-event-none mt-2 absolute left-0 inset-y-0 flex items-center pl-3">
-                  <span className="text-gray-500 text-sm">
-                    <MdPhoneIphone />
-                  </span>
+              <div className="mb-6">
+                <div className="relative shadow-sm">
+                  <div className="pointer-event-none mt-2 absolute left-0 inset-y-0 flex items-center pl-3">
+                    <span className="text-gray-500 text-sm">
+                      <MdPhoneIphone className="text-green-500" />
+                    </span>
+                  </div>
+                  <input
+                    type="tel"
+                    placeholder="012-3456-789"
+                    {...register("phone_number")}
+                    autoComplete="off"
+                    className="inputField rounded-md w-full pr-7 pl-8 border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
+                    required
+                  />
                 </div>
-                <input
-                  type="tel"
-                  placeholder="012-3456-789"
-                  {...register("phone_number")}
-                  autoComplete="off"
-                  className="inputField rounded-md w-full pr-7 pl-8 border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
-                  required
-                />
                 {errors.phone_number?.message && (
                   <p className="mt-2 text-xs text-red-400">
                     {errors.phone_number.message}
@@ -406,7 +416,7 @@ const SignUpCard = () => {
             </motion.div>
           )}
 
-                                                          {/* Step 3 Form */}
+          {/* Step 3 Form */}
 
           {currentStep === 2 && (
             <motion.div

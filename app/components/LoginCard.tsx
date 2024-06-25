@@ -93,7 +93,7 @@ const LoginCard = () => {
         <div className="mb-6 relative shadow-sm">
           <div className="pointer-event-none mt-2 absolute left-0 inset-y-0 flex items-center pl-3">
             <span className="text-gray-500 text-sm">
-              <CiUser />
+              <CiUser className="text-green-500" />
             </span>
           </div>
           <input
@@ -111,7 +111,7 @@ const LoginCard = () => {
         <div className="mb-6 relative shadow-sm">
           <div className="pointer-event-none mt-2 absolute left-0 inset-y-0 flex items-center pl-3">
             <span className="text-gray-500 text-sm">
-              <TbPassword/>
+              <TbPassword className="text-green-500" />
             </span>
           </div>
           <input
