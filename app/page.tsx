@@ -13,7 +13,7 @@ type UserData = {
   // Add other properties as needed
 };
 
-const Home: React.FC<AppProps> = ({ Component, pageProps }) => {
+const Home: React.FC = () => {
   const [userData, setUserData] = useState<UserData | any>({});
   const { data: session } = useSession();
   // const user = session ? session.user : null;
