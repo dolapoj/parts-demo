@@ -47,7 +47,11 @@ const ProductDetail = () => {
 
   const productId = searchParams.get("productId");
   const searchResults = useProductData(productId || undefined);
-  console.log(searchResults?.results.parts);
+
+  // Log searchResults to debug
+  useEffect(() => {
+    console.log('Search Results:', searchResults);
+  }, [searchResults]);
 
   //Side effect to monitor and log the URL
   useEffect(() => {
@@ -70,6 +74,12 @@ const ProductDetail = () => {
   const isInCart = (productId: number): boolean =>
     Object.keys(cart || {}).includes(productId.toString());
 
+  if (!searchResults) {
+    return <div className="h-100">Loading...</div>;
+  }
+
+  console.log("Result:", searchResults)
+
   return (
     <div className="px-12 my-10 leading-relaxed">
       <div className="flex justify-between gap-2 items-center mb-8">
@@ -77,7 +87,7 @@ const ProductDetail = () => {
           <p className="pl-4">
             Results For:{" "}
             <span className="text-blue-700 font-semibold">
-              {searchResults?.facets.makes[0].name}
+              {searchResults?.parts[0].fitment[0].make}
             </span>
           </p>
         </div>
@@ -169,7 +179,7 @@ const ProductDetail = () => {
         {/* Main Content */}
         <div className="flex-1 p-4">
           {/* Content for the main section */}
-          {searchResults?.results.parts.map((part: any) => {
+          {searchResults?.parts.map((part: any) => {
             return (
               <div
                 key={part.product_sku}

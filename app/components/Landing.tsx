@@ -39,9 +39,9 @@ const Landing = () => {
 
   return (
     <main className="bg-landing">
-      <Carousel parts={partsData} />
+      {/* <Carousel parts={partsData} /> */}
       <InnerSearch />
-      <BestSellers parts={partsData} />
+      {/* <BestSellers parts={partsData} /> */}
       <MoreParts
         color="#02026B"
         backgroundImage="/images/hyundai.png"

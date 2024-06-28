@@ -17,7 +17,9 @@ type UserData = {
 
 const NavBar: React.FC<NavBarProps> = () => {
   const { data: session } = useSession();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState<UserData | any>({});
+  const [key, setKey] = useState(0); // Key to force remount
   const user = session ? session.user : null;
   // console.log(session)
   // const user = session ? session.user : null;
@@ -27,9 +29,25 @@ const NavBar: React.FC<NavBarProps> = () => {
     const storedUserData = sessionStorage.getItem("userData");
     if (storedUserData) {
       setUserData(JSON.parse(storedUserData));
+      setIsLoggedIn(true);
     }
     // console.log(storedUserData);
-  }, []);
+  }, [key]);
+
+  useEffect(() => {
+    if (session?.user) {
+      setUserData(session.user);
+      // Optionally, store user data in sessionStorage
+      sessionStorage.setItem("userData", JSON.stringify(session.user));
+    }
+  }, [session]);
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("userData");
+    setUserData(null);
+    setIsLoggedIn(false);
+    setKey((prevKey) => prevKey + 1); // Force remount on logout
+  };
 
   return (
     <>
@@ -56,7 +74,7 @@ const NavBar: React.FC<NavBarProps> = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-              {!userData?.first_name && !session && (
+              {!userData?.first_name && (
                 <div className="flex flex-row text-sm gap-4 justify-start mr-6">
                   <Link href="/login">
                     <span className="hover:text-green-500 hover:font-bold">
@@ -70,15 +88,14 @@ const NavBar: React.FC<NavBarProps> = () => {
                   </Link>
                 </div>
               )}
-              {userData?.first_name ||
-                (session && (
-                  <h4 className="text-green-700">
-                    Yo,{" "}
-                    {JSON.stringify(user?.name)
-                      .replace(/"/g, "")
-                      .split(" ")[0] || userData.first_name}{" "}
-                  </h4>
-                ))}
+              {userData?.first_name && (
+                <h4 className="text-green-700 text-md">
+                  Hello,{" "}
+                  {
+                  // JSON.stringify(user?.name).replace(/"/g, "").split(" ")[0] ||
+                    userData.first_name}{" "}
+                </h4>
+              )}
               <div className="dropdown dropdown-end">
                 <div
                   tabIndex={0}
@@ -142,11 +159,14 @@ const NavBar: React.FC<NavBarProps> = () => {
                     <li>
                       <a className="justify-between">
                         Profile
-                        <span className="badge">New</span>
+                        {/* <span className="badge">New</span> */}
                       </a>
                     </li>
                     <li>
-                      <a onClick={() => signOut({ callbackUrl: `/login` })}>
+                      <a 
+                      // onClick={() => signOut({ callbackUrl: `/login` })}
+                      onClick={handleLogout}
+                      >
                         Logout
                       </a>
                     </li>
@@ -190,7 +210,7 @@ const NavBar: React.FC<NavBarProps> = () => {
           </form>
         </div>
         <div className="navbar-end">
-          {!userData?.first_name && !session && (
+          {!userData?.first_name && (
             <div className="flex flex-row text-sm gap-4 justify-start mr-6">
               <Link href="/login">
                 <span className="hover:text-green-500 hover:font-bold">
@@ -206,9 +226,10 @@ const NavBar: React.FC<NavBarProps> = () => {
           )}
           {userData?.first_name ||
             (session && (
-              <h4 className="text-green-700">
-                Yo,{" "}
-                {JSON.stringify(user?.name).replace(/"/g, "").split(" ")[0] ||
+              <h4 className="text-green-700 text-md">
+                Hello,{" "}
+                {
+                // JSON.stringify(user?.name).replace(/"/g, "").split(" ")[0] ||
                   userData.first_name}{" "}
               </h4>
             ))}

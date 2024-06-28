@@ -5,6 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { CiUser } from 'react-icons/ci';
 import { TbPassword } from "react-icons/tb";
+import { signIn } from 'next-auth/react';
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
