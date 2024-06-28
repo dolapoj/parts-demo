@@ -23,9 +23,9 @@ const getPartsData = () => {
   useEffect(() => {
     const getParts = async () => {
       const response = await fetch("/api/parts");
+      console.log("okay:", response)
       const parts: CarResponse = await response.json();
       setParts(parts.data);
-      // console.log(parts.data)
     };
 
     getParts();
@@ -39,9 +39,9 @@ const Landing = () => {
 
   return (
     <main className="bg-landing">
-      {/* <Carousel parts={partsData} /> */}
+      <Carousel parts={partsData} />
       <InnerSearch />
-      {/* <BestSellers parts={partsData} /> */}
+      <BestSellers parts={partsData} />
       <MoreParts
         color="#02026B"
         backgroundImage="/images/hyundai.png"

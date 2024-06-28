@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 async function fetchParts() {
-  const endpoint = "http://partdirectafrica.com/parts/parts-list";
+  const endpoint = "http://partdirectafrica.com/part/parts-list";
   const response = await fetch(endpoint, {
     method: "GET",
   });
