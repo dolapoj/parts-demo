@@ -85,7 +85,7 @@ const LoginCard = () => {
   };
 
   return (
-    <main className="py-4 2xl:py-16 sm:px-6 2xl:mx-32">
+    <main className="py-4 2xl:py-16 sm:px-6 2xl:mx-12">
       <p style={{ fontWeight: "700" }} className="text-2xl mb-8 font-semibold">
         Sign In
       </p>

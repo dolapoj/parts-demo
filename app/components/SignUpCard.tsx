@@ -127,7 +127,7 @@ const SignUpCard = () => {
   };
 
   return (
-    <main className="sm:p-6 sm:x-8 2xl:mx-32">
+    <main className="sm:p-6 sm:x-8 2xl:mx-12">
       <p style={{ fontWeight: "700" }} className="text-2xl">
         Create Account
       </p>
@@ -480,7 +480,7 @@ const SignUpCard = () => {
             onClick={handleNext}
             disabled={currentStep === steps.length - 1}
           >
-            {currentStep === 3 ? (
+            {currentStep === 2 ? (
               <Link className="w-100" href="/login">
                 Sign In
               </Link>

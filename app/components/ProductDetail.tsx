@@ -44,6 +44,7 @@ const ProductDetail = () => {
   const [cart, setCart] = useLocalStorageState<SearchResults>("cart", {});
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const [clickedButtons, setClickedButtons] = useState<{ [key: number]: boolean }>({});
 
   const productId = searchParams.get("productId");
   const searchResults = useProductData(productId || undefined);
@@ -67,6 +68,12 @@ const ProductDetail = () => {
     setCart((prevCart) => ({
       ...prevCart,
       [product.product_sku]: newProduct,
+    }));
+
+    // Update clicked button state
+    setClickedButtons((prev) => ({
+      ...prev,
+      [product.product_sku]: true,
     }));
   };
 
@@ -229,7 +236,8 @@ const ProductDetail = () => {
                         <div className="divider mt-0 divider-warning"></div>
                         <div className="flex justify-between gap-2 items-center mb-2">
                           <h6>Quantity</h6>
-                          <input className="w-12 h-4" />
+                          {/* <input className="w-12 h-4" /> */}
+                          <h4></h4>
                         </div>
                         <select className="block rounded-md">
                           <option>Select Year</option>
@@ -239,10 +247,12 @@ const ProductDetail = () => {
                         <button
                           disabled={isInCart(part?.product_sku)}
                           onClick={() => addToCart(part)}
-                          className="bg-yellow-500 text-black px-4 font-semibold w-full rounded-md mt-2"
+                          className="bg-yellow-500 text-black text-sm px-4 py-2 font-semibold w-full rounded-md mt-2"
+                          style={{
+                            backgroundColor: clickedButtons[part.product_sku] ? 'gray' : 'yellow'
+                          }}
                         >
-                          {" "}
-                          Add to Cart
+                          {isInCart(part?.product_sku) ? 'Added to Cart' : 'Add to Cart'}
                         </button>
                       </div>
                     </div>

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { MouseEventHandler, useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
 
 export type Product = {
@@ -12,13 +12,14 @@ export type Product = {
   quantity: number;
 };
 
+type Operation = 'increase' | 'decrease';
+
 export interface CartProps {
   [productId: string]: Product;
 }
 
 const CartPage = () => {
   const [cart, setCart] = useLocalStorageState<CartProps>("cart", {});
-  console.log(cart);
   const getProducts = () => Object.values(cart || {}); //Method for getting all products as an array data structure
   console.log(getProducts);
 
@@ -30,19 +31,30 @@ const CartPage = () => {
     })
   }
 
-  // const handleUpdateQuantity = (productId: number, operation: Operation) => {
-  //   setCart((prevCart) => {
-  //     const updatedCart = { ...prevCart }
-  //     if (updatedCart[productId]) {
-  //       if (operation === 'increase') {
-  //         updatedCart[productId] = { ...updatedCart[productId], quantity: updatedCart[productId].quantity + 1 }
-  //       } else {
-  //         updatedCart[productId] = { ...updatedCart[productId], quantity: updatedCart[productId].quantity - 1 }
-  //       }
-  //     }
-  //     return updatedCart
-  //   })
-  // }
+  const handleRemoveProductClick: MouseEventHandler<HTMLButtonElement> = (event) => {
+    const productId = Number(event.currentTarget.dataset.productid);
+    if (!isNaN(productId)) {
+      handleRemoveProduct(productId);
+    }
+  };
+
+  const handleUpdateQuantity = (productId: number, operation: Operation) => {
+    setCart((prevCart) => {
+      const updatedCart = { ...prevCart };
+      if (updatedCart[productId]) {
+        if (operation === 'increase') {
+          updatedCart[productId].quantity += 1;
+        } else if (operation === 'decrease' && updatedCart[productId].quantity > 1) {
+          updatedCart[productId].quantity -= 1;
+        }
+      }
+      return updatedCart;
+    });
+  };
+
+  if (!cart) {
+    return <p className="mt-8 mb-8 flex justify-center">Loading Cart...</p>
+  }
 
   return (
     <>
@@ -97,38 +109,41 @@ const CartPage = () => {
                     </div>
                   </div>
                 </td>
-                <td className="mx-auto text-sm text-center">{product.pricing.sellprice}</td>
+                <td className="mx-auto text-sm text-center">
+                  ${product.pricing.sellprice}
+                </td>
                 {/* Additional code for quantity and total remains unchanged */}
                 <td className="align-middle text-sm justify-center">
                   <div className="flex items-center justify-center">
                     <button
                       className="flex h-8 w-8 cursor-pointer items-center justify-center duration-100 hover:bg-neutral-100 focus:ring-2 focus:ring-gray-500 active:ring-2 active:ring-gray-500"
-                      // onClick={() =>
-                      //   updateQuantity(index, quantities[index] - 1)
-                      // }
+                      onClick={() => handleUpdateQuantity(product.product_sku, 'decrease')}
                     >
                       −
                     </button>
                     <div className="flex h-8 w-8 cursor-text items-center justify-center border active:ring-gray-500">
-                      {/* {quantities[index]} */}1
+                      {product.quantity}
                     </div>
                     <button
                       className="flex h-8 w-8 cursor-pointer items-center justify-center duration-100 hover:bg-neutral-100 focus:ring-2 focus:ring-gray-500 active:ring-2 active:ring-gray-500"
-                      // onClick={() =>
-                      //   updateQuantity(
-                      //     index,
-                      //     Math.max(1, quantities[index] + 1)
-                      //   )
-                      // }
+                      onClick={() => handleUpdateQuantity(product.product_sku, 'increase')}
                     >
                       +
                     </button>
                   </div>
                   <div className="flex justify-center mt-6">
-                    <button className="btn btn-sm btn-outline">Remove</button>
+                    <button
+                      className="btn btn-sm btn-outline"
+                      data-productid={product.product_sku}
+                      onClick={handleRemoveProductClick}
+                    >
+                      Remove
+                    </button>
                   </div>
                 </td>
-                <td className="mx-auto text-sm text-center">{product.pricing.sellprice}</td>
+                <td className="mx-auto text-sm text-center">
+                  ${product.pricing.sellprice}
+                </td>
                 <td className="align-middle">
                   {/* <FaTrashAlt
                       onClick={() => removeItem(index)}

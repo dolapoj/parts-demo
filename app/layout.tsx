@@ -15,16 +15,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  includeHeaderFooter = true,
 }: Readonly<{
   children: React.ReactNode;
+  includeHeaderFooter?: boolean;
 }>) {
   return (
     <html lang="en" className="bg-landing">
       <body className={inter.className}>
         <SessionWrapper>
-          <NavBar userData={undefined} />
+          {includeHeaderFooter && <NavBar userData={undefined} />}
           {children}
-          <Footer />
+          {includeHeaderFooter && <Footer />}
         </SessionWrapper>
         <Toaster position="top-center" />
       </body>
