@@ -52,10 +52,6 @@ const CartPage = () => {
     });
   };
 
-  if (!cart) {
-    return <p className="mt-8 mb-8 flex justify-center">Loading Cart...</p>
-  }
-
   return (
     <>
       <section className="px-24 pt-8 w-full">

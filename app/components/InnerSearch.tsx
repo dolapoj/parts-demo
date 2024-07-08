@@ -106,7 +106,7 @@ const InnerSearch: React.FC = () => {
                 type="submit"
               >
                 <IoCarSportSharp className="text-lg" />
-                SELECT YOUR VEHICLE
+                SEARCH VEHICLE PARTS
               </button>
             </div>
           </form>
