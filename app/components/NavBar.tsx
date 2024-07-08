@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 type NavBarProps = {
   userData: any; // Define the type of userData here
@@ -24,10 +25,10 @@ const NavBar: React.FC<NavBarProps> = () => {
   const { data: session } = useSession();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState<UserData | any>({});
-  const [searchData, setSearchData] = useState<SearchData | any>({ searchfor: '' });
+  const [searchData, setSearchData] = useState<SearchData | any>({ search: "" });
   const [key, setKey] = useState(0); // Key to force remount
   const user = session ? session.user : null;
-  console.log(searchData)
+  const router = useRouter();
 
   useEffect(() => {
     //Retrieve userData from sessionStorage when component mounts
@@ -50,10 +51,10 @@ const NavBar: React.FC<NavBarProps> = () => {
   //Handle Input Chnage in Form Fields
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setSearchData({
-      ...searchData,
+    setSearchData((prevSearchData: any) => ({
+      ...prevSearchData,
       [name]: value,
-    });
+    }));
     console.log(value);
   };
 
@@ -63,20 +64,19 @@ const NavBar: React.FC<NavBarProps> = () => {
     const endpoint =
       "http://partdirectafrica.com/part/search/d6c4a436-5f1f-40a0-8184-7d3db09a8431/partnumber/";
     try {
-      const response = await axios.post(
-        endpoint,
-        {
-          searchfor: searchData.searchfor,
+      const response = await axios.post(endpoint, searchData, {
+        headers: {
+          "Content-Type": "application/json",
         },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      });
+
+      // Save responseData to localStorage
+      localStorage.setItem("searchByPartNumber", JSON.stringify(response.data.results));
 
       // Handle the response as needed
       console.log("Search response:", response.data);
+      router.push(`/search`)
+      setSearchData({searchfor: ""})
     } catch (error) {
       console.error("There is an error:", error);
     }
@@ -218,16 +218,21 @@ const NavBar: React.FC<NavBarProps> = () => {
               )}
             </div>
           </div>
-          <Image
-            alt="logo"
-            src="/images/logo.png"
-            className={`w-24 sm:w-40`}
-            width={24}
-            height={24}
-          />
+          <Link href='/'>
+            <Image
+              alt="logo"
+              src="/images/logo.png"
+              className={`w-24 sm:w-40`}
+              width={24}
+              height={24}
+            />
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <form onSubmit={handleSubmitSearch} className="max-w-[480px] w-full px-4">
+          <form
+            onSubmit={handleSubmitSearch}
+            className="max-w-[480px] w-full px-4"
+          >
             <div className="relative">
               <input
                 type="text"
@@ -235,6 +240,7 @@ const NavBar: React.FC<NavBarProps> = () => {
                 className="w-full border h-12 shadow p-4 placeholder:text-xs rounded-full dark:text-gray-800 dark:border-gray-700 dark:bg-gray-200"
                 placeholder="Search by part number"
                 onChange={handleInputChange}
+                value={searchData.searchfor}
               />
               <button type="submit" className="absolute bottom-3.5 right-3">
                 <svg
