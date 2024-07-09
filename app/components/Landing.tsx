@@ -22,7 +22,8 @@ const getPartsData = () => {
 
   useEffect(() => {
     const getParts = async () => {
-      const response = await fetch("/api/parts");
+      // const response = await fetch("/api/parts");
+      const response = await fetch("http://partdirectafrica.com/part/parts-list");
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
