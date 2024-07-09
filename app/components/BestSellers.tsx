@@ -25,7 +25,7 @@ const BestSellers: React.FC<PartsDisplayProps> = ({ parts }) => {
               <figure>
                 <Image
                   src={car?.image as string}
-                  alt="Shoes"
+                  alt="product"
                   quality={100}
                   className="w-28 max-h-16"
                   width={28}

@@ -23,7 +23,9 @@ const getPartsData = () => {
   useEffect(() => {
     const getParts = async () => {
       const response = await fetch("/api/parts");
-      console.log("okay:", response)
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const parts: CarResponse = await response.json();
       setParts(parts.data);
     };

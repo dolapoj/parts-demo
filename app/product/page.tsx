@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import ProductDetail from "../components/ProductDetail";
 
@@ -26,7 +26,9 @@ const ProductDetailPage = () => {
 
   return (
     <>
-      <ProductDetail />
+      <Suspense fallback={<div>Loading...</div>}>
+        <ProductDetail />
+      </Suspense>
     </>
   );
 };
