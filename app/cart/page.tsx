@@ -59,7 +59,7 @@ const CartPage = () => {
     <>
       <section className="px-24 pt-8 w-full">
         <div className="flex justify-between items-center">
-          <h1 className="text-xl font-semibold">Your Shopping Cart</h1>
+          <h1 className="text-xl font-semibold">My Shopping Cart</h1>
           <h1 className="font-semibold text-blue-700">Continue Shopping</h1>
           <button className="btn btn-accent btn-sm text-white font-bold">
             Proceed to Checkout
