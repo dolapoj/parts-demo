@@ -21,7 +21,6 @@ export interface CartProps {
 const CartPage = () => {
   const [cart, setCart] = useLocalStorageState<CartProps>("cart", {});
   const getProducts = () => Object.values(cart || {}); //Method for getting all products as an array data structure
-  console.log(getProducts);
 
   const handleRemoveProduct = (productId: number): void => {
     setCart((prevCart) => {
@@ -51,6 +50,10 @@ const CartPage = () => {
       return updatedCart;
     });
   };
+
+  // if (cart) {
+  //   <>You have no item in cart</>
+  // }
 
   return (
     <>

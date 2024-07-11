@@ -59,6 +59,8 @@ const ResetPassword = () => {
           alt="Kinetic Parts"
           quality={100}
           className={`w-28 sm:w-60`}
+          width={28}
+          height={28}
         />
         <p
           className={`${styles.no_acct_text} text-center text-base sm:text-x sm:text-right mt-8 sm:mt-4`}
@@ -103,6 +105,8 @@ const ResetPassword = () => {
               alt="Reset Password"
               quality={100}
               className="w-28 sm:w-60"
+              width={28}
+              height={28}
             />
           </div>
         </div>
