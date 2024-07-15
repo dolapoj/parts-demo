@@ -1,7 +1,6 @@
 "use client";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Image from "next/image";
-
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import axios from "axios";
@@ -27,6 +26,7 @@ const NavBar: React.FC<NavBarProps> = () => {
   const [userData, setUserData] = useState<UserData | any>({});
   const [searchData, setSearchData] = useState<SearchData | any>({ search: "" });
   const [key, setKey] = useState(0); // Key to force remount
+  const [menuOpen, setMenuOpen] = useState(false); // State to control menu visibility
   const user = session ? session.user : null;
   const router = useRouter();
 
@@ -48,7 +48,7 @@ const NavBar: React.FC<NavBarProps> = () => {
     }
   }, [session]);
 
-  //Handle Input Chnage in Form Fields
+  //Handle Input Change in Form Fields
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setSearchData((prevSearchData: any) => ({
@@ -89,12 +89,16 @@ const NavBar: React.FC<NavBarProps> = () => {
     setKey((prevKey) => prevKey + 1); // Force remount on logout
   };
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <>
       <div className="navbar bg-base-100 p-8">
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden" onClick={toggleMenu}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -110,113 +114,115 @@ const NavBar: React.FC<NavBarProps> = () => {
                 />
               </svg>
             </div>
-            <div
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              {!userData?.first_name && (
-                <div className="flex flex-row text-sm gap-4 justify-start mr-6">
-                  <Link href="/login">
-                    <span className="hover:text-green-500 hover:font-bold">
-                      Sign In
-                    </span>
-                  </Link>
-                  <Link href="/signup">
-                    <span className="hover:text-green-500 hover:font-bold">
-                      Sign Up
-                    </span>
-                  </Link>
-                </div>
-              )}
-              {userData?.first_name && (
-                <h4 className="text-green-700 text-md">
-                  Hello,{" "}
-                  {
-                    // JSON.stringify(user?.name).replace(/"/g, "").split(" ")[0] ||
-                    userData.first_name
-                  }{" "}
-                </h4>
-              )}
-              <div className="dropdown dropdown-end">
-                <div
-                  tabIndex={0}
-                  role="button"
-                  className="btn btn-ghost btn-circle"
-                >
-                  <div className="indicator">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                      />
-                    </svg>
-                    <span className="badge badge-sm indicator-item">0</span>
+            {menuOpen && (
+              <div
+                tabIndex={0}
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                {!userData?.first_name && (
+                  <div className="flex flex-col text-sm gap-4 justify-start mr-6">
+                    <Link href="/login">
+                      <span className="hover:text-green-500 hover:font-bold">
+                        Sign In
+                      </span>
+                    </Link>
+                    <Link href="/signup">
+                      <span className="hover:text-green-500 hover:font-bold">
+                        Sign Up
+                      </span>
+                    </Link>
                   </div>
-                </div>
-                <div
-                  tabIndex={0}
-                  className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
-                >
-                  <div className="card-body">
-                    <span className="font-bold text-lg">2 Items</span>
-                    <span className="text-info">Subtotal: $999</span>
-                    <div className="card-actions">
-                      <button className="btn btn-primary btn-block">
-                        View cart
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {session || userData?.first_name ? (
+                )}
+                {userData?.first_name && (
+                  <h4 className="text-green-700 text-md">
+                    Hello,{" "}
+                    {
+                      // JSON.stringify(user?.name).replace(/"/g, "").split(" ")[0] ||
+                      userData.first_name
+                    }{" "}
+                  </h4>
+                )}
                 <div className="dropdown dropdown-end">
                   <div
                     tabIndex={0}
                     role="button"
-                    className="btn btn-ghost btn-circle avatar"
+                    className="btn btn-ghost btn-circle"
                   >
-                    <div className="w-10 rounded-full">
-                      <Image
-                        alt="Profile Image"
-                        src={user?.image as string}
-                        // src='/images/pad.png'
-                        width={20}
-                        height={20}
-                      />
+                    <div className="indicator">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                        />
+                      </svg>
+                      <span className="badge badge-sm indicator-item">0</span>
                     </div>
                   </div>
-                  <ul
+                  <div
                     tabIndex={0}
-                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                    className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
                   >
-                    <li>
-                      <a className="justify-between">
-                        Profile
-                        {/* <span className="badge">New</span> */}
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        // onClick={() => signOut({ callbackUrl: `/login` })}
-                        onClick={handleLogout}
-                      >
-                        Logout
-                      </a>
-                    </li>
-                  </ul>
+                    <div className="card-body">
+                      <span className="font-bold text-lg">2 Items</span>
+                      <span className="text-info">Subtotal: $999</span>
+                      <div className="card-actions">
+                        <button className="btn btn-primary btn-block">
+                          View cart
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              ) : (
-                <></>
-              )}
-            </div>
+                {session || userData?.first_name ? (
+                  <div className="dropdown dropdown-end">
+                    <div
+                      tabIndex={0}
+                      role="button"
+                      className="btn btn-ghost btn-circle avatar"
+                    >
+                      <div className="w-10 rounded-full">
+                        <Image
+                          alt="Profile Image"
+                          src={user?.image as string}
+                          // src='/images/pad.png'
+                          width={20}
+                          height={20}
+                        />
+                      </div>
+                    </div>
+                    <ul
+                      tabIndex={0}
+                      className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                    >
+                      <li>
+                        <a className="justify-between">
+                          Profile
+                          {/* <span className="badge">New</span> */}
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          // onClick={() => signOut({ callbackUrl: `/login` })}
+                          onClick={handleLogout}
+                        >
+                          Logout
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </div>
+            )}
           </div>
           <Link href='/'>
             <Image
@@ -251,13 +257,13 @@ const NavBar: React.FC<NavBarProps> = () => {
                   viewBox="0 0 56.966 56.966"
                   xmlSpace="preserve"
                 >
-                  <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                  <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661 14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
                 </svg>
               </button>
             </div>
           </form>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end hidden lg:flex">
           {!userData?.first_name && (
             <div className="flex flex-row text-sm gap-4 justify-start mr-6">
               <Link href="/login">
@@ -333,7 +339,7 @@ const NavBar: React.FC<NavBarProps> = () => {
                 <li>
                   <a className="justify-between">
                     Profile
-                    <span className="badge">New</span>
+                    {/* <span className="badge">New</span> */}
                   </a>
                 </li>
                 <li>
