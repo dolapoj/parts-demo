@@ -4,6 +4,7 @@ import SocialIcons from "./SocialIcons";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { CiUser } from 'react-icons/ci';
+import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { TbPassword } from "react-icons/tb";
 import { signIn } from 'next-auth/react';
 
@@ -20,6 +21,8 @@ const LoginCard = () => {
     email: "",
     password: "",
   });
+
+  const [showPassword, setShowPassword] = React.useState(false);
 
   const [errors, setErrors] = useState<ErrorsType>({});
   const [responseData, setResponseData] = useState(null);
