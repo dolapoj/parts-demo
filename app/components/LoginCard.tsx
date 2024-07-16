@@ -76,7 +76,7 @@ const LoginCard = () => {
         }
       } catch (error) {
         console.error("There is an error:", error);
-        toast.error("Invalid email or password.")
+        toast.error("An error occured.")
         // toast.error(`Error: ${error.message}`)
       }
 
@@ -119,7 +119,7 @@ const LoginCard = () => {
             </span>
           </div>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="password"
             placeholder=""
             value={formData.password}
@@ -128,6 +128,13 @@ const LoginCard = () => {
             className="rounded-md w-full pr-7 pl-8 border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
             required
           />
+          {/* show or hide password */}
+          <div
+            className="absolute top-4 right-2 text-xl text-gray-700 cursor-pointer"
+            onClick={() => setShowPassword((prev) => !prev)}
+          >
+            {showPassword ? <IoMdEye /> : <IoMdEyeOff />}
+          </div>
           {errors.password && (
             <p className="mt-2 text-xs text-red-600">{errors.invalid}</p>
           )}

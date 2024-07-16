@@ -63,7 +63,7 @@ const SignUpCard = () => {
 
   //State to show the visibility of the additional input field
   const [showInputField, setShowInputField] = useState(false);
-
+  
   const {
     register,
     handleSubmit,
