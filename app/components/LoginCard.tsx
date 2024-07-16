@@ -23,6 +23,7 @@ const LoginCard = () => {
   });
 
   const [showPassword, setShowPassword] = React.useState(false);
+  const [shouldRefresh, setShouldRefresh] = useState(false);
 
   const [errors, setErrors] = useState<ErrorsType>({});
   const [responseData, setResponseData] = useState(null);
@@ -64,7 +65,8 @@ const LoginCard = () => {
           
           //Save responseData to sessionStorage
           sessionStorage.setItem('userData', JSON.stringify(response.data.user))
-          router.push('/')
+          router.push('/');
+          // window.location.reload();
         } 
         if (response.status === 400) {
           console.log('status 400')

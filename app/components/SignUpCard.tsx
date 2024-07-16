@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import { CiUser } from "react-icons/ci";
+import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { CiLocationArrow1 } from "react-icons/ci";
 import { TbPassword } from "react-icons/tb";
 import { MdPhoneIphone } from "react-icons/md";
@@ -56,14 +57,15 @@ const steps = [
 const SignUpCard = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formEmail, setFormEmail] = useState("");
-  // const [activationLink, setActivationLink] = useState("");
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
 
   //State to track the selected value in the select form
   const [selectedValue, setSelectedValue] = useState("");
 
   //State to show the visibility of the additional input field
   const [showInputField, setShowInputField] = useState(false);
-  
+
   const {
     register,
     handleSubmit,
@@ -338,11 +340,18 @@ const SignUpCard = () => {
                     </span>
                   </div>
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     {...register("password")}
                     autoComplete="off"
                     className="rounded-md w-full pr-7 pl-8 border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
                   />
+                  {/* show or hide password */}
+                  <div
+                    className="absolute top-4 right-2 text-xl text-gray-700 cursor-pointer"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                  >
+                    {showPassword ? <IoMdEye /> : <IoMdEyeOff />}
+                  </div>
                 </div>
                 {errors.password?.message && (
                   <p className="mt-2 text-xs text-red-400">
@@ -364,6 +373,13 @@ const SignUpCard = () => {
                     {...register("confirm_password")}
                     className="rounded-md w-full pr-7 pl-8 border-gray-300 outline-offset-2 outline-transparent focus:border-green-500 focus:ring-green-300 focus:ring-2 text-sm"
                   />
+                  {/* show or hide password */}
+                  <div
+                    className="absolute top-4 right-2 text-xl text-gray-700 cursor-pointer"
+                    onClick={() => setShowConfirmPassword((prev) => !prev)}
+                  >
+                    {showConfirmPassword ? <IoMdEye /> : <IoMdEyeOff />}
+                  </div>
                 </div>
                 {errors.confirm_password?.message && (
                   <p className="mt-2 text-xs text-red-400">

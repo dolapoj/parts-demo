@@ -42,14 +42,12 @@ const Landing = () => {
 
   return (
     <main className="bg-landing">
-      <Carousel parts={partsData} />
+      <Suspense fallback={<p>Loading...</p>}>
+        <Carousel parts={partsData} />
+      </Suspense>
       <InnerSearch />
       <BestSellers parts={partsData} />
-      <MoreParts
-        color="#02026B"
-        backgroundImage="/images/hyundai.png"
-        props="SHOP MORE PARTS"
-      />
+      <MoreParts color="#02026B" props="SHOP MORE PARTS" />
       <MoreParts props="SHOP BY MAKE" color="white" text="black" />
       <Brands />
     </main>
