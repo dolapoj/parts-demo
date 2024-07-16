@@ -42,9 +42,7 @@ const Landing = () => {
 
   return (
     <main className="bg-landing">
-      <Suspense fallback={<p>Loading...</p>}>
-        <Carousel parts={partsData} />
-      </Suspense>
+      <Carousel parts={partsData} />
       <InnerSearch />
       <BestSellers parts={partsData} />
       <MoreParts color="#02026B" props="SHOP MORE PARTS" />
