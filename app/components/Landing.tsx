@@ -5,6 +5,7 @@ import BestSellers from "./BestSellers";
 import MoreParts from "./MoreParts";
 import Brands from "./Brands";
 import Carousel from "./Carousel";
+import LoadingSpinner from "./LoadingSpinner";
 
 interface Car {
   client_id: number;
@@ -19,35 +20,57 @@ interface CarResponse {
 
 const getPartsData = () => {
   const [parts, setParts] = useState<Car[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const getParts = async () => {
-      // const response = await fetch("/api/parts");
-      const response = await fetch("http://partdirectafrica.com/part/parts-list");
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      setLoading(true);
+      setError(null);
+
+      try {
+        const response = await fetch(
+          "http://partdirectafrica.com/part/parts-list"
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const parts: CarResponse = await response.json();
+        setParts(parts.data);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError('An unknown error occurred')
+        }
+      } finally {
+        setLoading(false);
       }
-      const parts: CarResponse = await response.json();
-      setParts(parts.data);
     };
 
     getParts();
   }, []);
 
-  return parts;
+  return { parts, loading, error };
 };
 
-const Landing = () => {
-  const partsData = getPartsData();
+const Landing: React.FC = () => {
+  const { parts, loading, error } = getPartsData();
 
   return (
     <main className="bg-landing">
-      <Carousel parts={partsData} />
-      <InnerSearch />
-      <BestSellers parts={partsData} />
-      <MoreParts color="#02026B" props="SHOP MORE PARTS" />
-      <MoreParts props="SHOP BY MAKE" color="white" text="black" />
-      <Brands />
+      {loading && <LoadingSpinner />}
+      {error && <div className="error-message">{error}</div>}
+      {!loading && !error && (
+        <>
+          <Carousel parts={parts} />
+          <InnerSearch />
+          <BestSellers parts={parts} />
+          <MoreParts color="#02026B" props="SHOP MORE PARTS" />
+          <MoreParts props="SHOP BY MAKE" color="white" text="black" />
+          <Brands />
+        </>
+      )}
     </main>
   );
 };
