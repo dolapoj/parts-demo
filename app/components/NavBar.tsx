@@ -62,7 +62,7 @@ const NavBar: React.FC<NavBarProps> = () => {
     event.preventDefault();
 
     const endpoint =
-      "http://partdirectafrica.com/part/search/d6c4a436-5f1f-40a0-8184-7d3db09a8431/partnumber/";
+      "https://partdirectafrica.com/part/search/d6c4a436-5f1f-40a0-8184-7d3db09a8431/partnumber/";
     try {
       const response = await axios.post(endpoint, searchData, {
         headers: {
@@ -134,7 +134,7 @@ const NavBar: React.FC<NavBarProps> = () => {
                   </div>
                 )}
                 {userData?.first_name && (
-                  <h4 className="text-green-700 text-md">
+                  <h4 className="text-green-700 text-xs">
                     Hello,{" "}
                     {
                       // JSON.stringify(user?.name).replace(/"/g, "").split(" ")[0] ||

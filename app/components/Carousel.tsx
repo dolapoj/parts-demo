@@ -68,7 +68,7 @@ const Carousel: React.FC<PartsDisplayProps> = ({ parts }) => {
                       backgroundSize: "contain",
                     }}
                   ></figure>
-                  <div className="card-body bg-black shadow-2xl rounded-xl max-h-28 p-4">
+                  <div className="card-body bg-black rounded-xl max-h-28 p-4">
                     <p className="font-semibold">{product.make} </p>
                     <p className="text-sm">{product.model}</p>
                     <p className="text-sm">{product.year}</p>
