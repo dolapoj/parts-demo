@@ -6,6 +6,7 @@ import MoreParts from "./MoreParts";
 import Brands from "./Brands";
 import Carousel from "./Carousel";
 import LoadingSpinner from "./LoadingSpinner";
+import ElasticCarousel from "./ElasticCarousel";
 
 interface Car {
   client_id: number;
@@ -30,7 +31,7 @@ const getPartsData = () => {
 
       try {
         const response = await fetch(
-          "http://partdirectafrica.com/part/parts-list"
+          "https://partdirectafrica.com/part/parts-list"
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

@@ -43,7 +43,7 @@ const LoginCard = () => {
     const validationErrors: { [key: string]: string } = {};
 
     //Make API call to the Login Endpoint
-    const endpoint = "http://partdirectafrica.com/auth/login/";
+    const endpoint = "https://partdirectafrica.com/auth/login/";
     if (Object.keys(validationErrors).length === 0) {
       try {
         const response = await axios.post(
@@ -66,6 +66,7 @@ const LoginCard = () => {
           //Save responseData to sessionStorage
           sessionStorage.setItem('userData', JSON.stringify(response.data.user))
           router.push('/');
+          toast.success(`Authenticated as ${formData.email}`)
           // window.location.reload();
         } 
         if (response.status === 400) {

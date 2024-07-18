@@ -79,7 +79,7 @@ const SignUpCard = () => {
 
   const processForm: SubmitHandler<Inputs> = async (data) => {
     //Make POST API call to the Register endpoint
-    const endpoint = "http://partdirectafrica.com/auth/register/";
+    const endpoint = "https://partdirectafrica.com/auth/register/";
     try {
       const response = await axios.post<ApiResponse>(endpoint, data, {
         headers: {

@@ -20,7 +20,7 @@ const InnerSearch: React.FC = () => {
 
   const fetchItems = async () => {
     const endpoint =
-      "http://partdirectafrica.com/part/parts-list/d6c4a436-5f1f-40a0-8184-7d3db09a8431/";
+      "https://partdirectafrica.com/part/parts-list/d6c4a436-5f1f-40a0-8184-7d3db09a8431/";
     const response = await fetch(endpoint, {
       method: "POST",
       headers: {
