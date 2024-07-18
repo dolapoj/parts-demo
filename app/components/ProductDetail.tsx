@@ -4,6 +4,7 @@ import Image from "next/image";
 import Ratings from "./Ratings";
 import { usePathname, useSearchParams } from "next/navigation";
 import useLocalStorageState from "use-local-storage-state";
+import Skeleton from "./Skeleton";
 
 interface SearchResults {
   [key: string]: any;
@@ -23,9 +24,7 @@ export interface CartProps {
 }
 
 const useProductData = (productId: string | undefined) => {
-  const [searchResults, setSearchResults] = useState<SearchResults | null>(
-    null
-  );
+  const [searchResults, setSearchResults] = useState<SearchResults | null>(null);
 
   useEffect(() => {
     if (productId) {
@@ -45,6 +44,7 @@ const ProductDetail = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [clickedButtons, setClickedButtons] = useState<{ [key: number]: boolean }>({});
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State to manage sidebar visibility
 
   const productId = searchParams.get("productId");
   const searchResults = useProductData(productId || undefined);
@@ -54,7 +54,7 @@ const ProductDetail = () => {
     console.log('Search Results:', searchResults);
   }, [searchResults]);
 
-  //Side effect to monitor and log the URL
+  // Side effect to monitor and log the URL
   useEffect(() => {
     if (productId) {
       console.log(`URL: ${pathname}?productId=${productId}`);
@@ -77,20 +77,20 @@ const ProductDetail = () => {
     }));
   };
 
-  //Function to check if a product is in the cart 
+  // Function to check if a product is in the cart 
   const isInCart = (productId: number): boolean =>
     Object.keys(cart || {}).includes(productId.toString());
 
   if (!searchResults) {
-    return <div className="h-100">Loading...</div>;
+    return <Skeleton />;
   }
 
-  console.log("Result:", searchResults)
+  console.log("Result:", searchResults);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <div className="px-12 my-10 leading-relaxed">
-        <div className="flex justify-between gap-2 items-center mb-8">
+    <Suspense fallback={<Skeleton />}>
+      <div className="px-4 sm:px-6 lg:px-8 my-10 leading-relaxed">
+        <div className="flex flex-col sm:flex-row justify-between gap-2 items-center mb-8">
           <div>
             <p className="pl-4">
               Results For:{" "}
@@ -106,10 +106,17 @@ const ProductDetail = () => {
           </div>
         </div>
 
-        {/* SIDEBAR */}
-        <section className="flex">
-          {/* Fixed Aside */}
-          <aside className="w-72 flex-shrink-0 p-4">
+        {/* Filter button for mobile view */}
+        <button
+          className="btn btn-primary mb-4 md:hidden"
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+        >
+          {isSidebarOpen ? "Close Filters" : "Open Filters"}
+        </button>
+
+        <section className="flex flex-col md:flex-row">
+          {/* Sidebar */}
+          <aside className={`w-full md:w-72 flex-shrink-0 p-4 ${isSidebarOpen ? 'block' : 'hidden'} md:block`}>
             {/* Content for the fixed aside */}
             <div className="bg-blue-800 p-4 text-white">
               <span className="text-yellow">Select Year</span>
@@ -134,7 +141,6 @@ const ProductDetail = () => {
               <span className="text-yellow">Select Make</span>
               <div className="divider mt-0 divider-warning"></div>
               <div className="grid grid-cols-5 gap-2 relative mt-0 text-xs">
-                <p>Acura</p>
                 <p>Acura</p>
                 <p>Acura</p>
                 <p>Acura</p>
@@ -191,10 +197,10 @@ const ProductDetail = () => {
               return (
                 <div
                   key={part.product_sku}
-                  className="bg-white flex flex-col justify-center mx-12 mb-8"
+                  className="bg-white flex flex-col justify-center mx-4 mb-8 md:mx-12"
                 >
-                  <div className="flex flex-wrap justify-between px-12 py-8">
-                    <div className="">
+                  <div className="flex flex-col sm:flex-row justify-between px-4 py-8 sm:px-12">
+                    <div className="flex justify-center sm:block">
                       <Image
                         src={part.image_url[0] as string}
                         alt="part type"
@@ -205,7 +211,7 @@ const ProductDetail = () => {
                       <p className="text-blue-500 text-xs">(100 Reviews)</p>
                     </div>
                     <div className="flex-1">
-                      <div className="flex justify-evenly leading-relaxed">
+                      <div className="flex flex-col sm:flex-row justify-evenly leading-relaxed">
                         <div className="max-w-80">
                           <h5 className="text-green-900 font-bold">
                             {part?.part_label}
@@ -229,7 +235,7 @@ const ProductDetail = () => {
                             the original light on specific vehicles
                           </p>
                         </div>
-                        <div className="bg-green-700 p-4 text-white rounded-xl">
+                        <div className="bg-green-700 p-4 text-white rounded-xl mt-4 sm:mt-0">
                           <h6 className="text-sm">
                             {part?.pricing.sellprice}{" "}
                             <span>{part?.pricing.currency}₦</span>
@@ -264,7 +270,7 @@ const ProductDetail = () => {
                     </div>
                   </div>
                   <div className="mb-4">
-                    <div className="flex flex-col justify-center mx-12">
+                    <div className="flex flex-col justify-center mx-4 md:mx-12">
                       <div className="bg-green-700 text-white p-2 rounded-t-lg text-sm font-semibold">
                         This Part Fits:
                       </div>
