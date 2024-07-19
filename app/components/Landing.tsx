@@ -40,7 +40,7 @@ const getPartsData = () => {
         setParts(partsData.data);
       } catch (error) {
         console.error('Error fetching parts data:', error);
-        setError("Failed to fetch parts data. Please try again later.");
+        // setError("Failed to fetch parts data. Please try again later.");
       } finally {
         setLoading(false);
       }
