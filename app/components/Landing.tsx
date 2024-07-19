@@ -62,13 +62,15 @@ const Landing: React.FC = () => {
       {!loading && !error && (
         <>
           <Carousel parts={parts} />
-          <InnerSearch />
-          <BestSellers parts={parts} />
-          <MoreParts color="#02026B" props="SHOP MORE PARTS" />
-          <MoreParts props="SHOP BY MAKE" color="white" text="black" />
-          <Brands />
         </>
       )}
+      <>
+        <InnerSearch />
+        <BestSellers parts={parts} />
+        <MoreParts color="#02026B" props="SHOP MORE PARTS" />
+        <MoreParts props="SHOP BY MAKE" color="white" text="black" />
+        <Brands />
+      </>
     </main>
   );
 };
