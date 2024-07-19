@@ -36,14 +36,11 @@ const getPartsData = () => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const parts: CarResponse = await response.json();
-        setParts(parts.data);
+        const partsData: CarResponse = await response.json();
+        setParts(partsData.data);
       } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError("An unknown error occurred");
-        }
+        console.error('Error fetching parts data:', error);
+        setError("Failed to fetch parts data. Please try again later.");
       } finally {
         setLoading(false);
       }
