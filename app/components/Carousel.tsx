@@ -5,20 +5,29 @@ import "slick-carousel/slick/slick-theme.css";
 import Image from "next/image";
 import axios, { AxiosResponse } from "axios";
 
-// interface Car {
-//   client_id: number;
-//   make: string;
-//   year: number;
-//   model: string;
-//   image: string;
-// }
 interface Car {
-  id: number;
+  client_id: number;
   make: string;
-  engine: string;
-  fuelType: string
-  image: string
+  year: number;
+  model: string;
+  image: string;
 }
+// interface Car {
+//   id: number;
+//   make: string;
+//   model: string
+//   year: string
+//   color: string
+//   mileage: string
+//   price: string
+//   fuelType: string
+//   transmission: string
+//   engine: string;
+//   horsepower: string
+//   features: []
+//   owners: number
+//   image: string
+// }
 interface PartsDisplayProps {
   parts: Car[];
 }
@@ -76,8 +85,8 @@ const Carousel: React.FC<PartsDisplayProps> = ({ parts }) => {
                   ></figure>
                   <div className="card-body bg-black rounded-xl max-h-28 p-4">
                     <p className="font-semibold">{product.make} </p>
-                    <p className="text-sm">{product.engine}</p>
-                    <p className="text-sm">{product.fuelType}</p>
+                    <p className="text-sm">{product.year}</p>
+                    <p className="text-sm">{product.model}</p>
                   </div>
                 </div>
               </div>
