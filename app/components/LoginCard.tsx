@@ -66,8 +66,7 @@ const LoginCard = () => {
           //Save responseData to sessionStorage
           sessionStorage.setItem('userData', JSON.stringify(response.data.user))
           router.push('/');
-          toast.success(`Authenticated as ${formData.email}`)
-          // window.location.reload();
+          toast.success(`Logged in as ${formData.email}`)
         } 
         if (response.status === 400) {
           console.log('status 400')
