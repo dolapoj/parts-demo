@@ -75,7 +75,7 @@ const Carousel: React.FC<PartsDisplayProps> = ({ parts }) => {
           <Slider {...settings}>
             {parts?.map((product, index) => (
               <div key={index} className="text-white rounded-xl">
-                <div className="card bg-white flex flex-col justify-between gap-14 sm:w-52 md:w-56 2xl:w-72 border-8 h-80 border-white">
+                <div className="card bg-white flex flex-col justify-between gap-6 sm:w-52 md:w-56 2xl:w-72 border-8 h-80 border-white">
                   <figure
                     className="relative mt-10 h-40 w-full bg-center bg-no-repeat"
                     style={{
@@ -84,9 +84,9 @@ const Carousel: React.FC<PartsDisplayProps> = ({ parts }) => {
                     }}
                   ></figure>
                   <div className="card-body bg-black rounded-xl max-h-28 p-4">
-                    <p className="font-semibold">{product.make} </p>
+                    <p className="font-semibold">{product.make.toUpperCase()} </p>
                     <p className="text-sm">{product.year}</p>
-                    <p className="text-sm">{product.model}</p>
+                    <p className="text-sm">{product.model.toUpperCase()}</p>
                   </div>
                 </div>
               </div>
