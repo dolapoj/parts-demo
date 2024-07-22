@@ -8,13 +8,22 @@ import Carousel from "./Carousel";
 import LoadingSpinner from "./LoadingSpinner";
 import ElasticCarousel from "./ElasticCarousel";
 
+// interface Car {
+//   client_id: number;
+//   make: string;
+//   year: number;
+//   model: string;
+//   image: string;
+// }
+
 interface Car {
-  client_id: number;
+  id: number;
   make: string;
-  year: number;
-  model: string;
-  image: string;
+  engine: string;
+  fuelType: string
+  image: string
 }
+
 interface CarResponse {
   data: Car[];
 }
@@ -31,12 +40,14 @@ const getPartsData = () => {
 
       try {
         const response = await fetch(
-          "https://partdirectafrica.com/part/parts-list"
+          // "https://partdirectafrica.com/part/parts-list"
+          "https://freetestapi.com/api/v1/cars"
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const partsData: CarResponse = await response.json();
+        // setParts(partsData.data);
         setParts(partsData.data);
       } catch (error) {
         console.error('Error fetching parts data:', error);
@@ -62,15 +73,13 @@ const Landing: React.FC = () => {
       {!loading && !error && (
         <>
           <Carousel parts={parts} />
+          <InnerSearch />
+          <BestSellers parts={parts} />
+          <MoreParts color="#02026B" props="SHOP MORE PARTS" />
+          <MoreParts props="SHOP BY MAKE" color="white" text="black" />
+          <Brands />
         </>
       )}
-      <>
-        <InnerSearch />
-        <BestSellers parts={parts} />
-        <MoreParts color="#02026B" props="SHOP MORE PARTS" />
-        <MoreParts props="SHOP BY MAKE" color="white" text="black" />
-        <Brands />
-      </>
     </main>
   );
 };

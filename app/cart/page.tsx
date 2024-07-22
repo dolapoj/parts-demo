@@ -56,7 +56,7 @@ const CartPage = () => {
   // }
 
   return (
-    <>
+    <div className="m-20">
       <section className="px-24 pt-8 w-full">
         <div className="flex justify-between items-center">
           <h1 className="text-xl font-semibold">My Shopping Cart</h1>
@@ -154,7 +154,7 @@ const CartPage = () => {
           </tbody>
         </table>
       </section>
-    </>
+    </div>
   );
 };
 

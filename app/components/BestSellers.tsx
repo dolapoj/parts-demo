@@ -2,14 +2,20 @@ import React, { Suspense, useEffect, useState } from "react";
 import Ratings from "./Ratings";
 import Image from "next/image";
 
+// interface Car {
+//   client_id: number;
+//   make: string;
+//   year: number;
+//   model: string;
+//   image: string;
+// }
 interface Car {
-  client_id: number;
+  id: number;
   make: string;
-  year: number;
-  model: string;
-  image: string;
+  engine: string;
+  fuelType: string
+  image: string
 }
-
 interface PartsDisplayProps {
   parts: Car[];
 }
@@ -21,7 +27,7 @@ const BestSellers: React.FC<PartsDisplayProps> = ({ parts }) => {
         <h4 className="font-semibold mx-12 sm:mx-16">BEST SELLERS</h4>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-12">
           {parts.map((car) => (
-            <div key={car.client_id} className="card mb-4">
+            <div key={car.id} className="card mb-4">
               <figure>
                 <Image
                   src={car?.image as string}
@@ -35,10 +41,10 @@ const BestSellers: React.FC<PartsDisplayProps> = ({ parts }) => {
               <div className="card-body text-center p-0">
                 <div className="">
                   <span className="font-semibold">
-                    {car?.make + ` ${car?.year}`}
+                    {car?.make + ` ${car?.fuelType}`}
                   </span>
                   <br />
-                  <span className="text-sm">{car?.model}</span>
+                  <span className="text-sm">{car?.engine}</span>
                   <Ratings />
                   {/* <p className="text-sm">{`${car?.model}`}</p> */}
                 </div>
