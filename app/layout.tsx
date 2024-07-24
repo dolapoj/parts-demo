@@ -23,7 +23,7 @@ export default function RootLayout({
   includeHeaderFooter?: boolean;
 }>) {
   const pathname = usePathname();
-  const hideHeaderFooter = ["/login", "/signup", "/reset-password"].includes(pathname);
+  const hideHeaderFooter = ["/login", "/signup", "/reset-password", "/status/verification"].includes(pathname);
 
   return (
     <html lang="en" className="bg-landing">
