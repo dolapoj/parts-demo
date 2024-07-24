@@ -7,6 +7,7 @@ import Brands from "./Brands";
 import Carousel from "./Carousel";
 import LoadingSpinner from "./LoadingSpinner";
 import ElasticCarousel from "./ElasticCarousel";
+import MoreMakes from "./MoreMakes";
 
 interface Car {
   client_id: number;
@@ -85,8 +86,13 @@ const Landing: React.FC = () => {
           <Carousel parts={parts} />
           <InnerSearch />
           <BestSellers parts={parts} />
-          <MoreParts color="#02026B" props="SHOP MORE PARTS" />
-          <MoreParts props="SHOP BY MAKE" color="white" text="black" />
+          <MoreParts
+            text="white"
+            color="#02026B"
+            props="SHOP BY PARTS"
+            backgroundImage="https://partdirectafrica.com/media/parts_images/Brake_pad_6f8qCEE.jpg"
+          />
+          <MoreMakes props="SHOP BY MAKES" color="white" text="black" />
           <Brands />
         </>
       )}

@@ -22,37 +22,17 @@ type StyleProperties = {
   [key: string]: string | number;
 };
 
-const MoreParts = ({ props, color, text, backgroundImage }: any) => {
-  // const style: StyleProperties = {
-  //   backgroundColor: color,
-  //   color: text,
-  //   backgroundImage: `url(${backgroundImage})`,
-  //   backgroundSize: "cover",
-  //   backgroundPosition: "center",
-  //   backgroundBlendMode: "overlay", // Ensures the color and image blend together
-  //   opacity: 0.9, // Adjust the opacity level as needed
-  // };
+const MoreMakes = ({ props, color, text, backgroundImage }: any) => {
   const style: StyleProperties = {
     backgroundColor: color,
     color: text,
-    position: 'relative',
-    overflow: 'hidden',
-  };
-
-  const overlayStyle: StyleProperties = {
     backgroundImage: `url(${backgroundImage})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    opacity: 0.1, // Adjust the opacity of the background image
-    pointerEvents: 'none',
+    opacity: 0.9, // Adjust the opacity level as needed
   };
 
-  const [ allMakes, setAllMakes ] = useState<Car[]>();
+  const [allMakes, setAllMakes] = useState<Car[]>();
 
   useEffect(() => {
     const fetchMakes = async (): Promise<void> => {
@@ -65,16 +45,15 @@ const MoreParts = ({ props, color, text, backgroundImage }: any) => {
       }
     };
     fetchMakes();
-  }, [])
+  }, []);
 
   return (
-    <section style={style} className="py-20 text-white">
-      <div style={overlayStyle}></div>
-      <div className="sm:mx-20">
+    <section style={style} className="py-20 text-white bg-opacity-70">
+      <div className="sm:mx-20 bg-opacity-50 p-4 rounded">
         <h5 className="text-center font-semibold">{props}</h5>
         <div className="grid grid-cols-3 gap-6 sm:grid-cols-5 sm:gap-4 mt-12 justify-around text-center">
           {allMakes?.map(car => (
-            <p className="cursor-pointer hover:font-bold">{car.make}</p>
+            <p className="cursor-pointer hover:font-bold" key={car.id}>{car.make}</p>
           ))}
         </div>
       </div>
@@ -82,4 +61,4 @@ const MoreParts = ({ props, color, text, backgroundImage }: any) => {
   );
 };
 
-export default MoreParts;
+export default MoreMakes;
