@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import useLocalStorageState from "use-local-storage-state";
 
 interface SearchResults {
   [key: string]: any;
@@ -30,8 +31,31 @@ const useProductData = () => {
 };
 
 const SearchDetails = () => {
+  const [clickedButtons, setClickedButtons] = useState<{ [key: number]: boolean }>({});
+  const [cart, setCart] = useLocalStorageState<SearchResults>("cart", {});
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const searchResults = useProductData();
   console.log(searchResults)
+
+  const addToCart = (product: Product): void => {
+    // Ensure the quantity is set to 1 when adding a new product
+    const newProduct = { ...product, quantity: 1 };
+  
+    setCart((prevCart) => ({
+      ...prevCart,
+      [product.product_sku]: newProduct,
+    }));
+  
+    // Update clicked button state
+    setClickedButtons((prev) => ({
+      ...prev,
+      [product.product_sku]: true,
+    }));
+  };
+  
+  // Function to check if a product is in the cart 
+  const isInCart = (productId: number): boolean =>
+    Object.keys(cart || {}).includes(productId.toString());
 
   return (
         <>
@@ -149,7 +173,9 @@ const SearchDetails = () => {
                               height={140}
                             /> */}
                             {/* <Ratings /> */}
-                            <p className="text-blue-500 text-xs">(100 Reviews)</p>
+                            <p className="text-blue-500 text-xs">
+                              (100 Reviews)
+                            </p>
                           </div>
                           <div className="flex-1">
                             <div className="flex justify-evenly leading-relaxed">
@@ -161,7 +187,8 @@ const SearchDetails = () => {
                                   {part?.mfg_name}
                                 </h6>
                                 <h6 className="text-sm mt-1">
-                                  <strong>Part Number:</strong> {part?.part_number}{" "}
+                                  <strong>Part Number:</strong>{" "}
+                                  {part?.part_number}{" "}
                                 </h6>
                                 <h6 className="text-sm mt-1">
                                   <strong>Brand:</strong> {part?.mfg_code}{" "}
@@ -180,37 +207,37 @@ const SearchDetails = () => {
                               <div className="bg-green-700 p-4 text-white rounded-xl">
                                 <h6 className="text-sm">
                                   {part?.pricing.sellprice}{" "}
-                                  <span>{part?.pricing.currency}
+                                  <span>
+                                    {part?.pricing.currency}
                                     {/* ₦ */}
-                                    </span>
+                                  </span>
                                 </h6>
                                 <div className="divider mt-0 divider-warning"></div>
                                 <div className="flex justify-between gap-2 items-center mb-2">
-                                  <h6>Quantity</h6>
+                                  {/* <h6>Quantity</h6> */}
                                   {/* <input className="w-12 h-4" /> */}
                                   <h4></h4>
                                 </div>
-                                <select className="block rounded-md">
+                                {/* <select className="block rounded-md">
                                   <option>Select Year</option>
                                   <option value="Individual">2019</option>
                                   <option value="Fleet Manager">2020</option>
-                                </select>
+                                </select> */}
                                 <button
-                              //     disabled={isInCart(part?.product_sku)}
-                              //     onClick={() => addToCart(part)}
+                                  disabled={isInCart(part?.product_sku)}
+                                  onClick={() => addToCart(part)}
                                   className="bg-yellow-500 text-black text-sm px-4 py-2 font-semibold w-full rounded-md mt-2"
-                              //     style={{
-                              //       backgroundColor: clickedButtons[
-                              //         part.product_sku
-                              //       ]
-                              //         ? "gray"
-                              //         : "yellow",
-                              //     }}
+                                  style={{
+                                    backgroundColor: clickedButtons[
+                                      part.product_sku
+                                    ]
+                                      ? "gray"
+                                      : "yellow",
+                                  }}
                                 >
-                                  {/* {isInCart(part?.product_sku) */}
-                                    {/* ? "Added to Cart"
-                                    : "Add to Cart"} */}
-                                    Add to Cart
+                                  {isInCart(part?.product_sku)
+                                    ? "Added to Cart"
+                                    : "Add to Cart"}
                                 </button>
                               </div>
                             </div>

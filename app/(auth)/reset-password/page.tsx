@@ -6,6 +6,7 @@ import styles from "../login/login.module.scss";
 import ResetAnime from "../../../images/resetpwvector.png";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const ResetPassword = () => {
   const router = useRouter();
@@ -25,7 +26,7 @@ const ResetPassword = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const endpoint = "http://kineticparts.africa/auth/request-reset-email/";
+    const endpoint = "https://partdirectafrica.com/auth/request-reset-email/";
 
     try {
       const response = await axios.post(
@@ -40,7 +41,7 @@ const ResetPassword = () => {
         }
       );
       setActivationLink(response.data.activation_link);
-      console.log("Data successfully posted: ", response.data);
+      console.log("Password change requested: ", response.data);
       setFormData({
         email: ""
       });
@@ -48,6 +49,7 @@ const ResetPassword = () => {
       router.push("/new-password");
     } catch (error) {
       console.error("Error posting data: ", error);
+      toast.error("Server downtime")
     }
   };
 
@@ -93,7 +95,7 @@ const ResetPassword = () => {
                 />
               </div>
               <div className="flex justify-center mt-14">
-                <button className="bg-green text-white w-full p-2 rounded-md mb-4">
+                <button type="submit" className="button m-auto font-medium text-white w-full p-2 hover:scale-105 hover:shadow-lg hover:shadow-green-300 transition-all">
                   Continue
                 </button>
               </div>

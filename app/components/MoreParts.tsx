@@ -74,7 +74,7 @@ const MoreParts = ({ props, color, text, backgroundImage }: any) => {
         <h5 className="text-center font-semibold">{props}</h5>
         <div className="grid grid-cols-3 gap-6 sm:grid-cols-5 sm:gap-4 mt-12 justify-around text-center">
           {allMakes?.map(car => (
-            <p className="cursor-pointer hover:font-bold">{car.make}</p>
+            <p className="cursor-pointer hover:font-bold">{car.model}</p>
           ))}
         </div>
       </div>
